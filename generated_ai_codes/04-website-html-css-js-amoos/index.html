@@ -1,71 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Copilot: AI that builds with you</title>
+    <title>Amoos.ro | Învață să creezi website-uri cu AI</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@200;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="dark-theme">
-    <nav class="navbar">
+    <!-- Header Section -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark-transparent">
         <div class="container">
-            <div class="nav-left">
-                <a href="#" class="github-logo">
-                    <svg height="32" aria-hidden="true" fill="currentColor" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true" class="octicon octicon-mark-github v-align-middle">
-                        <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
-                    </svg>
-                </a>
-                <nav class="nav-menu">
-                    <a href="#" class="nav-link">Product</a>
-                    <a href="#" class="nav-link">Solutions</a>
-                    <a href="#" class="nav-link">Open Source</a>
-                    <a href="#" class="nav-link">Pricing</a>
-                </nav>
-            </div>
-            <div class="nav-right">
-                <a href="#" class="btn btn-secondary">Sign in</a>
-                <a href="#" class="btn btn-primary">Sign up</a>
-            </div>
+            <a class="navbar-brand" href="#">
+                <img src="images/amoos-gold-bg-transparent.png" alt="Amoos.ro Logo" class="header-logo">
+            </a>
+            <a href="https://wa.me/yourphone" class="btn btn-primary ms-auto">
+                <i class="bi bi-whatsapp me-2"></i>
+                Contactează-ne
+            </a>
         </div>
     </nav>
 
     <main>
-        <section class="hero">
+        <!-- Hero Section -->
+        <section class="hero py-5 min-vh-100 d-flex align-items-center">
             <div class="container">
-                <h1 class="glow-text">AI that builds with you</h1>
-                <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary btn-large">Get started for free</a>
-                    <a href="#pricing" class="btn btn-outline btn-large">See plans & pricing</a>
+                <div class="row justify-content-center text-center">
+                    <div class="col-lg-8">
+                        <h1 class="display-2 fw-bold mb-4 text-white">Intra in domeniul IT MODERN reinventat de AI</h1>
+                        <p class="lead mb-5 text-secondary">Învață să codezi (programezi) cu AI (Vibe Coding) și învață să construiești site-uri web cu WordPress și Inteligență Artificială, chiar dacă nu ai experiență în programare.</p>
+                        <a href="#workshops" class="btn btn-primary btn-lg">
+                            Descoperă Workshopurile
+                            <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
                 </div>
-                
-                <div class="code-editor-showcase">
-                    <div class="editor-window">
-                        <div class="editor-header">
-                            <div class="window-controls">
-                                <span class="control close"></span>
-                                <span class="control minimize"></span>
-                                <span class="control maximize"></span>
+            </div>
+        </section>
+
+        <!-- Problem Section -->
+        <section class="bg-dark py-5" id="problems">
+            <div class="container">
+                <h2 class="text-center section-title mb-5">Provocările tale sunt și provocările noastre</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card bg-dark-card h-100">
+                            <div class="card-body">
+                                <div class="display-4 mb-3">🤔</div>
+                                <h3 class="text-white">Vrei un website, dar nu știi de unde să începi</h3>
+                                <p class="text-muted">Te simți copleșit de multitudinea de opțiuni și tehnologii disponibile.</p>
                             </div>
                         </div>
-                        <div class="editor-content">
-                            <pre class="code-block">
-<code><span class="comment">// Example of AI-powered code completion</span>
-function calculateTotal(items) {
-    return items.reduce((total, item) => {
-        return total + item.price * item.quantity;
-    }, 0);
-}</code></pre>
-                            <div class="copilot-suggestion">
-                                <div class="suggestion-header">
-                                    <i class="fas fa-robot"></i>
-                                    <span>GitHub Copilot Suggestion</span>
-                                </div>
-                                <pre class="suggestion-code">
-<code>// Add tax calculation
-const TAX_RATE = 0.08;
-return (total * (1 + TAX_RATE)).toFixed(2);</code></pre>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-dark-card h-100">
+                            <div class="card-body">
+                                <div class="display-4 mb-3">💰</div>
+                                <h3 class="text-white">Bugetul tău este limitat</h3>
+                                <p class="text-muted">Nu îți permiți să plătești mii de euro pentru un website profesional.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-dark-card h-100">
+                            <div class="card-body">
+                                <div class="display-4 mb-3">⏰</div>
+                                <h3 class="text-white">Timpul tău este prețios</h3>
+                                <p class="text-muted">Nu ai luni de zile să înveți programare de la zero.</p>
                             </div>
                         </div>
                     </div>
@@ -73,103 +83,153 @@ return (total * (1 + TAX_RATE)).toFixed(2);</code></pre>
             </div>
         </section>
 
-        <section class="delegate-section">
+        <!-- Workshops Section -->
+        <section class="py-5" id="workshops">
             <div class="container">
-                <h2>Delegate like a boss</h2>
-                <p class="section-description">Your backlog doesn't stand a chance. Delegate open issues to GitHub Copilot and let your coding agent write, run, and test code in the background.</p>
-                
-                <div class="feature-grid">
-                    <div class="feature-card glow-card">
-                        <div class="card-content">
-                            <h3>Because two brains are better than one</h3>
-                            <p>Agent mode helps make sweeping changes by analyzing code, proposing edits, running tests, and validating results across multiple files.</p>
-                            <a href="#" class="feature-link">Try agent mode <i class="fas fa-arrow-right"></i></a>
+                <h2 class="text-center section-title mb-5">Alege workshopul potrivit pentru tine</h2>
+                <div class="row justify-content-center g-4">
+                    <div class="col-lg-5">
+                        <div class="card bg-dark-card h-100">
+                            <div class="card-body">
+                                <span class="badge bg-primary-subtle text-primary mb-3">Fără programare</span>
+                                <h3>Creează un website în WordPress cu AI</h3>
+                                <p class="text-muted small mb-4">2 luni • 1 sesiune/săptămână • 6 persoane</p>
+                                <h4 class="display-6 mb-4">400 EUR</h4>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Învață să folosești WordPress</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Creează site-uri cu AI</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Mentorat live personalizat</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Acces la comunitate</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Certificate de absolvire</li>
+                                </ul>
+                                <a href="#" class="btn btn-outline-light w-100">Află mai multe</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="card bg-dark-card h-100 border-primary">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-3">Vibe Coding</span>
+                                <h3>Învață programare cu AI</h3>
+                                <p class="text-muted small mb-4">3 luni • 1 sesiune/săptămână • 6 persoane</p>
+                                <h4 class="display-6 mb-4">Curând</h4>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Bazele programării web</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Dezvoltare cu GitHub Copilot</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Proiecte practice reale</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Mentorat individual</li>
+                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Portofoliu personal</li>
+                                </ul>
+                                <a href="#" class="btn btn-primary w-100">Înscrie-te pe lista de așteptare</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="pricing" class="pricing-section">
+        <!-- About Section -->
+        <section class="bg-dark py-5" id="about">
             <div class="container">
-                <h2>Take flight with GitHub Copilot</h2>
-                <div class="pricing-toggle">
-                    <span class="active">For individuals</span>
-                    <span>For business</span>
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <h2 class="section-title text-start">Despre mine</h2>
+                        <p class="lead mb-4">Cu peste 20 de ani de experiență în IT și mai mult de 100 de site-uri create, sunt aici să te ghidez în călătoria ta de a-ți construi prezența online.</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i>20+ ani experiență în IT</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i>100+ website-uri create</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i>Mentor personal dedicat</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="images/mentor.jpg" alt="Raluca Manea" class="img-fluid rounded-3">
+                    </div>
                 </div>
-                
-                <div class="pricing-grid">
-                    <div class="pricing-card">
-                        <div class="card-header">
-                            <h3>Free</h3>
-                            <div class="price">$0<span>USD</span></div>
-                        </div>
-                        <div class="card-body">
-                            <ul class="features-list">
-                                <li>50 agent mode or chat requests per month</li>
-                                <li>2,000 completions per month</li>
-                                <li>Access to Claude 3.5 Sonnet, GPT-4.1, and more</li>
-                            </ul>
-                            <a href="#" class="btn btn-primary btn-full">Get started</a>
-                        </div>
-                    </div>
-                    
-                    <div class="pricing-card featured">
-                        <div class="card-header">
-                            <h3>Pro</h3>
-                            <div class="price">$10<span>USD</span></div>
-                            <div class="price-subtitle">per month or $100 per year</div>
-                        </div>
-                        <div class="card-body">
-                            <ul class="features-list">
-                                <li>Unlimited agent mode and chats with GPT-4.1</li>
-                                <li>Unlimited code completions</li>
-                                <li>Access to code review, Claude 3.7/4 Sonnet, Gemini 2.5 Pro, and more</li>
-                            </ul>
-                            <a href="#" class="btn btn-primary btn-full">Try for 30 days free</a>
-                        </div>
-                    </div>
+            </div>
+        </section>
 
-                    <div class="pricing-card">
-                        <div class="card-header">
-                            <h3>Pro+</h3>
-                            <div class="price">$39<span>USD</span></div>
-                            <div class="price-subtitle">per month or $390 per year</div>
-                        </div>
-                        <div class="card-body">
-                            <ul class="features-list">
-                                <li>Access to all models, including Claude Opus 4, o3, and GPT-4.5</li>
-                                <li>30x more premium requests than Copilot Free</li>
-                                <li>Coding agent (preview)</li>
-                            </ul>
-                            <a href="#" class="btn btn-primary btn-full">Get started</a>
+        <!-- FAQ Section -->
+        <section class="py-5" id="faq">
+            <div class="container">
+                <h2 class="text-center section-title mb-5">Întrebări frecvente</h2>
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item bg-dark-card">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed bg-dark-card text-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                Pot participa dacă nu am experiență tehnică?
+                            </button>
+                        </h3>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Absolut! Cursurile sunt create special pentru începători și nu necesită cunoștințe tehnice anterioare.
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="bg-dark py-5" id="cta">
+            <div class="container text-center">
+                <h2 class="display-4 mb-4">Pregătit să începi?</h2>
+                <p class="lead mb-5">Rezervă-ți acum locul în următoarea sesiune și începe să-ți construiești viitorul digital.</p>
+                <a href="https://wa.me/yourphone" class="btn btn-primary btn-lg">
+                    <i class="bi bi-whatsapp me-2"></i>
+                    Rezervă-ți locul
+                </a>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
+    <!-- Footer -->
+    <footer class="bg-dark-card py-5">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <svg height="30" aria-hidden="true" fill="currentColor" viewBox="0 0 45 16" version="1.1" width="84" data-view-component="true">
-                        <path d="M8.81 7.35v5.74c0 .04-.01.11-.06.13 0 0-1.25.89-3.31.89-2.49 0-5.44-.78-5.44-5.92S2.58 1.99 5.1 2c2.18 0 3.06.49 3.2.58.04.05.06.09.06.14L7.94 4.5c0 .09-.09.2-.2.17-.36-.11-.9-.33-2.17-.33-1.47 0-3.05.42-3.05 3.73s1.5 3.7 2.58 3.7c.92 0 1.25-.11 1.25-.11v-2.3H4.88c-.11 0-.19-.08-.19-.17V7.35c0-.09.08-.17.19-.17h3.74c.11 0 .19.08.19.17Zm35.85 2.33c0 3.43-1.11 4.41-3.05 4.41-1.64 0-2.52-.83-2.52-.83s-.04.46-.09.52c-.03.06-.08.08-.14.08h-1.48c-.1 0-.19-.08-.19-.17l.02-11.11c0-.09.08-.17.17-.17h2.13c.09 0 .17.08.17.17v3.77s.82-.53 2.02-.53l-.01-.02c1.2 0 2.97.45 2.97 3.88ZM27.68 2.43c.09 0 .17.08.17.17v11.11c0 .09-.08.17-.17.17h-2.13c-.09 0-.17-.08-.17-.17l.02-4.75h-3.31v4.75c0 .09-.08.17-.17.17h-2.13c-.08 0-.17-.08-.17-.17V2.6c0-.09.08-.17.17-.17h2.13c.09 0 .17.08.17.17v4.09h3.31V2.6c0-.09.08-.17.17-.17Zm8.26 3.64c.11 0 .19.08.19.17l-.02 7.47c0 .09-.06.17-.17.17H34.6c-.07 0-.14-.04-.16-.09-.03-.06-.08-.45-.08-.45s-1.13.77-2.52.77c-1.69 0-2.92-.55-2.92-2.75V6.25c0-.09.08-.17.17-.17h2.14c.09 0 .17.08.17.17v2.96c0 .8.19 1.09.97 1.09 1.11 0 2.11-.99 2.11-.99V6.25c0-.09.08-.17.17-.17Zm-6.3-1.98c-.71 0-1.21-.55-1.21-1.17 0-.66.5-1.17 1.21-1.17.71 0 1.21.51 1.21 1.17 0 .66-.5 1.17-1.21 1.17Zm6.42-1.92c-.09 0-.17-.08-.17-.17V.17c0-.09.08-.17.17-.17h2.13c.09 0 .17.08.17.17v1.83c0 .09-.08.17-.17.17ZM14.45 4.71c-.15-.04-.36-.07-.58-.07-1.24 0-1.91.95-1.91.95v7.43c0 .09-.08.17-.17.17h-2.14c-.09 0-.17-.08-.17-.17V6.25c0-.09.08-.17.17-.17h1.48c.09 0 .16.06.17.14.02.08.1.59.1.59s.63-.78 2.3-.78c.29 0 .56.02.79.07.09.02.13.11.13.19v1.87c0 .12-.08.19-.17.15Z"></path>
-                    </svg>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <img src="images/amoos-gold-COMPLET-bg-transparent.png" alt="Amoos.ro" class="footer-logo mb-3">
+                    <p class="text-muted">Învață să creezi website-uri profesionale cu ajutorul AI</p>
                 </div>
-                <div class="footer-links">
-                    <a href="#">Terms</a>
-                    <a href="#">Privacy</a>
-                    <a href="#">Security</a>
-                    <a href="#">Status</a>
-                    <a href="#">Docs</a>
-                    <a href="#">Contact</a>
+                <div class="col-lg-4">
+                    <h4 class="text-white mb-3">Legal</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none mb-2 d-inline-block">Termeni și Condiții</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none mb-2 d-inline-block">Politica de Confidențialitate</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none mb-2 d-inline-block">GDPR</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="mailto:contact@amoos.ro" class="text-muted text-decoration-none mb-2 d-inline-block">contact@amoos.ro</a></li>
+                        <li><a href="https://wa.me/yourphone" class="text-muted text-decoration-none mb-2 d-inline-block">WhatsApp</a></li>
+                    </ul>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="#" class="btn btn-dark"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="btn btn-dark"><i class="bi bi-linkedin"></i></a>
+                    </div>
                 </div>
             </div>
+            <hr class="my-4 border-secondary">
+            <p class="text-center text-muted mb-0">© 2024 Amoos.ro | Creat cu WordPress și AI</p>
         </div>
     </footer>
 
+    <!-- Floating CTA -->
+    <div class="floating-cta">
+        <a href="https://wa.me/yourphone" class="btn btn-primary rounded-circle p-3">
+            <i class="bi bi-whatsapp fs-4"></i>
+        </a>
+    </div>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    
+    <!-- Custom JS -->
     <script src="js/main.js"></script>
 </body>
 </html> 

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Copilot: Your AI pair programmer | GitHub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header" id="header">
+        <div class="container">
+            <nav class="main-nav">
+                <div class="nav-left">
+                    <a href="#" class="logo">
+                        <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true" class="octicon octicon-mark-github">
+                            <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+                        </svg>
+                    </a>
+                    <ul class="nav-menu">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#docs">Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="nav-right">
+                    <a href="#" class="btn btn-secondary">Sign in</a>
+                    <a href="#" class="btn btn-primary">Start free trial</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Your AI pair programmer</h1>
+                    <p class="hero-subtitle">GitHub Copilot uses OpenAI Codex to suggest code and entire functions in real-time, right from your editor.</p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary btn-large">Start your free trial</a>
+                        <a href="#pricing" class="btn btn-outline btn-large">See pricing</a>
+                    </div>
+                </div>
+                <div class="hero-code-preview">
+                    <div class="code-window">
+                        <div class="window-header">
+                            <div class="window-controls">
+                                <span class="control"></span>
+                                <span class="control"></span>
+                                <span class="control"></span>
+                            </div>
+                            <div class="window-tabs">
+                                <button class="tab active">example.ts</button>
+                                <button class="tab">test.ts</button>
+                            </div>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-typescript">
+function calculateDaysBetweenDates(begin: Date, end: Date): number {
+    const diff = end.getTime() - begin.getTime();
+    return Math.floor(diff / (1000 * 60 * 60 * 24));
+}
+
+// Copilot suggestion
+function formatDateRange(begin: Date, end: Date): string {
+    const days = calculateDaysBetweenDates(begin, end);
+    return `${days} day${days !== 1 ? 's' : ''} between ${begin.toLocaleDateString()} and ${end.toLocaleDateString()}`;
+}
+                            </code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-bg"></div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Write better code</h2>
+                    <p>GitHub Copilot is powered by OpenAI Codex and trained on billions of lines of public code.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>AI pair programming</h3>
+                        <p>Get suggestions for whole lines or entire functions right inside your editor.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5l6.74-6.76z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <line x1="16" y1="8" x2="2" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <line x1="17.5" y1="15" x2="9" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Code completion</h3>
+                        <p>Get suggestions as you type, helping you write code faster with fewer bugs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Plans and pricing</h2>
+                    <p>Choose the plan that's right for you or your team.</p>
+                </div>
+                <div class="pricing-toggle">
+                    <button class="toggle-btn active">Individual</button>
+                    <button class="toggle-btn">Business</button>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="card-header">
+                            <h3>Free</h3>
+                            <div class="price">$0</div>
+                            <div class="price-period">per month</div>
+                        </div>
+                        <ul class="features-list">
+                            <li>Basic code completion</li>
+                            <li>Single language support</li>
+                            <li>Community support</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline btn-full">Get started for free</a>
+                    </div>
+                    <div class="pricing-card featured">
+                        <div class="card-header">
+                            <h3>Pro</h3>
+                            <div class="price">$10</div>
+                            <div class="price-period">per month</div>
+                        </div>
+                        <ul class="features-list">
+                            <li>Advanced code completion</li>
+                            <li>Multi-language support</li>
+                            <li>Priority support</li>
+                            <li>Early access to new features</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-full">Start free trial</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <svg height="30" viewBox="0 0 45 16" version="1.1" width="84">
+                        <path fill-rule="evenodd" d="M8.81 7.35v5.74c0 .04-.01.11-.06.13 0 0-1.25.89-3.31.89-2.49 0-5.44-.78-5.44-5.92S2.58 1.99 5.1 2c2.18 0 3.06.49 3.2.58.04.05.06.09.06.14L7.94 4.5c0 .09-.09.2-.2.17-.36-.11-.9-.33-2.17-.33-1.47 0-3.05.42-3.05 3.73s1.5 3.7 2.58 3.7c.92 0 1.25-.11 1.25-.11v-2.3H4.88c-.11 0-.19-.08-.19-.17V7.35c0-.09.08-.17.19-.17h3.74c.11 0 .19.08.19.17Zm35.85 2.33c0 3.43-1.11 4.41-3.05 4.41-1.64 0-2.52-.83-2.52-.83s-.04.46-.09.52c-.03.06-.08.08-.14.08h-1.48c-.1 0-.19-.08-.19-.17l.02-11.11c0-.09.08-.17.17-.17h2.13c.09 0 .17.08.17.17v3.77s.82-.53 2.02-.53l-.01-.02c1.2 0 2.97.45 2.97 3.88ZM27.68 2.43c.09 0 .17.08.17.17v11.11c0 .09-.08.17-.17.17h-2.13c-.09 0-.17-.08-.17-.17l.02-4.75h-3.31v4.75c0 .09-.08.17-.17.17h-2.13c-.08 0-.17-.08-.17-.17V2.6c0-.09.08-.17.17-.17h2.13c.09 0 .17.08.17.17v4.09h3.31V2.6c0-.09.08-.17.17-.17Zm8.26 3.64c.11 0 .19.08.19.17l-.02 7.47c0 .09-.06.17-.17.17H34.6c-.07 0-.14-.04-.16-.09-.03-.06-.08-.45-.08-.45s-1.13.77-2.52.77c-1.69 0-2.92-.55-2.92-2.75V6.25c0-.09.08-.17.17-.17h2.14c.09 0 .17.08.17.17v2.96c0 .8.19 1.09.97 1.09 1.11 0 2.11-.99 2.11-.99V6.25c0-.09.08-.17.17-.17Zm-6.3-1.98c-.71 0-1.21-.55-1.21-1.17 0-.66.5-1.17 1.21-1.17.71 0 1.21.51 1.21 1.17 0 .66-.5 1.17-1.21 1.17Zm6.42-1.92c-.09 0-.17-.08-.17-.17V.17c0-.09.08-.17.17-.17h2.13c.09 0 .17.08.17.17v1.83c0 .09-.08.17-.17.17ZM14.45 4.71c-.15-.04-.36-.07-.58-.07-1.24 0-1.91.95-1.91.95v7.43c0 .09-.08.17-.17.17h-2.14c-.09 0-.17-.08-.17-.17V6.25c0-.09.08-.17.17-.17h1.48c.09 0 .16.06.17.14.02.08.1.59.1.59s.63-.78 2.3-.78c.29 0 .56.02.79.07.09.02.13.11.13.19v1.87c0 .12-.08.19-.17.15Z"></path>
+                    </svg>
+                </div>
+                <nav class="footer-nav">
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Status</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html> 
