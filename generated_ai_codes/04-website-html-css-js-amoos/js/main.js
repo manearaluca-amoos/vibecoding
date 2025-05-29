@@ -36,4 +36,64 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-}); 
+
+    // FAQ Functionality
+    initializeFAQ();
+});
+
+// FAQ Management Functions
+function initializeFAQ() {
+    const categoryButtons = document.querySelectorAll('.faq-category-btn');
+    const categories = document.querySelectorAll('.faq-category');
+    const categoryTitle = document.getElementById('faq-category-title');
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    // Category switching functionality
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetCategory = button.getAttribute('data-category');
+            
+            // Update active category button
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            // Update category title
+            categoryTitle.textContent = button.textContent;
+            
+            // Show target category, hide others
+            categories.forEach(category => {
+                if (category.getAttribute('data-category') === targetCategory) {
+                    category.classList.add('active');
+                } else {
+                    category.classList.remove('active');
+                }
+            });
+
+            // Reset all FAQ items in the new category
+            const activeCategoryItems = document.querySelectorAll(`.faq-category[data-category="${targetCategory}"] .faq-item`);
+            activeCategoryItems.forEach(item => {
+                item.classList.remove('active');
+            });
+        });
+    });
+
+    // FAQ accordion functionality
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const faqItem = question.parentNode;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all other FAQ items in the same category
+            const currentCategory = faqItem.closest('.faq-category');
+            const allItemsInCategory = currentCategory.querySelectorAll('.faq-item');
+            allItemsInCategory.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Toggle current item
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        });
+    });
+} 

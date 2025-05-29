@@ -95,15 +95,45 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: var(--nSpaceM);
 }
 
+/* Specific H2 Styling */
+h2 {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    color-scheme: dark;
+    display: block;
+    font-family: "Mona Sans", MonaSansFallback, -apple-system, "system-ui", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 48px;
+    font-weight: 600;
+    height: 115.188px;
+    letter-spacing: -1.44px;
+    line-height: 57.6px;
+    margin-block-end: 0px;
+    margin-block-start: 0px;
+    margin-bottom: 0px;
+    margin-inline-end: 0px;
+    margin-inline-start: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    max-width: 534px;
+    overflow-wrap: break-word;
+    text-size-adjust: 100%;
+    text-wrap-mode: wrap;
+    text-wrap-style: balance;
+    unicode-bidi: isolate;
+    width: 534px;
+    word-break: keep-all;
+    -webkit-font-smoothing: antialiased;
+}
+
 .section-title {
-    font-size: clamp(2rem, 5vw, 3rem);
-    text-align: center;
-    margin-bottom: var(--nSpace2XL);
-    color: var(--color-white);
-    background: linear-gradient(135deg, var(--color-purple), var(--color-teal));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /* Keep the gradient and animation effects */
     animation: titleGlow 2s ease-in-out infinite alternate;
+    /* Center alignment for section titles */
+    text-align: center;
+    /* Add some bottom margin for spacing */
+    margin-bottom: var(--nSpace2XL);
+    /* Inherit all other properties from h2 */
 }
 
 @keyframes titleGlow {
@@ -197,7 +227,7 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     overflow: hidden;
     margin-top: 76px;
-    background: linear-gradient(135deg, var(--color-deep-blue) 0%, #1a1a2e 50%, var(--color-deep-blue) 100%);
+    /* background: linear-gradient(135deg, var(--color-deep-blue) 0%, #1a1a2e 50%, var(--color-deep-blue) 100%); */
     min-height: 100vh;
 }
 
@@ -208,9 +238,9 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
+    /* background: 
         radial-gradient(circle at 20% 80%, rgba(138, 99, 210, 0.15), transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(0, 180, 171, 0.15), transparent 50%);
+        radial-gradient(circle at 80% 20%, rgba(0, 180, 171, 0.15), transparent 50%); */
     animation: pulseGlow 4s ease-in-out infinite;
 }
 
@@ -260,7 +290,14 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     padding: 20px 24px;
     border-radius: 12px;
-    background: rgba(10, 12, 16, 0.8);
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: linear-gradient(rgb(13, 17, 23) 0%, rgba(13, 17, 23, 0.2) 100%);
+    background-origin: padding-box;
+    background-position: 0% 0%;
+    background-repeat: repeat;
+    background-size: auto;
     border: 1px solid rgba(138, 99, 210, 0.3);
     backdrop-filter: blur(10px);
     font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', Consolas, 'Courier New', monospace;
@@ -622,45 +659,199 @@ h1, h2, h3, h4, h5, h6 {
    ========================================================================== */
 .faq {
     padding: var(--nSpace2XL) 0;
+    background-color: #000000;
+}
+
+.faq-layout {
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.faq-sidebar {
+    flex: 0 0 280px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    padding: 1rem;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.faq-category-btn {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: #8b8b8b;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.faq-category-btn:hover {
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+.faq-category-btn.active {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.faq-content {
+    flex: 1;
+    background-color: #0e0e0e;
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.faq-category-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333333;
+}
+
+.faq-category-header h3 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.faq-category {
+    display: none;
+}
+
+.faq-category.active {
+    display: block;
 }
 
 .faq-item {
-    border-bottom: 1px solid var(--cBorder);
+    border-bottom: 1px solid #333333;
+    margin-bottom: 0;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
 }
 
 .faq-question {
     width: 100%;
     background: none;
     border: none;
-    color: var(--text-primary);
-    font-size: 1.125rem;
+    color: #ffffff;
+    font-size: 1.1rem;
     font-weight: 500;
-    padding: var(--nSpaceL) 0;
+    padding: 1.5rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    transition: color var(--tDurationFast) var(--tTimingFunction);
+    transition: color 0.2s ease;
+    text-align: left;
 }
 
 .faq-question:hover {
-    color: var(--cAccent);
+    color: #00e6b8;
+}
+
+.faq-question span:first-child {
+    flex: 1;
+    margin-right: 1rem;
+}
+
+.faq-icon {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #8b8b8b;
+    transition: all 0.2s ease;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+    color: #00e6b8;
 }
 
 .faq-answer {
-    padding: 0;
-    height: 0;
     overflow: hidden;
-    transition: all var(--tDurationMedium) var(--tTimingFunction);
+    transition: all 0.3s ease;
+    max-height: 0;
 }
 
 .faq-item.active .faq-answer {
-    padding: 0 0 var(--nSpaceL);
-    height: auto;
+    max-height: 300px;
 }
 
-.faq-item.active .icon-arrow {
-    transform: rotate(180deg);
+.faq-answer-content {
+    padding: 0 0 1.5rem 0;
+    color: #b8b8b8;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Responsive FAQ Design */
+@media (max-width: 1024px) {
+    .faq-layout {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .faq-sidebar {
+        flex: none;
+        position: static;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+    
+    .faq-category-btn {
+        flex: 1;
+        min-width: 150px;
+        margin-bottom: 0;
+        text-align: center;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .faq-sidebar {
+        flex-direction: column;
+    }
+    
+    .faq-category-btn {
+        flex: none;
+        width: 100%;
+        text-align: left;
+    }
+    
+    .faq-content {
+        padding: 1.5rem;
+    }
+    
+    .faq-question {
+        font-size: 1rem;
+        padding: 1.2rem 0;
+    }
+    
+    .faq-answer-content {
+        font-size: 0.9rem;
+    }
 }
 
 /* ==========================================================================
@@ -821,7 +1012,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bg-dark-card {
-    background-color: var(--color-dark-gray);
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: linear-gradient(rgb(13, 17, 23) 0%, rgba(13, 17, 23, 0.2) 100%);
+    background-origin: padding-box;
+    background-position: 0% 0%;
+    background-repeat: repeat;
+    background-size: auto;
 }
 
 /* Text Color Overrides */
