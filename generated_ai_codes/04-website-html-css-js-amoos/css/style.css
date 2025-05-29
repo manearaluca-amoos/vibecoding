@@ -290,41 +290,51 @@ h2 {
     position: relative;
     padding: 20px 24px;
     border-radius: 12px;
-    background-attachment: scroll;
-    background-clip: border-box;
-    background-color: rgba(0, 0, 0, 0);
-    background-image: linear-gradient(rgb(13, 17, 23) 0%, rgba(13, 17, 23, 0.2) 100%);
-    background-origin: padding-box;
-    background-position: 0% 0%;
-    background-repeat: repeat;
-    background-size: auto;
-    border: 1px solid rgba(138, 99, 210, 0.3);
-    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(15px);
     font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', Consolas, 'Courier New', monospace;
     font-weight: 400;
     font-size: 1.4rem;
     line-height: 1.6;
     letter-spacing: 0.5px;
-    color: rgba(246, 248, 250, 0.9);
+    color: rgba(246, 248, 250, 0.95);
     max-width: 600px;
     margin: 0 auto 2rem auto;
+    border: 2px solid transparent;
+    
+    /* Static Neon Light Effect */
+    box-shadow: 
+        /* Inner glow */
+        inset 0 0 25px rgba(138, 99, 210, 0.4),
+        inset 0 0 50px rgba(0, 180, 171, 0.25),
+        /* Outer neon glow layers */
+        0 0 8px #8A63D2,
+        0 0 15px #8A63D2,
+        0 0 25px #8A63D2,
+        0 0 35px #00B4AB,
+        0 0 50px #00B4AB,
+        0 0 75px #00FFB3,
+        0 0 100px #00FFB3;
 }
 
 .hero .lead::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 12px;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(138, 99, 210, 0.5), rgba(0, 180, 171, 0.3), rgba(138, 99, 210, 0.5));
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    z-index: -1;
+    /* Removed - no moving effects */
+}
+
+.hero .lead::after {
+    /* Removed - no moving effects */
+}
+
+@keyframes neonPulse {
+    /* Removed - no animations */
+}
+
+@keyframes neonRotate {
+    /* Removed - no animations */
+}
+
+@keyframes neonSweep {
+    /* Removed - no animations */
 }
 
 /* Code-like styling for specific words with Conic Border */
