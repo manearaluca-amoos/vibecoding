@@ -252,9 +252,12 @@ h1, h2, h3, h4, h5, h6 {
     background: rgba(10, 12, 16, 0.8);
     border: 1px solid rgba(138, 99, 210, 0.3);
     backdrop-filter: blur(10px);
-    font-family: var(--brand-fontStack-sansSerif);
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', Consolas, 'Courier New', monospace;
     font-weight: 400;
+    font-size: 1.4rem;
     line-height: 1.6;
+    letter-spacing: 0.5px;
+    color: rgba(246, 248, 250, 0.9);
     max-width: 600px;
     margin: 0 auto 2rem auto;
 }
@@ -292,6 +295,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.95em;
     font-weight: 600;
     display: inline-block;
+    vertical-align: -21px;
     margin: 2px 4px;
     overflow: hidden;
     transition: all 0.3s ease;
