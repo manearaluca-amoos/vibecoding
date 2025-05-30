@@ -48,6 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Email Forms Functionality
     initializeEmailForms();
+
+    // Scroll to Top Button Functionality
+    initializeScrollToTop();
 });
 
 // FAQ Management Functions
@@ -381,4 +384,41 @@ function showEmailSuccess(workshopType, email) {
     
     // Console log for demo purposes (in production, this would be sent to your backend)
     console.log(`Email submitted for ${workshopType}: ${email}`);
+}
+
+// Scroll to Top Button Management
+function initializeScrollToTop() {
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    
+    if (!scrollToTopBtn) return;
+
+    // Show/hide button based on scroll position
+    const toggleScrollButton = () => {
+        if (window.scrollY > 300) {
+            scrollToTopBtn.style.display = 'flex';
+            scrollToTopBtn.style.opacity = '1';
+        } else {
+            scrollToTopBtn.style.opacity = '0';
+            setTimeout(() => {
+                if (window.scrollY <= 300) {
+                    scrollToTopBtn.style.display = 'none';
+                }
+            }, 300);
+        }
+    };
+
+    // Smooth scroll to top
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+
+    // Event listeners
+    window.addEventListener('scroll', toggleScrollButton);
+    scrollToTopBtn.addEventListener('click', scrollToTop);
+
+    // Initial check
+    toggleScrollButton();
 } 
