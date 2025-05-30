@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Scroll Animation Functionality
     initializeScrollAnimations();
+
+    // Email Forms Functionality
+    initializeEmailForms();
 });
 
 // FAQ Management Functions
@@ -305,4 +308,77 @@ style.textContent = `
         }
     }
 `;
-document.head.appendChild(style); 
+document.head.appendChild(style);
+
+// Email Forms Functionality
+function initializeEmailForms() {
+    // WordPress Email Form
+    const wordpressForm = document.getElementById('wordpressEmailForm');
+    const wordpressModal = new bootstrap.Modal(document.getElementById('wordpressModal'));
+    
+    if (wordpressForm) {
+        wordpressForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('wordpressEmail').value;
+            
+            if (email) {
+                // Show success message
+                showEmailSuccess('WordPress Workshop', email);
+                // Close modal
+                wordpressModal.hide();
+                // Reset form
+                wordpressForm.reset();
+            }
+        });
+    }
+
+    // Vibe Coding Email Form
+    const vibeCodingForm = document.getElementById('vibeCodingEmailForm');
+    const vibeCodingModal = new bootstrap.Modal(document.getElementById('vibeCodingModal'));
+    
+    if (vibeCodingForm) {
+        vibeCodingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('vibeCodingEmail').value;
+            
+            if (email) {
+                // Show success message
+                showEmailSuccess('Vibe Coding', email);
+                // Close modal
+                vibeCodingModal.hide();
+                // Reset form
+                vibeCodingForm.reset();
+            }
+        });
+    }
+}
+
+// Show success message after email submission
+function showEmailSuccess(workshopType, email) {
+    // Create success notification
+    const notification = document.createElement('div');
+    notification.className = 'position-fixed top-0 end-0 p-3';
+    notification.style.zIndex = '9999';
+    notification.innerHTML = `
+        <div class="toast show bg-dark-card border-success" role="alert">
+            <div class="toast-header bg-dark-card border-secondary">
+                <strong class="me-auto text-success">✅ Înregistrare reușită!</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body text-white">
+                Mulțumim! Te-am înregistrat pentru <strong>${workshopType}</strong>.<br>
+                Vei primi detaliile la <strong>${email}</strong> în următoarele 24 de ore.
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove notification after 5 seconds
+    setTimeout(() => {
+        notification.remove();
+    }, 5000);
+    
+    // Console log for demo purposes (in production, this would be sent to your backend)
+    console.log(`Email submitted for ${workshopType}: ${email}`);
+} 
