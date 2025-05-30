@@ -2692,3 +2692,212 @@ section .container::before {
     font-size: 0.95rem;
     padding: 1rem 0;
 }
+
+/* Modal Base Responsive Behavior */
+.modal-dialog {
+    width: 100%;
+    max-width: 600px;
+    margin: 1.75rem auto;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.modal-body {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.modal-title {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Global Modal Fixes for All Breakpoints */
+.modal.fade.show .modal-dialog {
+    transform: none !important;
+}
+
+.modal.fade.show {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Specific Modal ID Fixes */
+#highlightModal .modal-dialog,
+#aiModal .modal-dialog,
+#vibecodingModal .modal-dialog,
+#wordpressModal .modal-dialog {
+    width: 90%;
+    max-width: 90%;
+    margin: 1rem auto;
+}
+
+/* Modal Tablet Optimizations */
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 1rem !important;
+        max-width: 90% !important;
+        width: 90% !important;
+    }
+    
+    /* Specific Modal IDs */
+    #highlightModal .modal-dialog,
+    #aiModal .modal-dialog,
+    #vibecodingModal .modal-dialog,
+    #wordpressModal .modal-dialog {
+        width: 90% !important;
+        max-width: 90% !important;
+        margin: 1rem auto !important;
+    }
+    
+    .modal-content.bg-dark-card {
+        border-radius: 12px;
+        box-shadow: 
+            0 0 20px rgba(0, 212, 255, 0.5),
+            0 0 40px rgba(189, 0, 255, 0.3);
+        max-width: 100%;
+        overflow: hidden;
+        width: 100%;
+    }
+}
+
+/* Modal Mobile Optimizations */
+@media (max-width: 480px) {
+    .modal-dialog {
+        margin: 0.5rem auto !important;
+        max-width: 90% !important;
+        width: 90% !important;
+    }
+    
+    /* Specific Modal IDs - Force 90% width */
+    #highlightModal .modal-dialog,
+    #aiModal .modal-dialog,
+    #vibecodingModal .modal-dialog,
+    #wordpressModal .modal-dialog {
+        width: 90% !important;
+        max-width: 90% !important;
+        margin: 0.5rem auto !important;
+    }
+    
+    /* Ensure modal is centered and visible */
+    .modal.fade.show {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.5rem !important;
+    }
+    
+    .modal-content.bg-dark-card {
+        border-radius: 10px;
+        box-shadow: 
+            0 0 15px rgba(0, 212, 255, 0.5),
+            0 0 30px rgba(189, 0, 255, 0.3);
+        max-width: 100%;
+        overflow: hidden;
+        width: 100%;
+    }
+}
+
+/* Modal Extra Small Mobile */
+@media (max-width: 375px) {
+    .modal-dialog {
+        margin: 0.25rem auto !important;
+        max-width: 90% !important;
+        width: 90% !important;
+    }
+    
+    /* Specific Modal IDs - Force 90% width */
+    #highlightModal .modal-dialog,
+    #aiModal .modal-dialog,
+    #vibecodingModal .modal-dialog,
+    #wordpressModal .modal-dialog {
+        width: 90% !important;
+        max-width: 90% !important;
+        margin: 0.25rem auto !important;
+    }
+    
+    /* Ensure modal is centered and visible */
+    .modal.fade.show {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.25rem !important;
+    }
+    
+    .modal-content.bg-dark-card {
+        border-radius: 8px;
+        box-shadow: 
+            0 0 12px rgba(0, 212, 255, 0.5),
+            0 0 25px rgba(189, 0, 255, 0.3);
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* ==========================================================================
+   Universal Modal Width Override - All Devices
+   ========================================================================== */
+
+/* Target all modal variations - Width Only */
+.modal .modal-dialog,
+.modal.fade .modal-dialog,
+.modal.fade.show .modal-dialog,
+.modal.show .modal-dialog {
+    max-width: 600px;
+    width: 100%;
+    margin: 1.75rem auto;
+}
+
+/* Mobile First - Universal 90% width */
+@media (max-width: 991px) {
+    .modal .modal-dialog,
+    .modal.fade .modal-dialog,
+    .modal.fade.show .modal-dialog,
+    .modal.show .modal-dialog {
+        width: 90% !important;
+        max-width: 90% !important;
+        margin: 1rem auto !important;
+    }
+}
+
+/* ==========================================================================
+   Modal Functionality Fix - Override Previous Issues
+   ========================================================================== */
+
+/* Restore Bootstrap modal functionality */
+.modal {
+    display: none !important;
+}
+
+.modal.show {
+    display: block !important;
+}
+
+.modal.fade.show {
+    display: block !important;
+}
+
+/* Keep 90% width on mobile but allow Bootstrap to handle display */
+@media (max-width: 991px) {
+    .modal-dialog {
+        width: 90% !important;
+        max-width: 90% !important;
+        margin: 1rem auto !important;
+    }
+    
+    #highlightModal .modal-dialog,
+    #aiModal .modal-dialog,
+    #vibecodingModal .modal-dialog,
+    #wordpressModal .modal-dialog {
+        width: 90% !important;
+        max-width: 90% !important;
+        margin: 1rem auto !important;
+    }
+}
