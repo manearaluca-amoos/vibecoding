@@ -231,4 +231,24 @@ function initializeHighlightModal() {
             }
         });
     });
+
+    // Handle modal workshop button click
+    const modalWorkshopBtn = document.getElementById('modalWorkshopBtn');
+    modalWorkshopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Close the modal first
+        modal.hide();
+        
+        // Wait for modal to close, then scroll to workshops
+        setTimeout(() => {
+            const workshopsSection = document.querySelector('#workshops');
+            if (workshopsSection) {
+                workshopsSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }, 300); // Wait for modal close animation to complete
+    });
 } 
