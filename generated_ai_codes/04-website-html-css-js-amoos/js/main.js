@@ -51,6 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Scroll to Top Button Functionality
     initializeScrollToTop();
+
+    // Smooth Scroll Animations
+    initializeSmoothScrollAnimations();
 });
 
 // FAQ Management Functions
@@ -421,4 +424,91 @@ function initializeScrollToTop() {
 
     // Initial check
     toggleScrollButton();
+}
+
+// Smooth Scroll Animations
+function initializeSmoothScrollAnimations() {
+    // Create intersection observer for smooth scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Add stagger delay for cards in the same container
+                const delay = entry.target.classList.contains('card') ? index * 100 : 0;
+                
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, delay);
+                
+                // Stop observing once animated
+                scrollObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Auto-apply scroll-animate class to elements that should animate
+    const animatableElements = [
+        '.section-title',
+        '.card.bg-dark-card',
+        '.lead',
+        '.btn',
+        '.list-unstyled',
+        '.faq-item',
+        '.badge',
+        '.mentor-placeholder',
+        'p:not(.text-muted):not(.small)'
+    ];
+
+    // Apply scroll-animate class and observe elements
+    animatableElements.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(element => {
+            // Skip if already has scroll-animate class
+            if (!element.classList.contains('scroll-animate')) {
+                element.classList.add('scroll-animate');
+                scrollObserver.observe(element);
+            }
+        });
+    });
+
+    // Special handling for cards with stagger effect
+    const cardContainers = document.querySelectorAll('.row.g-4, .workshops-grid, .problem-grid');
+    cardContainers.forEach(container => {
+        const cards = container.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            if (!card.classList.contains('scroll-animate')) {
+                card.classList.add('scroll-animate');
+                // Add custom delay based on position
+                card.style.transitionDelay = `${index * 0.1}s`;
+                scrollObserver.observe(card);
+            }
+        });
+    });
+
+    // Special handling for list items
+    const lists = document.querySelectorAll('.list-unstyled');
+    lists.forEach(list => {
+        const items = list.querySelectorAll('li');
+        items.forEach((item, index) => {
+            item.style.transitionDelay = `${index * 0.1}s`;
+        });
+    });
+
+    // Handle elements that are already in view on page load
+    setTimeout(() => {
+        const visibleElements = document.querySelectorAll('.scroll-animate');
+        visibleElements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            
+            if (isVisible) {
+                element.classList.add('visible');
+                scrollObserver.unobserve(element);
+            }
+        });
+    }, 100);
 } 
