@@ -42,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Highlight Modal Functionality
     initializeHighlightModal();
+
+    // Scroll Animation Functionality
+    initializeScrollAnimations();
 });
 
 // FAQ Management Functions
@@ -251,4 +254,55 @@ function initializeHighlightModal() {
             }
         }, 300); // Wait for modal close animation to complete
     });
-} 
+}
+
+// Scroll Animation Management
+function initializeScrollAnimations() {
+    // Create intersection observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                // Once animated, we can stop observing this element
+                scrollObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe the hero lead text
+    const heroLead = document.querySelector('.hero .lead');
+    if (heroLead) {
+        scrollObserver.observe(heroLead);
+    }
+
+    // Add staggered animation for highlighted words
+    const highlightedWords = document.querySelectorAll('.hero .lead .highlight-code');
+    highlightedWords.forEach((word, index) => {
+        setTimeout(() => {
+            word.style.animation = `fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards`;
+            word.style.animationDelay = `${1.5 + (index * 0.2)}s`;
+        }, 100);
+    });
+}
+
+// Add CSS for highlighted words animation
+const style = document.createElement('style');
+style.textContent = `
+    .hero .lead .highlight-code {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+`;
+document.head.appendChild(style); 

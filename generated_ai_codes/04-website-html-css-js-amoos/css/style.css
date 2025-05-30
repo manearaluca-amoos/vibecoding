@@ -75,6 +75,10 @@ img {
     display: block;
 }
 
+.text-secondary{
+    color:  rgb(213 222 230) !important;
+}
+
 /* ==========================================================================
    Layout & Container
    ========================================================================== */
@@ -274,7 +278,7 @@ h2 {
     left: -5px;
     right: -5px;
     bottom: -5px;
-    background: rgba(246, 248, 250, 0.02);
+    /* background: rgba(246, 248, 250, 0.02); */
     border-radius: 8px;
     z-index: -1;
     opacity: 0;
@@ -288,38 +292,89 @@ h2 {
 /* Technical Border Container for Lead Text */
 .hero .lead {
     position: relative;
-    padding: 20px 24px;
-    border-radius: 12px;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(15px);
+    padding: 32px 40px;
+    margin: 100px auto;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
     font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', Consolas, 'Courier New', monospace;
     font-weight: 400;
     font-size: 1.4rem;
     line-height: 1.6;
     letter-spacing: 0.5px;
-    color: rgba(246, 248, 250, 0.95);
-    max-width: 600px;
-    margin: 0 auto 2rem auto;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 700px;
     border: 2px solid transparent;
     
-    /* Static Neon Light Effect */
+    /* Enhanced Neon Light Effect */
     box-shadow: 
         /* Inner glow */
-        inset 0 0 25px rgba(138, 99, 210, 0.4),
-        inset 0 0 50px rgba(0, 180, 171, 0.25),
-        /* Outer neon glow layers - Custom gradient */
-        0 0 8px #5add9c,
-        0 0 12px #4bd49c,
-        0 0 18px #46cba4,
-        0 0 25px #3fc3ab,
-        0 0 32px #37b2b7,
-        0 0 40px #2785cd,
-        0 0 48px #2580cf,
-        0 0 56px #2480cd,
-        0 0 65px #236ed2,
-        0 0 75px #1f3fce,
-        0 0 85px #2a0fa9,
-        0 0 95px #2a017e;
+        inset 0 0 30px rgba(0, 230, 184, 0.3),
+        inset 0 0 60px rgba(138, 99, 210, 0.2),
+        /* Outer neon glow layers */
+        0 0 10px rgba(0, 230, 184, 0.6),
+        0 0 20px rgba(0, 230, 184, 0.4),
+        0 0 30px rgba(0, 230, 184, 0.3),
+        0 0 40px rgba(138, 99, 210, 0.4),
+        0 0 60px rgba(138, 99, 210, 0.2);
+    
+    /* Scroll Animation - Initial State */
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Animation when element is visible */
+.hero .lead.animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Typewriter effect for text content */
+.hero .lead.animate-in {
+    animation: slideUpFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+               pulseGlow 3s ease-in-out 1.5s infinite alternate;
+}
+
+@keyframes slideUpFade {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+        filter: blur(5px);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateY(20px) scale(0.98);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 
+            inset 0 0 30px rgba(0, 230, 184, 0.3),
+            inset 0 0 60px rgba(138, 99, 210, 0.2),
+            0 0 10px rgba(0, 230, 184, 0.6),
+            0 0 20px rgba(0, 230, 184, 0.4),
+            0 0 30px rgba(0, 230, 184, 0.3),
+            0 0 40px rgba(138, 99, 210, 0.4),
+            0 0 60px rgba(138, 99, 210, 0.2);
+    }
+    100% {
+        box-shadow: 
+            inset 0 0 40px rgba(0, 230, 184, 0.4),
+            inset 0 0 80px rgba(138, 99, 210, 0.3),
+            0 0 15px rgba(0, 230, 184, 0.8),
+            0 0 30px rgba(0, 230, 184, 0.6),
+            0 0 45px rgba(0, 230, 184, 0.4),
+            0 0 60px rgba(138, 99, 210, 0.5),
+            0 0 80px rgba(138, 99, 210, 0.3);
+    }
 }
 
 .hero .lead::before {
@@ -345,97 +400,73 @@ h2 {
 /* Code-like styling for specific words with Conic Border */
 .hero .lead .highlight-code {
     position: relative;
-    background: rgba(10, 12, 16, 0.9);
-    color: var(--color-teal);
+    background: linear-gradient(135deg, rgba(0, 230, 184, 0.15), rgba(138, 99, 210, 0.15));
+    color: #ddebe7;
     text-shadow: 
-        0 0 10px rgba(0, 180, 171, 0.6),
-        0 0 20px rgba(0, 180, 171, 0.4),
-        0 0 30px rgba(0, 180, 171, 0.3);
-    transform: translateY(-1px) scale(1.05);
-    padding: 8px 16px;
-    border-radius: var(--borderRadius-medium);
-    font-family: var(--brand-fontStack-system);
-    font-size: 0.95em;
-    font-weight: 600;
+        0 0 15px rgba(0, 255, 184, 0.8),
+        0 0 25px rgba(0, 255, 184, 0.5),
+        0 0 35px rgba(0, 255, 184, 0.3);
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1em;
     display: inline-block;
-    vertical-align: -21px;
-    margin: 2px 4px;
-    overflow: hidden;
+    vertical-align: baseline;
+    margin: 4px 6px;
+    border: 2px solid rgba(0, 230, 184, 0.6);
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 /* Clickable highlight styles */
 .hero .lead .clickable-highlight {
     cursor: pointer;
     user-select: none;
+    position: relative;
+}
+
+/* Add a subtle pulse animation to indicate interactivity */
+.hero .lead .clickable-highlight::after {
+    content: '👆';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 0.7em;
+    opacity: 0.7;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
 }
 
 .hero .lead .clickable-highlight:hover {
-    transform: translateY(-2px) scale(1.1);
+    transform: translateY(-3px) scale(1.05);
+    background: linear-gradient(135deg, rgba(0, 230, 184, 0.25), rgba(138, 99, 210, 0.25));
+    border-color: rgba(0, 230, 184, 0.9);
+    color: #00FFCC;
     text-shadow: 
-        0 0 15px rgba(0, 180, 171, 0.8),
-        0 0 25px rgba(0, 180, 171, 0.6),
-        0 0 35px rgba(0, 180, 171, 0.4);
+        0 0 20px rgba(0, 255, 204, 1),
+        0 0 30px rgba(0, 255, 204, 0.7),
+        0 0 40px rgba(0, 255, 204, 0.5);
+    box-shadow: 
+        0 0 20px rgba(0, 230, 184, 0.6),
+        0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .hero .lead .clickable-highlight:active {
-    transform: translateY(-1px) scale(1.08);
-}
-
-.hero .lead .highlight-code::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 2px;
-    background: conic-gradient(
-        from 0deg,
-        rgba(138, 99, 210, 0.8) 0deg,
-        rgba(0, 180, 171, 0.8) 90deg,
-        rgba(138, 99, 210, 0.8) 180deg,
-        rgba(0, 180, 171, 0.8) 270deg,
-        rgba(138, 99, 210, 0.8) 360deg
-    );
-    border-radius: inherit;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    z-index: -1;
-    animation: rotateBorder 4s linear infinite;
-}
-
-.hero .lead .highlight-code::after {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    background: rgba(10, 12, 16, 0.95);
-    border-radius: calc(var(--borderRadius-medium) - 2px);
-    z-index: -1;
-}
-
-.hero .lead .highlight-code:hover {
-    text-shadow: 
-        0 0 15px rgba(0, 180, 171, 0.8),
-        0 0 25px rgba(0, 180, 171, 0.6),
-        0 0 35px rgba(0, 180, 171, 0.4);
-    transform: translateY(-2px) scale(1.1);
+    transform: translateY(-1px) scale(1.02);
 }
 
 /* Alternative static effects for accessibility */
 @media (prefers-reduced-motion: reduce) {
-    .hero .lead .highlight-code {
-        transform: none;
-    }
-    
-    .hero .lead .highlight-code::before {
+    .hero .lead .clickable-highlight::after {
         animation: none;
-        background: linear-gradient(135deg, 
-            rgba(138, 99, 210, 0.6), 
-            rgba(0, 180, 171, 0.6)
-        );
     }
     
-    .hero .lead .highlight-code:hover {
+    .hero .lead .clickable-highlight:hover {
         transform: none;
     }
 }
@@ -1004,7 +1035,15 @@ h2 {
     
     .hero .lead {
         font-size: 1.2rem;
-        padding: 16px 20px;
+        max-width: 100%;
+        margin: 80px auto 1.5rem auto;
+        padding: 24px 28px;
+    }
+    
+    .hero .lead .highlight-code {
+        font-size: 0.95em;
+        padding: 10px 16px;
+        margin: 3px 4px;
     }
     
     .workshops-grid {
@@ -1035,17 +1074,16 @@ h2 {
     }
 
     .hero .lead {
-        font-size: 1.1rem;
-        max-width: 100%;
-        margin: 0 auto 1.5rem auto;
-        padding: 14px 18px;
+        font-size: 1rem;
+        padding: 20px 24px;
+        margin: 60px auto 1.5rem auto;
+        line-height: 1.5;
     }
     
     .hero .lead .highlight-code {
         font-size: 0.9em;
-        padding: 6px 12px;
-        margin: 1px 2px;
-        vertical-align: -18px;
+        padding: 8px 14px;
+        margin: 2px 3px;
     }
 
     .hero-subtitle {
