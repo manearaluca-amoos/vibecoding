@@ -22,9 +22,9 @@
     --text-secondary: rgba(246, 248, 250, 0.7);
     --text-muted: rgba(246, 248, 250, 0.6);
 
-    /* Typography - GitHub Brand Fonts */
-    --brand-fontStack-sansSerifAlt: "Hubot Sans", "Hubot SansHeaderFallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-    --brand-fontStack-sansSerif: "Mona Sans", "MonaSansFallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    /* Typography - Reliable Google Fonts */
+    --brand-fontStack-sansSerifAlt: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    --brand-fontStack-sansSerif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
     --brand-fontStack-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
     
     /* Border Radius */
@@ -101,7 +101,7 @@ h2 {
     color: rgb(255, 255, 255);
     color-scheme: dark;
     display: block;
-    font-family: "Mona Sans", MonaSansFallback, -apple-system, "system-ui", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-family: "Inter", -apple-system, "system-ui", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
     font-size: 48px;
     font-weight: 600;
     height: 115.188px;
@@ -121,7 +121,7 @@ h2 {
     text-wrap-mode: wrap;
     text-wrap-style: balance;
     unicode-bidi: isolate;
-    width: 534px;
+    width: 100%;
     word-break: keep-all;
     -webkit-font-smoothing: antialiased;
 }
@@ -307,14 +307,19 @@ h2 {
         /* Inner glow */
         inset 0 0 25px rgba(138, 99, 210, 0.4),
         inset 0 0 50px rgba(0, 180, 171, 0.25),
-        /* Outer neon glow layers */
-        0 0 8px #8A63D2,
-        0 0 15px #8A63D2,
-        0 0 25px #8A63D2,
-        0 0 35px #00B4AB,
-        0 0 50px #00B4AB,
-        0 0 75px #00FFB3,
-        0 0 100px #00FFB3;
+        /* Outer neon glow layers - Custom gradient */
+        0 0 8px #5add9c,
+        0 0 12px #4bd49c,
+        0 0 18px #46cba4,
+        0 0 25px #3fc3ab,
+        0 0 32px #37b2b7,
+        0 0 40px #2785cd,
+        0 0 48px #2580cf,
+        0 0 56px #2480cd,
+        0 0 65px #236ed2,
+        0 0 75px #1f3fce,
+        0 0 85px #2a0fa9,
+        0 0 95px #2a017e;
 }
 
 .hero .lead::before {
@@ -357,6 +362,24 @@ h2 {
     margin: 2px 4px;
     overflow: hidden;
     transition: all 0.3s ease;
+}
+
+/* Clickable highlight styles */
+.hero .lead .clickable-highlight {
+    cursor: pointer;
+    user-select: none;
+}
+
+.hero .lead .clickable-highlight:hover {
+    transform: translateY(-2px) scale(1.1);
+    text-shadow: 
+        0 0 15px rgba(0, 180, 171, 0.8),
+        0 0 25px rgba(0, 180, 171, 0.6),
+        0 0 35px rgba(0, 180, 171, 0.4);
+}
+
+.hero .lead .clickable-highlight:active {
+    transform: translateY(-1px) scale(1.08);
 }
 
 .hero .lead .highlight-code::before {
@@ -957,8 +980,10 @@ h2 {
 }
 
 /* ==========================================================================
-   Responsive Design
+   Responsive Design - Enhanced
    ========================================================================== */
+
+/* Tablet Landscape */
 @media (max-width: 1024px) {
     :root {
         --nSpace2XL: 2.5rem;
@@ -968,15 +993,59 @@ h2 {
         grid-template-columns: 1fr;
         gap: var(--nSpaceXL);
     }
+    
+    .container {
+        padding: 0 var(--nSpaceM);
+    }
+    
+    .hero .display-2.text-white {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+    
+    .hero .lead {
+        font-size: 1.2rem;
+        padding: 16px 20px;
+    }
+    
+    .workshops-grid {
+        gap: var(--nSpaceL);
+    }
+    
+    .problem-grid {
+        gap: var(--nSpaceL);
+    }
 }
 
+/* Tablet Portrait & Large Mobile */
 @media (max-width: 768px) {
     :root {
         --nSpaceXL: 1.5rem;
+        --nSpaceL: 1rem;
     }
 
     .hero {
         text-align: center;
+        padding-top: 2rem;
+    }
+    
+    .hero .display-2.text-white {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+
+    .hero .lead {
+        font-size: 1.1rem;
+        max-width: 100%;
+        margin: 0 auto 1.5rem auto;
+        padding: 14px 18px;
+    }
+    
+    .hero .lead .highlight-code {
+        font-size: 0.9em;
+        padding: 6px 12px;
+        margin: 1px 2px;
+        vertical-align: -18px;
     }
 
     .hero-subtitle {
@@ -986,6 +1055,12 @@ h2 {
 
     .workshops-grid {
         grid-template-columns: 1fr;
+        gap: var(--nSpaceM);
+    }
+    
+    .problem-grid {
+        grid-template-columns: 1fr;
+        gap: var(--nSpaceM);
     }
 
     .footer-nav {
@@ -996,15 +1071,217 @@ h2 {
         bottom: 1rem;
         right: 1rem;
     }
+    
+    .section-title {
+        font-size: clamp(2rem, 5vw, 2.5rem);
+        line-height: 1.3;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .navbar .container {
+        padding: 0 1rem;
+    }
+    
+    /* Better touch targets */
+    .btn {
+        padding: 14px 20px;
+        font-size: 1rem;
+        min-height: 48px;
+    }
+    
+    .faq-question {
+        min-height: 48px;
+        padding: 1.2rem 0;
+    }
+    
+    /* Mentor placeholder adjustments */
+    .mentor-placeholder {
+        min-height: 250px;
+        padding: 2rem;
+    }
+    
+    .mentor-placeholder .display-1 {
+        font-size: 3rem;
+    }
 }
 
+/* Mobile */
 @media (max-width: 480px) {
+    :root {
+        --nSpace2XL: 2rem;
+        --nSpaceXL: 1rem;
+        --nSpaceL: 0.75rem;
+        --nSpaceM: 0.5rem;
+    }
+    
+    .hero {
+        padding-top: 1rem;
+        min-height: 90vh;
+    }
+    
+    .hero .display-2.text-white {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+        margin-bottom: 0.75rem;
+    }
+    
+    .hero .lead {
+        font-size: 1rem;
+        padding: 12px 16px;
+        line-height: 1.5;
+    }
+    
+    .hero .lead .highlight-code {
+        font-size: 0.85em;
+        padding: 4px 8px;
+        vertical-align: -15px;
+    }
+
     .btn-large {
         width: 100%;
+        padding: 16px 24px;
+        font-size: 1.1rem;
+    }
+    
+    .btn {
+        padding: 12px 16px;
+        font-size: 0.95rem;
+        width: 100%;
+        justify-content: center;
     }
 
     .problem-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .workshops-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .workshop-card,
+    .problem-card {
+        padding: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: clamp(1.75rem, 6vw, 2rem);
+        margin-bottom: 1.5rem;
+    }
+    
+    .container {
+        padding: 0 0.75rem;
+    }
+    
+    .navbar .container {
+        padding: 0 0.75rem;
+    }
+    
+    /* FAQ improvements for mobile */
+    .faq-content {
+        padding: 1rem;
+    }
+    
+    .faq-question {
+        font-size: 0.95rem;
+        padding: 1rem 0;
+    }
+    
+    .faq-answer-content {
+        font-size: 0.85rem;
+        padding: 0 0 1rem 0;
+    }
+    
+    /* Footer adjustments */
+    .footer-grid {
+        gap: 1.5rem;
+    }
+    
+    .footer-logo {
+        height: 50px;
+    }
+    
+    /* Mentor placeholder for mobile */
+    .mentor-placeholder {
+        min-height: 200px;
+        padding: 1.5rem;
+    }
+    
+    .mentor-placeholder .display-1 {
+        font-size: 2.5rem;
+    }
+    
+    .mentor-placeholder h4 {
+        font-size: 1.1rem;
+    }
+    
+    .mentor-placeholder p {
+        font-size: 0.9rem;
+    }
+    
+    /* Floating CTA mobile */
+    .floating-cta {
+        bottom: 0.75rem;
+        right: 0.75rem;
+    }
+    
+    .floating-cta .btn {
+        width: auto;
+        padding: 12px;
+    }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 375px) {
+    .hero .display-2.text-white {
+        font-size: clamp(1.25rem, 8vw, 1.75rem);
+    }
+    
+    .hero .lead {
+        font-size: 0.9rem;
+        padding: 10px 14px;
+    }
+    
+    .section-title {
+        font-size: clamp(1.5rem, 7vw, 1.75rem);
+    }
+    
+    .container {
+        padding: 0 0.5rem;
+    }
+    
+    .workshop-card,
+    .problem-card {
+        padding: 1rem;
+    }
+    
+    .mentor-placeholder .display-1 {
+        font-size: 2rem;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .hero .display-2.text-white {
+        font-size: clamp(3rem, 4vw, 4.5rem);
+    }
+    
+    .workshops-grid {
+        max-width: 1200px;
+    }
+}
+
+/* Ultra Wide Desktop */
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1600px;
     }
 }
 
@@ -1272,4 +1549,231 @@ section .container::before {
 #about img:hover {
     border-color: var(--color-teal);
     transform: scale(1.02);
+}
+
+/* ==========================================================================
+   Mentor Placeholder Styling
+   ========================================================================== */
+.mentor-placeholder {
+    background: linear-gradient(135deg, rgba(138, 99, 210, 0.1), rgba(0, 180, 171, 0.05));
+    border: 2px solid rgba(138, 99, 210, 0.3);
+    transition: all 0.3s ease;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mentor-placeholder:hover {
+    border-color: var(--color-teal);
+    background: linear-gradient(135deg, rgba(138, 99, 210, 0.15), rgba(0, 180, 171, 0.1));
+    transform: scale(1.02);
+}
+
+.mentor-placeholder .display-1 {
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.mentor-placeholder h4 {
+    color: var(--color-white);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.mentor-placeholder p {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.mentor-placeholder small {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ==========================================================================
+   Mobile-First Touch & Interaction Optimizations
+   ========================================================================== */
+
+/* Improve touch interactions on mobile */
+@media (hover: none) and (pointer: coarse) {
+    .btn:hover,
+    .card:hover,
+    .faq-question:hover,
+    .workshop-card:hover,
+    .problem-card:hover {
+        transform: none;
+    }
+    
+    .btn:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+    
+    .hero .lead .highlight-code:hover {
+        transform: translateY(-1px) scale(1.05);
+    }
+}
+
+/* Navbar improvements for mobile */
+@media (max-width: 991px) {
+    .navbar-toggler {
+        border: none;
+        padding: 0.5rem;
+        font-size: 1.25rem;
+    }
+    
+    .navbar-toggler:focus {
+        box-shadow: none;
+        outline: 2px solid var(--color-teal);
+        outline-offset: 2px;
+    }
+    
+    .navbar-collapse {
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        margin-top: 1rem;
+        border-radius: 8px;
+        padding: 1rem;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+        transition: all 0.2s ease;
+    }
+    
+    .navbar-nav .nav-link:hover {
+        background: rgba(0, 230, 184, 0.1);
+        color: var(--color-teal);
+    }
+}
+
+/* Improve accessibility and focus states */
+.btn:focus,
+.faq-question:focus,
+.faq-category-btn:focus {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 2px;
+}
+
+/* Better scroll behavior for mobile */
+@media (max-width: 768px) {
+    html {
+        scroll-padding-top: 80px;
+    }
+    
+    /* Prevent horizontal overflow */
+    body {
+        overflow-x: hidden;
+    }
+    
+    /* Optimize images for mobile */
+    img {
+        height: auto;
+        max-width: 100%;
+    }
+    
+    /* Better spacing for touch */
+    .card-features li {
+        padding: 0.5rem 0;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* Mobile-friendly form elements */
+    input, textarea, select {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+}
+
+/* Landscape mobile adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: 100vh;
+        padding-top: 1rem;
+    }
+    
+    .hero .display-2.text-white {
+        font-size: clamp(1.5rem, 4vh, 2rem);
+        margin-bottom: 0.5rem;
+    }
+    
+    .hero .lead {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        margin-bottom: 1rem;
+    }
+    
+    .floating-cta {
+        bottom: 0.5rem;
+        right: 0.5rem;
+    }
+}
+
+/* ==========================================================================
+   Modal Styling
+   ========================================================================== */
+.modal-content.bg-dark-card {
+    background-color: rgba(10, 12, 16, 0.95);
+    backdrop-filter: blur(15px);
+}
+
+.modal-header.border-secondary {
+    border-bottom-color: rgba(138, 99, 210, 0.3);
+}
+
+.modal-footer.border-secondary {
+    border-top-color: rgba(138, 99, 210, 0.3);
+}
+
+.modal-body .list-styled {
+    list-style: none;
+    padding-left: 0;
+}
+
+.modal-body .list-styled li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: rgba(246, 248, 250, 0.9);
+}
+
+.modal-body .list-styled li::before {
+    content: '✨';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--color-teal);
+}
+
+.modal-body .bg-dark-transparent {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(138, 99, 210, 0.2);
+}
+
+.modal-body .badge.bg-primary-subtle {
+    background-color: rgba(138, 99, 210, 0.2) !important;
+    color: var(--color-purple) !important;
+    border: 1px solid rgba(138, 99, 210, 0.3);
+}
+
+.modal-body .badge.bg-success-subtle {
+    background-color: rgba(0, 180, 171, 0.2) !important;
+    color: var(--color-teal) !important;
+    border: 1px solid rgba(0, 180, 171, 0.3);
+}
+
+.modal-body h5.text-primary {
+    color: var(--color-teal) !important;
+}
+
+.modal-body h6.text-warning {
+    color: var(--color-gold) !important;
+}
+
+.modal-body h6.text-success {
+    color: var(--color-teal) !important;
 } 

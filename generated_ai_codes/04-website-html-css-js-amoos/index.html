@@ -5,18 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amoos.ro | Învață să codezi si creezi website-uri cu AI</title>
     
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- GitHub Brand Fonts -->
-    <link rel="preconnect" href="https://fonts.github.com" crossorigin>
-    <link rel="stylesheet" href="https://github.githubassets.com/assets/mona-sans.css">
-    <link rel="stylesheet" href="https://github.githubassets.com/assets/hubot-sans.css">
-    
-    <!-- Fallback Google Fonts -->
+    <!-- Google Fonts - Reliable alternatives -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -42,7 +40,7 @@
                 <div class="row justify-content-center text-center">
                     <div class="col-lg-8">
                         <h1 class="display-2 fw-bold mb-4 text-white">Devino programator modern reinventat de AI</h1>
-                        <p class="lead mb-5 text-secondary">Învață să codezi (programezi) cu <span class="highlight-code">AI</span> <span class="highlight-code">Vibe Coding</span> și învață să construiești site-uri web cu <span class="highlight-code">WordPress</span> și Inteligență Artificială, chiar dacă nu ai experiență în programare.</p>
+                        <p class="lead mb-5 text-secondary">Învață să codezi (programezi) cu <span class="highlight-code clickable-highlight" data-highlight="ai">AI</span> <span class="highlight-code clickable-highlight" data-highlight="vibe-coding">Vibe Coding</span> și învață să construiești site-uri web cu <span class="highlight-code clickable-highlight" data-highlight="wordpress">WordPress</span> și Inteligență Artificială, chiar dacă nu ai experiență în programare.</p>
                         <a href="#workshops" class="btn btn-primary btn-lg">
                             Descoperă Workshopurile
                             <i class="bi bi-arrow-right ms-2"></i>
@@ -147,7 +145,12 @@
                         </ul>
                     </div>
                     <div class="col-lg-6">
-                        <img src="images/mentor.jpg" alt="Raluca Manea" class="img-fluid rounded-3">
+                        <div class="mentor-placeholder bg-dark-card rounded-3 p-5 text-center">
+                            <div class="display-1 mb-3">👨‍💻</div>
+                            <h4 class="text-white mb-3">Raluca Manea</h4>
+                            <p class="text-muted">Mentor și Developer cu 20+ ani experiență</p>
+                            <small class="text-muted">Fotografia va fi adăugată în curând</small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -436,6 +439,25 @@
         <a href="https://wa.me/yourphone" class="btn btn-primary rounded-circle p-3">
             <i class="bi bi-whatsapp fs-4"></i>
         </a>
+    </div>
+
+    <!-- Highlight Modal -->
+    <div class="modal fade" id="highlightModal" tabindex="-1" aria-labelledby="highlightModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark-card border-primary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title text-white" id="highlightModalLabel">Modal Title</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-white" id="highlightModalBody">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Închide</button>
+                    <a href="#workshops" class="btn btn-primary" data-bs-dismiss="modal">Vezi Cursurile</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap Icons -->
