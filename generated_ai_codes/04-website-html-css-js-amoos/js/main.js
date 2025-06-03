@@ -49,6 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Email Forms Functionality
     initializeEmailForms();
 
+    // Contact Form Functionality
+    initializeContactForm();
+
+    // Dual Signup Form Functionality
+    initializeDualSignupForms();
+
     // Scroll to Top Button Functionality
     initializeScrollToTop();
 
@@ -387,6 +393,144 @@ function showEmailSuccess(workshopType, email) {
     
     // Console log for demo purposes (in production, this would be sent to your backend)
     console.log(`Email submitted for ${workshopType}: ${email}`);
+}
+
+// Contact Form Functionality
+function initializeContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    const contactModal = new bootstrap.Modal(document.getElementById('contactModal'));
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            if (name && email && subject && message) {
+                // Show success message
+                showContactSuccess(name, email, subject);
+                // Close modal
+                contactModal.hide();
+                // Reset form
+                contactForm.reset();
+            }
+        });
+    }
+}
+
+// Show success message after contact form submission
+function showContactSuccess(name, email, subject) {
+    // Create success notification
+    const notification = document.createElement('div');
+    notification.className = 'position-fixed top-0 end-0 p-3';
+    notification.style.zIndex = '9999';
+    notification.innerHTML = `
+        <div class="toast show bg-dark-card border-primary" role="alert">
+            <div class="toast-header bg-dark-card border-secondary">
+                <strong class="me-auto text-primary">✅ Mesaj trimis cu succes!</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body text-white">
+                Mulțumim <strong>${name}</strong>!<br>
+                Am primit mesajul tău despre <strong>"${subject}"</strong>.<br>
+                Îți vom răspunde la <strong>${email}</strong> în maximum 24 de ore.
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove notification after 6 seconds
+    setTimeout(() => {
+        notification.remove();
+    }, 6000);
+    
+    // Console log for demo purposes
+    console.log(`Contact form submitted by ${name} (${email}) - Subject: ${subject}`);
+}
+
+// Dual Signup Form Functionality
+function initializeDualSignupForms() {
+    const signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+    
+    // WordPress signup form
+    const wordpressSignupForm = document.getElementById('signupWordpressForm');
+    if (wordpressSignupForm) {
+        wordpressSignupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('signupWordpressEmail').value;
+            
+            if (email) {
+                // Show success message
+                showSignupSuccess('WordPress Workshop', email);
+                // Close modal
+                signupModal.hide();
+                // Reset form
+                wordpressSignupForm.reset();
+            }
+        });
+    }
+    
+    // Vibe Coding signup form
+    const vibeCodingSignupForm = document.getElementById('signupVibeCodingForm');
+    if (vibeCodingSignupForm) {
+        vibeCodingSignupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('signupVibeCodingEmail').value;
+            
+            if (email) {
+                // Show success message
+                showSignupSuccess('Vibe Coding (Lista de Așteptare)', email);
+                // Close modal
+                signupModal.hide();
+                // Reset form
+                vibeCodingSignupForm.reset();
+            }
+        });
+    }
+}
+
+// Show success message after signup form submission
+function showSignupSuccess(workshopType, email) {
+    // Create success notification
+    const notification = document.createElement('div');
+    notification.className = 'position-fixed top-0 end-0 p-3';
+    notification.style.zIndex = '9999';
+    
+    const isVibeCoding = workshopType.includes('Vibe Coding');
+    const successMessage = isVibeCoding ? 
+        'Te-ai înscris cu succes pe lista de așteptare!' : 
+        'Rezervare confirmată!';
+    const actionMessage = isVibeCoding ?
+        'Vei fi primul notificat când se deschid înscrierile.' :
+        'Vei primi detaliile complete despre workshop în următoarele 24 de ore.';
+    
+    notification.innerHTML = `
+        <div class="toast show bg-dark-card border-${isVibeCoding ? 'primary' : 'success'}" role="alert">
+            <div class="toast-header bg-dark-card border-secondary">
+                <strong class="me-auto text-${isVibeCoding ? 'primary' : 'success'}">🎉 ${successMessage}</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body text-white">
+                Mulțumim pentru înscrierea la <strong>${workshopType}</strong>!<br>
+                ${actionMessage}<br>
+                Email confirmare: <strong>${email}</strong>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove notification after 7 seconds
+    setTimeout(() => {
+        notification.remove();
+    }, 7000);
+    
+    // Console log for demo purposes
+    console.log(`Signup form submitted for ${workshopType}: ${email}`);
 }
 
 // Scroll to Top Button Management
