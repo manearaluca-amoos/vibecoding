@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amoos.ro | Învață să codezi si creezi website-uri cu AI</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+    
+    <!-- Critical CSS inlined -->
+    <style>
+        /* Critical Above-the-fold CSS */
+        :root {
+            --primary: #007bff;
+            --secondary: #6c757d;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --white: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background: #0d1117;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Hero Section - Critical */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        /* Static titles - no animations */
+        .hero h1, h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            transition: none;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #8b949e;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #58a6ff;
+        }
+        
+        /* Sections */
+        section {
+            padding: 3rem 0;
+        }
+        
+        .card {
+            background: #21262d;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .workshop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .text-center { text-align: center; }
+        .text-muted { color: #8b949e; }
+        .mb-3 { margin-bottom: 1rem; }
+        .w-100 { width: 100%; }
+        
+        .badge {
+            background: #007bff;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .badge-success {
+            background: #28a745;
+        }
+        
+        .border-primary {
+            border: 2px solid #007bff;
+        }
+        
+        /* Form styles */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background: #0d1117;
+            color: white;
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .container { padding: 0 0.5rem; }
+            h2 { font-size: 2rem; }
+            section { padding: 2rem 0; }
+            .grid { grid-template-columns: 1fr; }
+            .workshop-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="brand">amoos.ro</a>
+            <a href="#contact" class="btn btn-primary">Contactează-ne</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Devino programator modern reinventat de AI</h1>
+            <p>Învață să codezi cu <strong>AI Vibe Coding</strong> și construiește site-uri web cu <strong>WordPress</strong> și Inteligență Artificială, chiar dacă nu ai experiență în programare.</p>
+            <a href="#workshops" class="btn btn-primary">
+                Descoperă Workshopurile →
+            </a>
+        </div>
+    </section>
+
+    <!-- Problems Section -->
+    <section id="problems">
+        <div class="container">
+            <h2 class="text-center">Provocările tale sunt și provocările noastre</h2>
+            <div class="grid">
+                <div class="card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🤔</div>
+                    <h3>Vrei un website, dar nu știi de unde să începi</h3>
+                    <p class="text-muted">Te simți copleșit de multitudinea de opțiuni și tehnologii disponibile.</p>
+                </div>
+                <div class="card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">💰</div>
+                    <h3>Bugetul tău este limitat</h3>
+                    <p class="text-muted">Nu îți permiți să plătești mii de euro pentru un website profesional.</p>
+                </div>
+                <div class="card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">⏰</div>
+                    <h3>Timpul tău este prețios</h3>
+                    <p class="text-muted">Nu ai luni de zile să înveți programare de la zero.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workshops Section -->
+    <section id="workshops">
+        <div class="container">
+            <h2 class="text-center">Alege workshopul potrivit pentru tine</h2>
+            <div class="workshop-grid">
+                <div class="card border-primary">
+                    <span class="badge mb-3">WordPress</span>
+                    <h3>Creează un website în WordPress cu AI</h3>
+                    <p class="text-muted mb-3">2 luni • 1 sesiune/săptămână • 6 persoane</p>
+                    <h4 style="font-size: 2rem; margin-bottom: 1.5rem;">400 EUR</h4>
+                    <ul style="list-style: none; margin-bottom: 2rem; padding: 0;">
+                        <li class="mb-3">✓ Învață să folosești WordPress</li>
+                        <li class="mb-3">✓ Creează site-uri cu AI</li>
+                        <li class="mb-3">✓ Mentorat live personalizat</li>
+                        <li class="mb-3">✓ Acces la comunitate</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary w-100">Află mai multe</a>
+                </div>
+                <div class="card">
+                    <span class="badge badge-success mb-3">Vibe Coding</span>
+                    <h3>Învață programare cu AI</h3>
+                    <p class="text-muted mb-3">3 luni • 1 sesiune/săptămână • 6 persoane</p>
+                    <h4 style="font-size: 2rem; margin-bottom: 1.5rem;">Curând</h4>
+                    <ul style="list-style: none; margin-bottom: 2rem; padding: 0;">
+                        <li class="mb-3">✓ Bazele programării web</li>
+                        <li class="mb-3">✓ Dezvoltare cu GitHub Copilot</li>
+                        <li class="mb-3">✓ Proiecte practice reale</li>
+                        <li class="mb-3">✓ Mentorat individual</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary w-100">Lista de așteptare</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background: #21262d;">
+        <div class="container">
+            <h2 class="text-center">Contactează-ne</h2>
+            <div style="max-width: 500px; margin: 0 auto;">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label class="form-label">Email:</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Mesaj:</label>
+                        <textarea rows="4" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Trimite mesajul</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Memory-safe JavaScript -->
+    <script>
+        (function() {
+            'use strict';
+            
+            // Prevent multiple executions
+            if (window.amoosInitialized) return;
+            window.amoosInitialized = true;
+            
+            // Single event delegation for all clicks
+            document.addEventListener('click', function(e) {
+                // Handle smooth scroll for anchor links
+                if (e.target.matches('a[href^="#"]')) {
+                    e.preventDefault();
+                    const targetId = e.target.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        const navHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+                        const targetPosition = targetElement.offsetTop - navHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                    return;
+                }
+            });
+            
+            // Single form handler
+            document.addEventListener('submit', function(e) {
+                if (e.target.matches('#contactForm')) {
+                    e.preventDefault();
+                    const email = e.target.querySelector('input[type="email"]').value;
+                    
+                    if (email && /\S+@\S+\.\S+/.test(email)) {
+                        alert('Mulțumim pentru mesaj! Te vom contacta în curând.');
+                        e.target.reset();
+                    } else {
+                        alert('Te rog să introduci o adresă de email validă.');
+                    }
+                }
+            });
+            
+            // Throttled scroll handler to prevent memory buildup
+            let scrollTimeout;
+            const navbar = document.querySelector('.navbar');
+            
+            function handleScroll() {
+                if (scrollTimeout) return;
+                
+                scrollTimeout = setTimeout(() => {
+                    const scrollTop = window.pageYOffset;
+                    
+                    if (navbar) {
+                        navbar.style.background = scrollTop > 100 
+                            ? 'rgba(13, 17, 23, 0.98)' 
+                            : 'rgba(13, 17, 23, 0.95)';
+                    }
+                    
+                    scrollTimeout = null;
+                }, 16); // ~60fps
+            }
+            
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            
+        })();
+    </script>
+</body>
+</html> 

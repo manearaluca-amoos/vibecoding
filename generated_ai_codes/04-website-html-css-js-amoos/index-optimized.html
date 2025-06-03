@@ -52,11 +52,29 @@
             padding: 2rem 0;
         }
         
+        /* Static titles - no animations */
+        .hero h1, h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            transition: none;
+        }
+        
         .hero h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
             margin-bottom: 1.5rem;
             line-height: 1.1;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
         }
         
         .hero p {
@@ -112,16 +130,10 @@
             color: #58a6ff;
         }
         
-        /* Loading optimization */
+        /* Simplified loading placeholder - no pulse animation */
         .loading-placeholder {
             background: #21262d;
             border-radius: 6px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
         }
         
         /* Responsive */
@@ -129,6 +141,7 @@
             .hero h1 { font-size: 2.5rem; }
             .hero p { font-size: 1.1rem; }
             .container { padding: 0 0.5rem; }
+            h2 { font-size: 2rem; }
         }
     </style>
     
@@ -226,21 +239,21 @@
             // Insert remaining sections directly
             const problemsSection = `
                 <div class="container">
-                    <h2 style="text-align: center; margin-bottom: 3rem;">Provocările tale sunt și provocările noastre</h2>
+                    <h2 style="text-align: center; margin-bottom: 3rem; color: #ffffff;">Provocările tale sunt și provocările noastre</h2>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
                         <div style="background: #21262d; padding: 2rem; border-radius: 8px;">
                             <div style="font-size: 3rem; margin-bottom: 1rem;">🤔</div>
-                            <h3>Vrei un website, dar nu știi de unde să începi</h3>
+                            <h3 style="color: #ffffff;">Vrei un website, dar nu știi de unde să începi</h3>
                             <p style="color: #8b949e;">Te simți copleșit de multitudinea de opțiuni și tehnologii disponibile.</p>
                         </div>
                         <div style="background: #21262d; padding: 2rem; border-radius: 8px;">
                             <div style="font-size: 3rem; margin-bottom: 1rem;">💰</div>
-                            <h3>Bugetul tău este limitat</h3>
+                            <h3 style="color: #ffffff;">Bugetul tău este limitat</h3>
                             <p style="color: #8b949e;">Nu îți permiți să plătești mii de euro pentru un website profesional.</p>
                         </div>
                         <div style="background: #21262d; padding: 2rem; border-radius: 8px;">
                             <div style="font-size: 3rem; margin-bottom: 1rem;">⏰</div>
-                            <h3>Timpul tău este prețios</h3>
+                            <h3 style="color: #ffffff;">Timpul tău este prețios</h3>
                             <p style="color: #8b949e;">Nu ai luni de zile să înveți programare de la zero.</p>
                         </div>
                     </div>
@@ -249,13 +262,13 @@
             
             const workshopsSection = `
                 <div class="container">
-                    <h2 style="text-align: center; margin-bottom: 3rem;">Alege workshopul potrivit pentru tine</h2>
+                    <h2 style="text-align: center; margin-bottom: 3rem; color: #ffffff;">Alege workshopul potrivit pentru tine</h2>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
                         <div style="background: #21262d; padding: 2rem; border-radius: 8px; border: 2px solid #007bff;">
                             <span style="background: #007bff; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem;">WordPress</span>
-                            <h3 style="margin: 1rem 0;">Creează un website în WordPress cu AI</h3>
+                            <h3 style="margin: 1rem 0; color: #ffffff;">Creează un website în WordPress cu AI</h3>
                             <p style="color: #8b949e; margin-bottom: 1rem;">2 luni • 1 sesiune/săptămână • 6 persoane</p>
-                            <h4 style="font-size: 2rem; margin-bottom: 1.5rem;">400 EUR</h4>
+                            <h4 style="font-size: 2rem; margin-bottom: 1.5rem; color: #ffffff;">400 EUR</h4>
                             <ul style="list-style: none; margin-bottom: 2rem;">
                                 <li style="margin-bottom: 0.5rem;">✓ Învață să folosești WordPress</li>
                                 <li style="margin-bottom: 0.5rem;">✓ Creează site-uri cu AI</li>
@@ -266,9 +279,9 @@
                         </div>
                         <div style="background: #21262d; padding: 2rem; border-radius: 8px;">
                             <span style="background: #28a745; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem;">Vibe Coding</span>
-                            <h3 style="margin: 1rem 0;">Învață programare cu AI</h3>
+                            <h3 style="margin: 1rem 0; color: #ffffff;">Învață programare cu AI</h3>
                             <p style="color: #8b949e; margin-bottom: 1rem;">3 luni • 1 sesiune/săptămână • 6 persoane</p>
-                            <h4 style="font-size: 2rem; margin-bottom: 1.5rem;">Curând</h4>
+                            <h4 style="font-size: 2rem; margin-bottom: 1.5rem; color: #ffffff;">Curând</h4>
                             <ul style="list-style: none; margin-bottom: 2rem;">
                                 <li style="margin-bottom: 0.5rem;">✓ Bazele programării web</li>
                                 <li style="margin-bottom: 0.5rem;">✓ Dezvoltare cu GitHub Copilot</li>
@@ -298,7 +311,7 @@
     <!-- Contact form at bottom -->
     <section id="contact" style="background: #21262d; padding: 4rem 0; margin-top: 4rem;">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 2rem;">Contactează-ne</h2>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #ffffff;">Contactează-ne</h2>
             <div style="max-width: 500px; margin: 0 auto;">
                 <form id="contactForm">
                     <div style="margin-bottom: 1rem;">
