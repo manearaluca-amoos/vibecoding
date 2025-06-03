@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amoos.ro | Învață să codezi si creezi website-uri cu AI</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/critical.css" as="style">
+    <link rel="preload" href="js/main-min.js" as="script">
+    
+    <!-- Critical CSS inlined -->
+    <style>
+        /* Critical Above-the-fold CSS */
+        :root {
+            --primary: #007bff;
+            --secondary: #6c757d;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --white: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background: #0d1117;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Hero Section - Critical */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #8b949e;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #58a6ff;
+        }
+        
+        /* Loading optimization */
+        .loading-placeholder {
+            background: #21262d;
+            border-radius: 6px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .container { padding: 0 0.5rem; }
+        }
+    </style>
+    
+    <!-- Load non-critical CSS async -->
+    <link rel="preload" href="css/style-min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/style-min.css"></noscript>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="brand">amoos.ro</a>
+            <a href="#contact" class="btn btn-primary btn-sm">Contactează-ne</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Devino programator modern reinventat de AI</h1>
+            <p>Învață să codezi cu <strong>AI Vibe Coding</strong> și construiește site-uri web cu <strong>WordPress</strong> și Inteligență Artificială, chiar dacă nu ai experiență în programare.</p>
+            <a href="#workshops" class="btn btn-primary">
+                Descoperă Workshopurile →
+            </a>
+        </div>
+    </section>
+
+    <!-- Problems Section -->
+    <section id="problems" class="loading-placeholder" style="min-height: 500px;">
+        <div class="container">
+            <div style="padding: 2rem; text-align: center;">
+                <p>Se încarcă conținutul...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workshops Section -->
+    <section id="workshops" class="loading-placeholder" style="min-height: 600px;">
+        <div class="container">
+            <div style="padding: 2rem; text-align: center;">
+                <p>Se încarcă workshopurile...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lazy load the rest of the content -->
+    <div id="lazy-content" style="display: none;">
+        <!-- All other sections will be loaded here via JS -->
+    </div>
+
+    <!-- Load essential scripts only -->
+    <script>
+        // Critical inline JavaScript for immediate functionality
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Lazy load content when page is ready
+        window.addEventListener('DOMContentLoaded', function() {
+            // Load remaining content after critical path
+            setTimeout(() => {
+                loadRemainingContent();
+            }, 100);
+        });
+
+        function loadRemainingContent() {
+            // Load the full content via AJAX or insert remaining HTML
+            fetch('content/sections.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('problems').innerHTML = html;
+                    // Remove loading placeholders
+                    document.querySelectorAll('.loading-placeholder').forEach(el => {
+                        el.classList.remove('loading-placeholder');
+                    });
+                })
+                .catch(() => {
+                    // Fallback: load remaining sections directly
+                    loadSectionsDirectly();
+                });
+        }
+
+        function loadSectionsDirectly() {
+            // Insert remaining sections directly
+            const problemsSection = `
+                <div class="container">
+                    <h2 style="text-align: center; margin-bottom: 3rem;">Provocările tale sunt și provocările noastre</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                        <div style="background: #21262d; padding: 2rem; border-radius: 8px;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🤔</div>
+                            <h3>Vrei un website, dar nu știi de unde să începi</h3>
+                            <p style="color: #8b949e;">Te simți copleșit de multitudinea de opțiuni și tehnologii disponibile.</p>
+                        </div>
+                        <div style="background: #21262d; padding: 2rem; border-radius: 8px;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">💰</div>
+                            <h3>Bugetul tău este limitat</h3>
+                            <p style="color: #8b949e;">Nu îți permiți să plătești mii de euro pentru un website profesional.</p>
+                        </div>
+                        <div style="background: #21262d; padding: 2rem; border-radius: 8px;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">⏰</div>
+                            <h3>Timpul tău este prețios</h3>
+                            <p style="color: #8b949e;">Nu ai luni de zile să înveți programare de la zero.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            const workshopsSection = `
+                <div class="container">
+                    <h2 style="text-align: center; margin-bottom: 3rem;">Alege workshopul potrivit pentru tine</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+                        <div style="background: #21262d; padding: 2rem; border-radius: 8px; border: 2px solid #007bff;">
+                            <span style="background: #007bff; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem;">WordPress</span>
+                            <h3 style="margin: 1rem 0;">Creează un website în WordPress cu AI</h3>
+                            <p style="color: #8b949e; margin-bottom: 1rem;">2 luni • 1 sesiune/săptămână • 6 persoane</p>
+                            <h4 style="font-size: 2rem; margin-bottom: 1.5rem;">400 EUR</h4>
+                            <ul style="list-style: none; margin-bottom: 2rem;">
+                                <li style="margin-bottom: 0.5rem;">✓ Învață să folosești WordPress</li>
+                                <li style="margin-bottom: 0.5rem;">✓ Creează site-uri cu AI</li>
+                                <li style="margin-bottom: 0.5rem;">✓ Mentorat live personalizat</li>
+                                <li style="margin-bottom: 0.5rem;">✓ Acces la comunitate</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary" style="width: 100%; text-align: center;">Află mai multe</a>
+                        </div>
+                        <div style="background: #21262d; padding: 2rem; border-radius: 8px;">
+                            <span style="background: #28a745; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem;">Vibe Coding</span>
+                            <h3 style="margin: 1rem 0;">Învață programare cu AI</h3>
+                            <p style="color: #8b949e; margin-bottom: 1rem;">3 luni • 1 sesiune/săptămână • 6 persoane</p>
+                            <h4 style="font-size: 2rem; margin-bottom: 1.5rem;">Curând</h4>
+                            <ul style="list-style: none; margin-bottom: 2rem;">
+                                <li style="margin-bottom: 0.5rem;">✓ Bazele programării web</li>
+                                <li style="margin-bottom: 0.5rem;">✓ Dezvoltare cu GitHub Copilot</li>
+                                <li style="margin-bottom: 0.5rem;">✓ Proiecte practice reale</li>
+                                <li style="margin-bottom: 0.5rem;">✓ Mentorat individual</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary" style="width: 100%; text-align: center;">Lista de așteptare</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('problems').innerHTML = problemsSection;
+            document.getElementById('workshops').innerHTML = workshopsSection;
+            
+            // Remove loading classes
+            document.querySelectorAll('.loading-placeholder').forEach(el => {
+                el.classList.remove('loading-placeholder');
+                el.style.minHeight = 'auto';
+            });
+        }
+    </script>
+
+    <!-- Load non-critical JavaScript async -->
+    <script async src="js/main-min.js"></script>
+    
+    <!-- Contact form at bottom -->
+    <section id="contact" style="background: #21262d; padding: 4rem 0; margin-top: 4rem;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Contactează-ne</h2>
+            <div style="max-width: 500px; margin: 0 auto;">
+                <form id="contactForm">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem;">Email:</label>
+                        <input type="email" required style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid #444; background: #0d1117; color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem;">Mesaj:</label>
+                        <textarea rows="4" style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid #444; background: #0d1117; color: white; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Trimite mesajul</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html> 
