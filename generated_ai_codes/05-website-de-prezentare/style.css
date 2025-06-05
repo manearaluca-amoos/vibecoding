@@ -1,0 +1,1259 @@
+/* ========================================================================
+   AMOOS.RO - MODERN LANDING PAGE STYLES
+   Apple-inspired dark design with modern aesthetics
+   Using Hungarian notation for custom properties
+   ======================================================================== */
+
+/* ========================================================================
+   CSS CUSTOM PROPERTIES (Variables with Hungarian Notation)
+   ======================================================================== */
+:root {
+    /* Color Variables */
+    --clrPrimary: #007AFF;          /* Main brand blue */
+    --clrPrimaryHover: #0056CC;     /* Primary hover state */
+    --clrPrimaryLight: #4DA2FF;     /* Light blue accent */
+    --clrSecondary: #5856D6;        /* Purple accent */
+    --clrSuccess: #30D158;          /* Green for success states */
+    --clrWarning: #FF9F0A;          /* Orange for warnings */
+    --clrDanger: #FF3B30;           /* Red for errors */
+    
+    /* Background Colors */
+    --bgPrimary: #000000;           /* Pure black background */
+    --bgSecondary: #1C1C1E;         /* Dark gray sections */
+    --bgTertiary: #2C2C2E;          /* Lighter gray for cards */
+    --bgCard: #1C1C1E;              /* Card backgrounds */
+    --bgOverlay: rgba(0, 0, 0, 0.8); /* Overlay backgrounds */
+    
+    /* Text Colors */
+    --txtPrimary: #FFFFFF;          /* Primary white text */
+    --txtSecondary: #A1A1A6;        /* Secondary gray text */
+    --txtMuted: #6D6D70;            /* Muted text color */
+    --txtAccent: #007AFF;           /* Accent text color */
+    
+    /* Spacing Variables */
+    --spcXs: 0.25rem;               /* 4px */
+    --spcSm: 0.5rem;                /* 8px */
+    --spcMd: 1rem;                  /* 16px */
+    --spcLg: 1.5rem;                /* 24px */
+    --spcXl: 2rem;                  /* 32px */
+    --spcXxl: 3rem;                 /* 48px */
+    --spcHuge: 4rem;                /* 64px */
+    
+    /* Typography Variables */
+    --fntFamilyPrimary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --fntFamilyDisplay: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --fntSizeXs: 0.75rem;           /* 12px */
+    --fntSizeSm: 0.875rem;          /* 14px */
+    --fntSizeMd: 1rem;              /* 16px */
+    --fntSizeLg: 1.125rem;          /* 18px */
+    --fntSizeXl: 1.25rem;           /* 20px */
+    --fntSizeXxl: 1.5rem;           /* 24px */
+    --fntSizeHuge: 2rem;            /* 32px */
+    --fntSizeDisplay: 3rem;         /* 48px */
+    
+    /* Border & Radius Variables */
+    --brdrRadius: 12px;             /* Standard border radius */
+    --brdrRadiusLg: 16px;           /* Large border radius */
+    --brdrColor: #3A3A3C;           /* Border color */
+    --brdrColorLight: #48484A;      /* Light border color */
+    
+    /* Shadow Variables */
+    --shdwSm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shdwMd: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shdwLg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    
+    /* Animation Variables */
+    --animDuration: 0.3s;           /* Standard animation duration */
+    --animEasing: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth easing */
+}
+
+/* ========================================================================
+   GLOBAL STYLES & RESET
+   ======================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fntFamilyPrimary);
+    background-color: var(--bgPrimary);
+    color: var(--txtPrimary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Smooth scrolling for all anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bgSecondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--clrPrimary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--clrPrimaryHover);
+}
+
+/* ========================================================================
+   HEADER & NAVIGATION STYLES
+   ======================================================================== */
+#sHeaderSection {
+    background: linear-gradient(135deg, var(--bgPrimary) 0%, var(--bgSecondary) 100%);
+    min-height: 100vh;
+    position: relative;
+    z-index: 1000;
+}
+
+/* Navigation bar styling */
+.navbar {
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--brdrColor);
+    padding: var(--spcMd) 0;
+    transition: all var(--animDuration) var(--animEasing);
+}
+
+.navbar-brand .sLogoText {
+    font-size: var(--fntSizeXl);
+    font-weight: 700;
+    color: var(--txtPrimary);
+    text-decoration: none;
+}
+
+.navbar-brand img {
+    border-radius: 8px;
+}
+
+/* Main CTA button in navigation */
+.sMainCTA {
+    background: var(--clrPrimary);
+    border: none;
+    padding: var(--spcSm) var(--spcLg);
+    border-radius: var(--brdrRadius);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--animDuration) var(--animEasing);
+}
+
+.sMainCTA:hover {
+    background: var(--clrPrimaryHover);
+    transform: translateY(-2px);
+    box-shadow: var(--shdwMd);
+}
+
+/* Hero content styling */
+.sHeroContent {
+    padding-top: var(--spcHuge);
+}
+
+.sMainHeadline {
+    font-size: var(--fntSizeDisplay);
+    font-weight: 700;
+    margin-bottom: var(--spcLg);
+    background: linear-gradient(135deg, var(--txtPrimary) 0%, var(--clrPrimaryLight) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sTagline {
+    font-size: var(--fntSizeXl);
+    color: var(--txtSecondary);
+    margin-bottom: var(--spcXxl);
+    max-width: 500px;
+}
+
+/* Workshop Date Display */
+.sWorkshopDate {
+    margin: var(--spcXl) 0 var(--spcXxl) 0;
+    /* Ensure visibility even if animation fails */
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative;
+    z-index: 10;
+    display: block;
+}
+
+.sDateCard {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--clrPrimary) 0%, var(--clrSecondary) 100%);
+    padding: var(--spcLg) var(--spcXl);
+    border-radius: var(--brdrRadiusLg);
+    box-shadow: var(--shdwLg);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all var(--animDuration) var(--animEasing);
+    /* Ensure visibility */
+    opacity: 1 !important;
+    transform: scale(1) !important;
+    position: relative;
+    z-index: 5;
+    /* Add glow effect for better visibility */
+    box-shadow: 
+        var(--shdwLg),
+        0 0 20px rgba(0, 122, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.sDateCard:hover {
+    transform: translateY(-4px) scale(1) !important;
+    box-shadow: 
+        0 12px 40px rgba(0, 122, 255, 0.4),
+        0 0 30px rgba(0, 122, 255, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.sDateIcon {
+    font-size: var(--fntSizeHuge);
+    color: var(--txtPrimary);
+    margin-right: var(--spcLg);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sDateInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.sDateDay {
+    font-size: var(--fntSizeXxl);
+    font-weight: 800;
+    color: var(--txtPrimary);
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sDateTime {
+    font-size: var(--fntSizeXl);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: var(--spcXs);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Hero CTA Enhancements */
+.sHeroCTA {
+    margin-top: var(--spcXl);
+    position: relative;
+    z-index: 10;
+}
+
+.sHeroCTA .btn {
+    margin-bottom: var(--spcMd);
+    padding: var(--spcLg) var(--spcXl);
+    font-size: var(--fntSizeLg);
+    font-weight: 600;
+    border-radius: var(--brdrRadius);
+    transition: all var(--animDuration) var(--animEasing);
+    /* Ensure buttons are visible */
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    position: relative;
+    z-index: 5;
+    min-width: 200px;
+    text-align: center;
+}
+
+.sHeroCTA .btn-primary {
+    background: var(--clrPrimary);
+    border: none;
+}
+
+.sHeroCTA .btn-primary:hover {
+    background: var(--clrPrimaryHover);
+    transform: translateY(-3px);
+    box-shadow: var(--shdwLg);
+}
+
+.sHeroCTA .btn-outline-light {
+    border: 2px solid var(--txtSecondary);
+    color: var(--txtSecondary);
+    background: transparent;
+}
+
+.sHeroCTA .btn-outline-light:hover {
+    background: var(--txtSecondary);
+    color: var(--bgPrimary);
+    border-color: var(--txtSecondary);
+}
+
+.sHeroVisual img {
+    border-radius: var(--brdrRadiusLg);
+    box-shadow: var(--shdwLg);
+}
+
+/* ========================================================================
+   MODAL STYLES
+   ======================================================================== */
+.sModalContent {
+    background: var(--bgCard);
+    border: 1px solid var(--brdrColor);
+    border-radius: var(--brdrRadiusLg);
+    box-shadow: var(--shdwLg);
+}
+
+.sModalHeader {
+    background: linear-gradient(135deg, var(--clrPrimary) 0%, var(--clrSecondary) 100%);
+    border-bottom: none;
+    border-radius: var(--brdrRadiusLg) var(--brdrRadiusLg) 0 0;
+    padding: var(--spcXl);
+}
+
+.sModalTitle {
+    color: var(--txtPrimary);
+    font-size: var(--fntSizeXxl);
+    font-weight: 700;
+    margin: 0;
+}
+
+.sModalClose {
+    background: none;
+    border: none;
+    color: var(--txtPrimary);
+    opacity: 0.8;
+    font-size: var(--fntSizeLg);
+}
+
+.sModalClose:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.sModalBody {
+    padding: var(--spcXl);
+    color: var(--txtPrimary);
+}
+
+.sModalDateBadge {
+    background: var(--clrPrimary);
+    color: var(--txtPrimary);
+    padding: var(--spcSm) var(--spcLg);
+    border-radius: var(--brdrRadius);
+    font-size: var(--fntSizeLg);
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: var(--spcXl);
+}
+
+.sModalSubtitle {
+    color: var(--txtPrimary);
+    font-size: var(--fntSizeXl);
+    font-weight: 600;
+    margin: var(--spcXl) 0 var(--spcLg) 0;
+}
+
+.sModalList {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--spcXl);
+}
+
+.sModalList li {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spcMd);
+    color: var(--txtSecondary);
+    font-size: var(--fntSizeMd);
+}
+
+.sModalList li i {
+    color: var(--clrSuccess);
+    margin-right: var(--spcMd);
+    font-size: var(--fntSizeLg);
+}
+
+.sModalAgenda {
+    margin-bottom: var(--spcXl);
+}
+
+.sAgendaItem {
+    display: flex;
+    align-items: center;
+    padding: var(--spcMd);
+    background: var(--bgSecondary);
+    border-radius: var(--brdrRadius);
+    margin-bottom: var(--spcSm);
+    border-left: 4px solid var(--clrPrimary);
+}
+
+.sAgendaTime {
+    font-size: var(--fntSizeSm);
+    font-weight: 600;
+    color: var(--clrPrimary);
+    min-width: 120px;
+    margin-right: var(--spcLg);
+}
+
+.sAgendaText {
+    color: var(--txtSecondary);
+    font-size: var(--fntSizeMd);
+}
+
+.sModalPrice {
+    text-align: center;
+    margin: var(--spcXl) 0;
+}
+
+.sFreeText {
+    font-size: var(--fntSizeHuge);
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--clrSuccess) 0%, #50C878 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Registration Form Styles */
+.sRegistrationForm {
+    background: var(--bgSecondary);
+    padding: var(--spcXl);
+    border-radius: var(--brdrRadiusLg);
+    border: 1px solid var(--brdrColor);
+}
+
+.sFormTitle {
+    color: var(--txtPrimary);
+    font-size: var(--fntSizeXl);
+    font-weight: 700;
+    margin-bottom: var(--spcMd);
+    text-align: center;
+}
+
+.sFormSubtitle {
+    color: var(--txtSecondary);
+    font-size: var(--fntSizeMd);
+    text-align: center;
+    margin-bottom: var(--spcXl);
+}
+
+.sModalForm .form-label {
+    color: var(--txtPrimary);
+    font-weight: 600;
+    margin-bottom: var(--spcSm);
+}
+
+.sEmailInput {
+    background: var(--bgCard);
+    border: 1px solid var(--brdrColor);
+    border-radius: var(--brdrRadius);
+    color: var(--txtPrimary);
+    padding: var(--spcMd);
+    font-size: var(--fntSizeMd);
+    transition: all var(--animDuration) var(--animEasing);
+}
+
+.sEmailInput:focus {
+    background: var(--bgCard);
+    border-color: var(--clrPrimary);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.25);
+    color: var(--txtPrimary);
+}
+
+.sEmailInput::placeholder {
+    color: var(--txtMuted);
+}
+
+.sCheckboxLabel {
+    color: var(--txtSecondary);
+    font-size: var(--fntSizeSm);
+}
+
+.sTermsLink {
+    color: var(--clrPrimary);
+    text-decoration: none;
+}
+
+.sTermsLink:hover {
+    color: var(--clrPrimaryLight);
+    text-decoration: underline;
+}
+
+.sSubmitBtn {
+    background: var(--clrPrimary);
+    border: none;
+    padding: var(--spcLg);
+    font-size: var(--fntSizeLg);
+    font-weight: 600;
+    border-radius: var(--brdrRadius);
+    transition: all var(--animDuration) var(--animEasing);
+}
+
+.sSubmitBtn:hover {
+    background: var(--clrPrimaryHover);
+    transform: translateY(-2px);
+    box-shadow: var(--shdwMd);
+}
+
+.sFormNote {
+    background: var(--bgCard);
+    padding: var(--spcMd);
+    border-radius: var(--brdrRadius);
+    color: var(--txtSecondary);
+    font-size: var(--fntSizeSm);
+    text-align: center;
+    margin-top: var(--spcMd);
+    border: 1px solid var(--brdrColor);
+}
+
+.sSuccessMessage {
+    text-align: center;
+    padding: var(--spcXl);
+    background: linear-gradient(135deg, var(--clrSuccess) 0%, #50C878 100%);
+    border-radius: var(--brdrRadiusLg);
+    color: var(--txtPrimary);
+}
+
+.sSuccessMessage i {
+    font-size: var(--fntSizeHuge);
+    margin-bottom: var(--spcMd);
+}
+
+.sSuccessMessage h5 {
+    font-size: var(--fntSizeXl);
+    font-weight: 700;
+    margin-bottom: var(--spcMd);
+}
+
+.sSuccessMessage p {
+    font-size: var(--fntSizeMd);
+    margin: 0;
+}
+
+/* ========================================================================
+   SECTION STYLES - General Layout
+   ======================================================================== */
+section {
+    padding: var(--spcHuge) 0;
+}
+
+/* Alternating background colors for sections */
+#sProblemSection,
+#sProofSection,
+#sFAQSection {
+    background-color: var(--bgSecondary);
+}
+
+#sSolutionSection,
+#sTestimonialsSection,
+#sAboutSection,
+#sFinalCTA {
+    background-color: var(--bgPrimary);
+}
+
+/* Section titles styling */
+.sSectionTitle {
+    font-size: var(--fntSizeHuge);
+    font-weight: 700;
+    margin-bottom: var(--spcLg);
+    text-align: center;
+    background: linear-gradient(135deg, var(--txtPrimary) 0%, var(--clrPrimaryLight) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sSectionSubtitle {
+    font-size: var(--fntSizeLg);
+    color: var(--txtSecondary);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ========================================================================
+   PROBLEM SECTION STYLES
+   ======================================================================== */
+.sProblemCard {
+    text-align: center;
+    padding: var(--spcXl);
+    background: var(--bgCard);
+    border-radius: var(--brdrRadiusLg);
+    box-shadow: var(--shdwSm);
+    transition: all var(--animDuration) var(--animEasing);
+    height: 100%;
+}
+
+.sProblemCard:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shdwMd);
+}
+
+.sProblemIcon {
+    font-size: var(--fntSizeHuge);
+    color: var(--clrPrimary);
+    margin-bottom: var(--spcLg);
+}
+
+.sProblemCard h4 {
+    font-size: var(--fntSizeXl);
+    font-weight: 600;
+    margin-bottom: var(--spcMd);
+    color: var(--txtPrimary);
+}
+
+.sProblemCard p {
+    color: var(--txtSecondary);
+    font-size: var(--fntSizeMd);
+}
+
+/* ========================================================================
+   SOLUTION SECTION STYLES
+   ======================================================================== */
+.sSolutionCard {
+    background: var(--bgCard);
+    border-radius: var(--brdrRadiusLg);
+    padding: var(--spcXxl);
+    box-shadow: var(--shdwMd);
+    border: 1px solid var(--brdrColor);
+}
+
+.sSolutionContent h3 {
+    font-size: var(--fntSizeXxl);
+    font-weight: 700;
+    margin-bottom: var(--spcLg);
+    color: var(--txtPrimary);
+}
+
+.sDateBadge {
+    background: var(--clrPrimary);
+    color: var(--txtPrimary);
+    padding: var(--spcSm) var(--spcMd);
+    border-radius: var(--brdrRadius);
+    font-size: var(--fntSizeSm);
+    font-weight: 600;
+}
+
+.sSolutionFeatures {
+    margin: var(--spcXl) 0;
+}
+
+.sFeatureItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spcMd);
+    font-size: var(--fntSizeMd);
+}
+
+.sFeatureItem i {
+    color: var(--clrSuccess);
+    margin-right: var(--spcMd);
+    font-size: var(--fntSizeLg);
+}
+
+.sFeatureItem span {
+    color: var(--txtSecondary);
+}
+
+.sPrice {
+    font-size: var(--fntSizeXl);
+    font-weight: 700;
+    color: var(--clrSuccess);
+    background: linear-gradient(135deg, var(--clrSuccess) 0%, #50C878 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 20px rgba(48, 209, 88, 0.3);
+}
+
+.sSolutionVisual img {
+    border-radius: var(--brdrRadius);
+    box-shadow: var(--shdwMd);
+}
+
+/* ========================================================================
+   PORTFOLIO/PROOF SECTION STYLES
+   ======================================================================== */
+.sPortfolioGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spcXl);
+    margin-bottom: var(--spcXxl);
+}
+
+.sPortfolioItem {
+    position: relative;
+    border-radius: var(--brdrRadius);
+    overflow: hidden;
+    transition: all var(--animDuration) var(--animEasing);
+}
+
+.sPortfolioItem:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shdwLg);
+}
+
+.sPortfolioItem img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: all var(--animDuration) var(--animEasing);
+}
+
+.sPortfolioOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    padding: var(--spcXl);
+    transform: translateY(100%);
+    transition: all var(--animDuration) var(--animEasing);
+}
+
+.sPortfolioItem:hover .sPortfolioOverlay {
+    transform: translateY(0);
+}
+
+.sPortfolioOverlay h4 {
+    color: var(--txtPrimary);
+    font-size: var(--fntSizeLg);
+    font-weight: 600;
+    margin-bottom: var(--spcSm);
+}
+
+.sPortfolioOverlay p {
+    color: var(--txtSecondary);
+    font-size: var(--fntSizeSm);
+}
+
+/* Client logos styling */
+.sClientLogos {
+    opacity: 0.6;
+    transition: opacity var(--animDuration) var(--animEasing);
+}
+
+.sClientLogos:hover {
+    opacity: 1;
+}
+
+.sClientLogo {
+    height: 60px;
+    filter: grayscale(100%);
+    transition: all var(--animDuration) var(--animEasing);
+}
+
+.sClientLogo:hover {
+    filter: grayscale(0%);
+}
+
+/* ========================================================================
+   TESTIMONIALS SECTION STYLES
+   ======================================================================== */
+.sTestimonialCard {
+    background: var(--bgCard);
+    border-radius: var(--brdrRadiusLg);
+    padding: var(--spcXl);
+    height: 100%;
+    border: 1px solid var(--brdrColor);
+    transition: all var(--animDuration) var(--animEasing);
+}
+
+.sTestimonialCard:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shdwMd);
+    border-color: var(--clrPrimary);
+}
+
+.sTestimonialHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spcLg);
+}
+
+.sTestimonialAvatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: var(--spcMd);
+    border: 2px solid var(--clrPrimary);
+}
+
+.sTestimonialHeader h5 {
+    font-size: var(--fntSizeLg);
+    font-weight: 600;
+    color: var(--txtPrimary);
+    margin-bottom: var(--spcXs);
+}
+
+.sTestimonialRole {
+    font-size: var(--fntSizeSm);
+    color: var(--txtSecondary);
+    margin: 0;
+}
+
+.sQuoteIcon {
+    font-size: var(--fntSizeXl);
+    color: var(--clrPrimary);
+    margin-bottom: var(--spcMd);
+}
+
+.sTestimonialQuote p {
+    font-size: var(--fntSizeMd);
+    color: var(--txtSecondary);
+    font-style: italic;
+    line-height: 1.7;
+}
+
+/* ========================================================================
+   ABOUT SECTION STYLES
+   ======================================================================== */
+.sAboutImage img {
+    border-radius: var(--brdrRadiusLg);
+    box-shadow: var(--shdwLg);
+}
+
+.sAboutSubtitle {
+    font-size: var(--fntSizeXl);
+    color: var(--clrPrimary);
+    margin-bottom: var(--spcXl);
+}
+
+.sAboutStats {
+    display: flex;
+    gap: var(--spcXl);
+    margin: var(--spcXl) 0;
+    flex-wrap: wrap;
+}
+
+.sStatItem {
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+}
+
+.sStatNumber {
+    display: block;
+    font-size: var(--fntSizeHuge);
+    font-weight: 700;
+    color: var(--clrPrimary);
+    line-height: 1;
+}
+
+.sStatLabel {
+    font-size: var(--fntSizeSm);
+    color: var(--txtSecondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sAboutDescription {
+    font-size: var(--fntSizeLg);
+    color: var(--txtSecondary);
+    margin-bottom: var(--spcLg);
+    line-height: 1.7;
+}
+
+/* ========================================================================
+   FAQ SECTION STYLES
+   ======================================================================== */
+.sFAQItem {
+    background: var(--bgCard);
+    border: 1px solid var(--brdrColor);
+    border-radius: var(--brdrRadius);
+    margin-bottom: var(--spcMd);
+    overflow: hidden;
+}
+
+.sFAQItem .accordion-button {
+    background: transparent;
+    color: var(--txtPrimary);
+    border: none;
+    padding: var(--spcLg);
+    font-size: var(--fntSizeLg);
+    font-weight: 600;
+    box-shadow: none;
+}
+
+.sFAQItem .accordion-button:not(.collapsed) {
+    background: var(--clrPrimary);
+    color: var(--txtPrimary);
+}
+
+.sFAQItem .accordion-button:focus {
+    border: none;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.25);
+}
+
+.sFAQItem .accordion-body {
+    background: var(--bgCard);
+    color: var(--txtSecondary);
+    padding: var(--spcLg);
+    font-size: var(--fntSizeMd);
+    line-height: 1.7;
+}
+
+/* ========================================================================
+   FINAL CTA SECTION STYLES
+   ======================================================================== */
+.sFinalCTACard {
+    background: linear-gradient(135deg, var(--bgCard) 0%, var(--bgTertiary) 100%);
+    border-radius: var(--brdrRadiusLg);
+    padding: var(--spcHuge);
+    border: 1px solid var(--brdrColor);
+    box-shadow: var(--shdwLg);
+}
+
+.sFinalCTATitle {
+    font-size: var(--fntSizeDisplay);
+    font-weight: 700;
+    margin-bottom: var(--spcLg);
+    background: linear-gradient(135deg, var(--txtPrimary) 0%, var(--clrPrimary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sFinalCTASubtitle {
+    font-size: var(--fntSizeXl);
+    color: var(--txtSecondary);
+    margin-bottom: var(--spcXxl);
+}
+
+.sFinalCTAFeature {
+    display: flex;
+    align-items: center;
+    font-size: var(--fntSizeMd);
+}
+
+.sFinalCTAFeature i {
+    color: var(--clrSuccess);
+    margin-right: var(--spcSm);
+}
+
+.sFinalCTAFeature span {
+    color: var(--txtSecondary);
+}
+
+.sFinalCTAPrice {
+    margin: var(--spcXl) 0;
+    text-align: center;
+}
+
+.sFinalCTAPriceOld {
+    font-size: var(--fntSizeXl);
+    color: var(--txtMuted);
+    text-decoration: line-through;
+    margin-right: var(--spcMd);
+}
+
+.sFinalCTAPriceNew {
+    font-size: var(--fntSizeDisplay);
+    font-weight: 700;
+    color: var(--clrPrimary);
+    margin-right: var(--spcMd);
+}
+
+/* Special styling for FREE price */
+.sFreePrice {
+    font-size: 4rem !important;
+    font-weight: 800 !important;
+    background: linear-gradient(135deg, var(--clrSuccess) 0%, #50C878 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(48, 209, 88, 0.4);
+    display: block;
+    margin-bottom: var(--spcMd);
+    letter-spacing: 0.1em;
+}
+
+.sFinalCTADiscount {
+    background: var(--clrSuccess);
+    color: var(--txtPrimary);
+    padding: var(--spcSm) var(--spcLg);
+    border-radius: var(--brdrRadius);
+    font-size: var(--fntSizeLg);
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(48, 209, 88, 0.3);
+}
+
+.sFinalCTAButton {
+    background: var(--clrPrimary);
+    border: none;
+    padding: var(--spcLg) var(--spcXxl);
+    font-size: var(--fntSizeXl);
+    font-weight: 700;
+    border-radius: var(--brdrRadius);
+    text-decoration: none;
+    transition: all var(--animDuration) var(--animEasing);
+    display: inline-block;
+}
+
+.sFinalCTAButton:hover {
+    background: var(--clrPrimaryHover);
+    transform: translateY(-3px);
+    box-shadow: var(--shdwLg);
+}
+
+.sFinalCTAUrgency {
+    color: var(--clrWarning);
+    font-size: var(--fntSizeMd);
+    font-weight: 600;
+}
+
+/* ========================================================================
+   FOOTER STYLES
+   ======================================================================== */
+#sFooter {
+    background: var(--bgTertiary);
+    border-top: 1px solid var(--brdrColor);
+}
+
+.sFooterBrand {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spcLg);
+}
+
+.sFooterLogoText {
+    font-size: var(--fntSizeLg);
+    font-weight: 700;
+    color: var(--txtPrimary);
+}
+
+.sFooterDescription {
+    color: var(--txtSecondary);
+    font-size: var(--fntSizeMd);
+    line-height: 1.6;
+}
+
+.sFooterTitle {
+    color: var(--txtPrimary);
+    font-size: var(--fntSizeLg);
+    font-weight: 600;
+    margin-bottom: var(--spcLg);
+}
+
+.sFooterLinks {
+    list-style: none;
+    padding: 0;
+}
+
+.sFooterLinks li {
+    margin-bottom: var(--spcSm);
+}
+
+.sFooterLinks a {
+    color: var(--txtSecondary);
+    text-decoration: none;
+    font-size: var(--fntSizeMd);
+    transition: color var(--animDuration) var(--animEasing);
+}
+
+.sFooterLinks a:hover {
+    color: var(--clrPrimary);
+}
+
+.sFooterSocial {
+    display: flex;
+    gap: var(--spcMd);
+}
+
+.sSocialLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: var(--bgSecondary);
+    color: var(--txtSecondary);
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: var(--fntSizeLg);
+    transition: all var(--animDuration) var(--animEasing);
+}
+
+.sSocialLink:hover {
+    background: var(--clrPrimary);
+    color: var(--txtPrimary);
+    transform: translateY(-2px);
+}
+
+.sFooterBottom {
+    border-top: 1px solid var(--brdrColor);
+    padding-top: var(--spcXl);
+    margin-top: var(--spcXl);
+}
+
+.sFooterBottom p {
+    color: var(--txtMuted);
+    font-size: var(--fntSizeSm);
+}
+
+/* ========================================================================
+   FLOATING CTA BUTTON
+   ======================================================================== */
+.floating-cta {
+    position: fixed;
+    bottom: var(--spcXl);
+    right: var(--spcXl);
+    z-index: 1000;
+    transition: all var(--animDuration) var(--animEasing);
+}
+
+.floating-cta .btn {
+    background: var(--clrPrimary);
+    border: none;
+    padding: var(--spcMd) var(--spcLg);
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: var(--shdwLg);
+    text-decoration: none;
+}
+
+.floating-cta .btn:hover {
+    background: var(--clrPrimaryHover);
+    transform: scale(1.05);
+}
+
+/* ========================================================================
+   RESPONSIVE DESIGN - Mobile First Approach
+   ======================================================================== */
+
+/* Tablet styles */
+@media (max-width: 768px) {
+    .sMainHeadline {
+        font-size: var(--fntSizeXxl);
+    }
+    
+    .sTagline {
+        font-size: var(--fntSizeLg);
+    }
+    
+    .sSectionTitle {
+        font-size: var(--fntSizeXxl);
+    }
+    
+    .sDateCard {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--spcLg);
+    }
+    
+    .sDateIcon {
+        margin-right: 0;
+        margin-bottom: var(--spcMd);
+    }
+    
+    .sDateDay {
+        font-size: var(--fntSizeXl);
+    }
+    
+    .sDateTime {
+        font-size: var(--fntSizeLg);
+    }
+    
+    .sHeroCTA .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: var(--spcMd);
+    }
+    
+    .sSolutionCard {
+        padding: var(--spcXl);
+    }
+    
+    .sAboutStats {
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .sFinalCTACard {
+        padding: var(--spcXl);
+    }
+    
+    .sFinalCTATitle {
+        font-size: var(--fntSizeXxl);
+    }
+    
+    .sFreePrice {
+        font-size: 3rem !important;
+    }
+    
+    .sModalBody {
+        padding: var(--spcLg);
+    }
+    
+    .sRegistrationForm {
+        margin-top: var(--spcXl);
+    }
+    
+    .floating-cta {
+        bottom: var(--spcMd);
+        right: var(--spcMd);
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+    :root {
+        --spcXxl: 2rem;
+        --spcHuge: 3rem;
+    }
+    
+    .sMainHeadline {
+        font-size: var(--fntSizeXl);
+    }
+    
+    .sSectionTitle {
+        font-size: var(--fntSizeXl);
+    }
+    
+    .sDateDay {
+        font-size: var(--fntSizeLg);
+    }
+    
+    .sDateTime {
+        font-size: var(--fntSizeMd);
+    }
+    
+    .sProblemCard,
+    .sTestimonialCard {
+        padding: var(--spcLg);
+    }
+    
+    .sPortfolioGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sAboutStats .sStatItem {
+        flex-basis: 50%;
+    }
+    
+    .sFinalCTAButton {
+        padding: var(--spcMd) var(--spcLg);
+        font-size: var(--fntSizeLg);
+    }
+    
+    .sFreePrice {
+        font-size: 2.5rem !important;
+    }
+    
+    .sModalBody {
+        padding: var(--spcMd);
+    }
+    
+    .sModalHeader {
+        padding: var(--spcLg);
+    }
+    
+    .sModalTitle {
+        font-size: var(--fntSizeXl);
+    }
+} 

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amoos.ro - Workshops de Programare cu AI</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Debug styles to ensure visibility -->
+    <style>
+        /* Force visibility of critical elements */
+        .sWorkshopDate, .sDateCard, .sHeroCTA, .sHeroCTA .btn {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+        }
+        .sDateCard {
+            display: inline-flex !important;
+        }
+        .sHeroCTA .btn {
+            display: inline-block !important;
+            margin: 0 10px 10px 0 !important;
+        }
+    </style>
+    
+    <!-- Fallback for no JavaScript -->
+    <noscript>
+        <style>
+            .sWorkshopDate, .sDateCard, .sHeroCTA .btn, 
+            .sMainHeadline, .sTagline {
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: none !important;
+            }
+        </style>
+    </noscript>
+</head>
+<body>
+
+    <!-- SECTION 1: Header with Logo and Tagline -->
+    <header id="sHeaderSection" class="sticky-top">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="#sHeaderSection">
+                    <img src="https://images.pexels.com/photos/6386956/pexels-photo-6386956.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&fit=crop" alt="Amoos Logo" class="me-2" style="border-radius: 8px;">
+                    <span class="sLogoText">Amoos.ro</span>
+                </a>
+                
+                <div class="navbar-nav ms-auto">
+                    <a href="#sFinalCTA" class="btn btn-primary sMainCTA">
+                        <i class="bi bi-whatsapp me-2"></i>
+                        Rezervă Acum
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container sHeroContent">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <h1 class="sMainHeadline">Învață programare cu AI în 2025</h1>
+                    <p class="sTagline">Transformă-ți ideile în realitate digitală cu mentoratul live și inteligența artificială</p>
+                    
+                    <!-- Workshop Date - Large and Prominent -->
+                    <div class="sWorkshopDate">
+                        <div class="sDateCard">
+                            <i class="bi bi-calendar-event sDateIcon"></i>
+                            <div class="sDateInfo">
+                                <span class="sDateDay">3 Iulie 2025</span>
+                                <span class="sDateTime">20:00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sHeroCTA">
+                        <button type="button" class="btn btn-primary btn-lg me-3" data-bs-toggle="modal" data-bs-target="#sWorkshopModal">
+                            <i class="bi bi-envelope-plus me-2"></i>
+                            Înscrie-te GRATUIT
+                        </button>
+                        <button type="button" class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#sWorkshopModal">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Detalii Workshop
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div class="sHeroVisual">
+                        <img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=500&h=400&fit=crop" alt="AI Programming" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Workshop Details Modal -->
+    <div class="modal fade" id="sWorkshopModal" tabindex="-1" aria-labelledby="sWorkshopModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content sModalContent">
+                <div class="modal-header sModalHeader">
+                    <h2 class="modal-title sModalTitle" id="sWorkshopModalLabel">
+                        <i class="bi bi-robot me-2"></i>
+                        Workshop: Vibe Coding cu AI
+                    </h2>
+                    <button type="button" class="btn-close sModalClose" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body sModalBody">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="sModalDetails">
+                                <div class="sModalDateBadge">
+                                    <i class="bi bi-calendar3 me-2"></i>
+                                    3 Iulie 2025, 20:00
+                                </div>
+                                
+                                <h4 class="sModalSubtitle">Ce vei învăța:</h4>
+                                <ul class="sModalList">
+                                    <li><i class="bi bi-check-circle-fill"></i> Să folosești ChatGPT și Claude pentru a scrie cod</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Să creezi o aplicație web funcțională în timpul workshop-ului</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Tehnici avansate de prompt engineering pentru programare</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Cum să optimizezi și să testezi codul generat de AI</li>
+                                    <li><i class="bi bi-check-circle-fill"></i> Instrumentele moderne de dezvoltare cu AI</li>
+                                </ul>
+                                
+                                <h4 class="sModalSubtitle">Agenda Workshop-ului:</h4>
+                                <div class="sModalAgenda">
+                                    <div class="sAgendaItem">
+                                        <span class="sAgendaTime">20:00 - 20:30</span>
+                                        <span class="sAgendaText">Introducere în AI Coding și setup</span>
+                                    </div>
+                                    <div class="sAgendaItem">
+                                        <span class="sAgendaTime">20:30 - 21:30</span>
+                                        <span class="sAgendaText">Crearea primei aplicații cu AI</span>
+                                    </div>
+                                    <div class="sAgendaItem">
+                                        <span class="sAgendaTime">21:30 - 22:30</span>
+                                        <span class="sAgendaText">Optimizare și lansarea aplicației</span>
+                                    </div>
+                                    <div class="sAgendaItem">
+                                        <span class="sAgendaTime">22:30 - 23:00</span>
+                                        <span class="sAgendaText">Q&A și următorii pași</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="sModalPrice">
+                                    <span class="sFreeText">Complet GRATUIT</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="sRegistrationForm">
+                                <h4 class="sFormTitle">Înscrie-te acum!</h4>
+                                <p class="sFormSubtitle">Introdu adresa ta de email pentru a-ți rezerva locul</p>
+                                
+                                <form id="sWorkshopForm" class="sModalForm">
+                                    <div class="mb-3">
+                                        <label for="sEmailInput" class="form-label">Adresa de email</label>
+                                        <input type="email" class="form-control sEmailInput" id="sEmailInput" placeholder="exemplu@email.com" required>
+                                        <div class="invalid-feedback">
+                                            Te rugăm să introduci o adresă de email validă.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="sAgreeTerms" required>
+                                        <label class="form-check-label sCheckboxLabel" for="sAgreeTerms">
+                                            Sunt de acord cu <a href="#" class="sTermsLink">termenii și condițiile</a>
+                                        </label>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary w-100 sSubmitBtn">
+                                        <i class="bi bi-envelope-check me-2"></i>
+                                        Rezervă-mi locul
+                                    </button>
+                                    
+                                    <div class="sFormNote">
+                                        <i class="bi bi-info-circle me-2"></i>
+                                        Vei primi un email de confirmare cu linkul pentru workshop
+                                    </div>
+                                </form>
+                                
+                                <!-- Success Message -->
+                                <div id="sSuccessMessage" class="sSuccessMessage d-none">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <h5>Înregistrare reușită!</h5>
+                                    <p>Îți mulțumim! Vei primi în curând un email de confirmare cu toate detaliile.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: Problem -->
+    <section id="sProblemSection" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="sSectionTitle">Îți dorești să creezi o aplicație, dar nu știi de unde să începi?</h2>
+                    
+                    <div class="row mt-5">
+                        <div class="col-md-4 mb-4">
+                            <div class="sProblemCard">
+                                <i class="bi bi-question-circle sProblemIcon"></i>
+                                <h4>Nu știi să programezi</h4>
+                                <p>Vrei să-ți transformi ideea în aplicație, dar programarea pare prea complicată</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="sProblemCard">
+                                <i class="bi bi-clock sProblemIcon"></i>
+                                <h4>Nu ai timp să înveți</h4>
+                                <p>Cursurile clasice durează luni de zile și nu ai timpul necesar</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="sProblemCard">
+                                <i class="bi bi-currency-euro sProblemIcon"></i>
+                                <h4>Costurile sunt mari</h4>
+                                <p>Să angajezi un programator costa mii de euro pentru o aplicație simplă</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Solution / Services -->
+    <section id="sSolutionSection" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="sSectionTitle">Soluția: Vibe Coding cu AI</h2>
+                    <p class="sSectionSubtitle">Workshop practic unde înveți să creezi aplicații cu ajutorul inteligenței artificiale</p>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="sSolutionCard">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="sSolutionContent">
+                                    <h3>Workshop: "Vibe Coding – Învață programare cu AI"</h3>
+                                    <div class="sSolutionMeta">
+                                        <span class="badge sDateBadge">
+                                            <i class="bi bi-calendar3 me-2"></i>
+                                            3 Iulie 2025, 20:00
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="sSolutionFeatures mt-4">
+                                        <div class="sFeatureItem">
+                                            <i class="bi bi-check-circle"></i>
+                                            <span><strong>Fără programare</strong> - folosești AI să scrie codul</span>
+                                        </div>
+                                        <div class="sFeatureItem">
+                                            <i class="bi bi-camera-video"></i>
+                                            <span><strong>Mentorat live</strong> - îți răspund la întrebări în timp real</span>
+                                        </div>
+                                        <div class="sFeatureItem">
+                                            <i class="bi bi-robot"></i>
+                                            <span><strong>Lucrezi cu AI</strong> - ChatGPT, Claude și alte unelte moderne</span>
+                                        </div>
+                                        <div class="sFeatureItem">
+                                            <i class="bi bi-trophy"></i>
+                                            <span><strong>Proiect real</strong> - pleci cu o aplicație funcțională</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="sSolutionCTA mt-4">
+                                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#sWorkshopModal">
+                                            Rezervă-ți locul
+                                            <i class="bi bi-arrow-right ms-2"></i>
+                                        </button>
+                                        <span class="sPrice ms-3">FREE</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="sSolutionVisual">
+                                    <img src="https://images.pexels.com/photos/5077047/pexels-photo-5077047.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Workshop Live" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: Proof / Portfolio -->
+    <section id="sProofSection" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="sSectionTitle">Rezultate dovedite</h2>
+                    <p class="sSectionSubtitle">Peste 100 de aplicații create și antreprenori ajutați să-și digitalizeze afacerea</p>
+                </div>
+            </div>
+            
+            <!-- Portfolio Slider -->
+            <div class="sPortfolioSlider mb-5">
+                <div class="sPortfolioGrid">
+                    <div class="sPortfolioItem">
+                        <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop" alt="E-commerce App">
+                        <div class="sPortfolioOverlay">
+                            <h4>E-commerce Platform</h4>
+                            <p>Magazin online complet</p>
+                        </div>
+                    </div>
+                    <div class="sPortfolioItem">
+                        <img src="https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop" alt="CRM System">
+                        <div class="sPortfolioOverlay">
+                            <h4>CRM System</h4>
+                            <p>Gestionarea clienților</p>
+                        </div>
+                    </div>
+                    <div class="sPortfolioItem">
+                        <img src="https://images.pexels.com/photos/4491461/pexels-photo-4491461.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop" alt="Learning Platform">
+                        <div class="sPortfolioOverlay">
+                            <h4>Platformă Educațională</h4>
+                            <p>Cursuri online interactive</p>
+                        </div>
+                    </div>
+                    <div class="sPortfolioItem">
+                        <img src="https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop" alt="Mobile App">
+                        <div class="sPortfolioOverlay">
+                            <h4>Aplicație Mobilă</h4>
+                            <p>iOS și Android</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Client Logos -->
+            <div class="sClientLogos">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-2 col-4 text-center">
+                        <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=120&h=60&fit=crop" alt="Tech Company" class="sClientLogo">
+                    </div>
+                    <div class="col-md-2 col-4 text-center">
+                        <img src="https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=120&h=60&fit=crop" alt="Education" class="sClientLogo">
+                    </div>
+                    <div class="col-md-2 col-4 text-center">
+                        <img src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=120&h=60&fit=crop" alt="Startup" class="sClientLogo">
+                    </div>
+                    <div class="col-md-2 col-4 text-center">
+                        <img src="https://images.pexels.com/photos/416405/pexels-photo-416405.jpeg?auto=compress&cs=tinysrgb&w=120&h=60&fit=crop" alt="Agency" class="sClientLogo">
+                    </div>
+                    <div class="col-md-2 col-4 text-center">
+                        <img src="https://images.pexels.com/photos/3184454/pexels-photo-3184454.jpeg?auto=compress&cs=tinysrgb&w=120&h=60&fit=crop" alt="NGO" class="sClientLogo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Testimonials -->
+    <section id="sTestimonialsSection" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="sSectionTitle">Ce spun participanții</h2>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="sTestimonialCard">
+                        <div class="sTestimonialHeader">
+                            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop" alt="Ana Maria" class="sTestimonialAvatar">
+                            <div>
+                                <h5>Ana Maria Popescu</h5>
+                                <p class="sTestimonialRole">Antreprenor, Freelancer</p>
+                            </div>
+                        </div>
+                        <div class="sTestimonialQuote">
+                            <i class="bi bi-quote sQuoteIcon"></i>
+                            <p>"Am reușit să-mi creez primul magazin online în doar 3 ore! Raluca m-a ghidat pas cu pas și acum am o afacere digitală care funcționează."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <div class="sTestimonialCard">
+                        <div class="sTestimonialHeader">
+                            <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop" alt="Mihai Ionescu" class="sTestimonialAvatar">
+                            <div>
+                                <h5>Mihai Ionescu</h5>
+                                <p class="sTestimonialRole">Manager IT</p>
+                            </div>
+                        </div>
+                        <div class="sTestimonialQuote">
+                            <i class="bi bi-quote sQuoteIcon"></i>
+                            <p>"Nu știam nimic despre programare, dar cu AI-ul am construit o aplicație pentru echipa mea. Workshop-ul a fost exact ce aveam nevoie."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <div class="sTestimonialCard">
+                        <div class="sTestimonialHeader">
+                            <img src="https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop" alt="Elena Marinescu" class="sTestimonialAvatar">
+                            <div>
+                                <h5>Elena Marinescu</h5>
+                                <p class="sTestimonialRole">Consultant Business</p>
+                            </div>
+                        </div>
+                        <div class="sTestimonialQuote">
+                            <i class="bi bi-quote sQuoteIcon"></i>
+                            <p>"Metodele clasice de învățare nu funcționau pentru mine. Cu AI am înțeles rapid și am aplicat imediat. Recomand cu căldură!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: About Us -->
+    <section id="sAboutSection" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="sAboutImage">
+                        <img src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&fit=crop" alt="Raluca Manea" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="sAboutContent">
+                        <h2 class="sSectionTitle">Raluca Manea</h2>
+                        <h3 class="sAboutSubtitle">Mentorul tău în lumea programării cu AI</h3>
+                        
+                        <div class="sAboutStats">
+                            <div class="sStatItem">
+                                <span class="sStatNumber">20+</span>
+                                <span class="sStatLabel">Ani experiență IT</span>
+                            </div>
+                            <div class="sStatItem">
+                                <span class="sStatNumber">100+</span>
+                                <span class="sStatLabel">Aplicații create</span>
+                            </div>
+                            <div class="sStatItem">
+                                <span class="sStatNumber">500+</span>
+                                <span class="sStatLabel">Persoane mentorate</span>
+                            </div>
+                        </div>
+                        
+                        <p class="sAboutDescription">
+                            Sunt developer senior cu peste 20 de ani de experiență în industria IT. Am lucrat pentru companii din SUA, Europa și România, creând aplicații pentru milioane de utilizatori.
+                        </p>
+                        
+                        <p class="sAboutDescription">
+                            Acum îmi dedic timpul să îi ajut pe antreprenori și freelanceri să-și transforme ideile în aplicații reale, folosind puterea inteligenței artificiale.
+                        </p>
+                        
+                        <div class="sAboutCTA">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sWorkshopModal">
+                                Lucrează cu mine
+                                <i class="bi bi-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: FAQ -->
+    <section id="sFAQSection" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="sSectionTitle">Întrebări frecvente</h2>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="sFAQAccordion">
+                        <div class="accordion-item sFAQItem">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Pot participa dacă nu am experiență tehnică?
+                                </button>
+                            </h3>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#sFAQAccordion">
+                                <div class="accordion-body">
+                                    Absolut! Workshop-ul este conceput special pentru începători. Vei învăța să folosești AI-ul pentru a scrie cod, fără să ai nevoie de cunoștințe prealabile de programare.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item sFAQItem">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Cât durează fiecare sesiune?
+                                </button>
+                            </h3>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#sFAQAccordion">
+                                <div class="accordion-body">
+                                    Workshop-ul durează aproximativ 3 ore, cu pauze. Vei avea timp să practici și să îmi pui întrebări pe parcurs.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item sFAQItem">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Pot recupera o sesiune pierdută?
+                                </button>
+                            </h3>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#sFAQAccordion">
+                                <div class="accordion-body">
+                                    Da! Toate sesiunile sunt înregistrate și vei avea acces la ele timp de 6 luni. Poți revedea materialul oricând.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item sFAQItem">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Ce echipament am nevoie?
+                                </button>
+                            </h3>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#sFAQAccordion">
+                                <div class="accordion-body">
+                                    Doar un laptop/PC cu internet și un browser modern. Toate uneltele pe care le vom folosi sunt gratuite și accesibile online.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item sFAQItem">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    Workshop-ul este cu adevărat gratuit?
+                                </button>
+                            </h3>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#sFAQAccordion">
+                                <div class="accordion-body">
+                                    Da! Workshop-ul este complet gratuit. Vreau să ofer această oportunitate tuturor celor care doresc să învețe programare cu AI, indiferent de situația financiară.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: Final Call to Action -->
+    <section id="sFinalCTA" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <div class="sFinalCTACard">
+                        <h2 class="sFinalCTATitle">Rezervă-ți locul acum!</h2>
+                        <p class="sFinalCTASubtitle">
+                            Workshop-ul "Vibe Coding cu AI" - 3 Iulie 2025, ora 20:00
+                        </p>
+                        
+                        <div class="sFinalCTAFeatures">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="sFinalCTAFeature">
+                                        <i class="bi bi-check-circle"></i>
+                                        <span>3 ore de mentorat live</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="sFinalCTAFeature">
+                                        <i class="bi bi-check-circle"></i>
+                                        <span>Aplicație funcțională</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="sFinalCTAFeature">
+                                        <i class="bi bi-check-circle"></i>
+                                        <span>Înregistrare 6 luni</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="sFinalCTAFeature">
+                                        <i class="bi bi-check-circle"></i>
+                                        <span>Workshop complet gratuit</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="sFinalCTAPrice">
+                            <span class="sFinalCTAPriceNew sFreePrice">FREE</span>
+                            <span class="sFinalCTADiscount">100% Gratuit</span>
+                        </div>
+                        
+                        <div class="sFinalCTAButtons">
+                            <button type="button" class="btn btn-primary btn-lg sFinalCTAButton" data-bs-toggle="modal" data-bs-target="#sWorkshopModal">
+                                <i class="bi bi-envelope me-2"></i>
+                                Înscrie-te acum
+                            </button>
+                            
+                            <div class="sFinalCTAUrgency mt-3">
+                                <i class="bi bi-clock me-2"></i>
+                                <span>Doar <strong>20 locuri</strong> disponibile</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9: Footer -->
+    <footer id="sFooter" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="sFooterBrand">
+                        <img src="https://images.pexels.com/photos/6386956/pexels-photo-6386956.jpeg?auto=compress&cs=tinysrgb&w=40&h=40&fit=crop" alt="Amoos Logo" class="me-2" style="border-radius: 6px;">
+                        <span class="sFooterLogoText">Amoos.ro</span>
+                    </div>
+                    <p class="sFooterDescription">
+                        Transformăm ideile în aplicații reale cu ajutorul inteligenței artificiale și mentoratului personalizat.
+                    </p>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="sFooterTitle">Link-uri utile</h5>
+                    <ul class="sFooterLinks">
+                        <li><a href="#sTerms">Termeni și Condiții</a></li>
+                        <li><a href="#sPrivacy">Politica de Confidențialitate</a></li>
+                        <li><a href="#sAboutSection">Despre noi</a></li>
+                        <li><a href="#sFAQSection">Întrebări frecvente</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="sFooterTitle">Urmărește-ne</h5>
+                    <div class="sFooterSocial">
+                        <a href="#" class="sSocialLink">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="sSocialLink">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" class="sSocialLink">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="sSocialLink">
+                            <i class="bi bi-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="sFooterBottom">
+                        <p class="text-center mb-0">
+                            © 2025 Amoos.ro | Creat cu Raluca Manea și AI
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating CTA Button -->
+    <div id="sFloatingCTA" class="floating-cta d-none">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sWorkshopModal">
+            <i class="bi bi-envelope me-2"></i>
+            Înscrie-te
+        </button>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+
+</body>
+</html> 

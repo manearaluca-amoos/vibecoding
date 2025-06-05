@@ -8,6 +8,35 @@
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
     
+    <!-- NUCLEAR OPTION: KILL ALL ANIMATIONS BEFORE ANY OTHER CSS -->
+    <style>
+        /* NUCLEAR ANIMATION KILLER - HIGHEST PRIORITY */
+        *, *::before, *::after {
+            animation: none !important;
+            animation-duration: 0s !important;
+            animation-delay: 0s !important;
+            transition: none !important;
+            transition-duration: 0s !important;
+            transition-delay: 0s !important;
+        }
+        
+        /* FORCE ALL ELEMENTS TO BE STATIC */
+        h1, h2, h3, h4, h5, h6 {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+        
+        /* KILL SCROLL ANIMATIONS SPECIFICALLY */
+        [class*="animate"], [class*="scroll"], [class*="fade"], [class*="slide"] {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+    </style>
+    
     <!-- Critical CSS inlined -->
     <style>
         /* Critical Above-the-fold CSS */
@@ -54,17 +83,53 @@
             transition: none;
         }
         
+        /* Completely static h2 elements - no animations whatsoever */
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #ffffff !important;
+            transition: none !important;
+            animation: none !important;
+            transform: none !important;
+        }
+        
+        h2:hover, h2:focus, h2:active {
+            color: #ffffff !important;
+            transition: none !important;
+            animation: none !important;
+            transform: none !important;
+        }
+        
+        /* FORCE DISABLE ALL ANIMATION CLASSES */
+        .scroll-animate, .section-title, .visible, .fade-in, .slide-in, .animate, .animated {
+            transition: none !important;
+            animation: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+        
+        .scroll-animate.visible, .section-title.visible, .fade-in.visible {
+            transition: none !important;
+            animation: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+        
+        /* Force static h2 with animation classes */
+        h2.scroll-animate, h2.section-title, h2.visible, h2.fade-in, h2.animate {
+            color: #ffffff !important;
+            transition: none !important;
+            animation: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+        
         .hero h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
             margin-bottom: 1.5rem;
             line-height: 1.1;
-        }
-        
-        h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
         }
         
         h3 {
@@ -155,6 +220,7 @@
         .text-center { text-align: center; }
         .text-muted { color: #8b949e; }
         .mb-3 { margin-bottom: 1rem; }
+        .mb-5 { margin-bottom: 2rem; }
         .w-100 { width: 100%; }
         
         .badge {
@@ -203,7 +269,19 @@
             .hero h1 { font-size: 2.5rem; }
             .hero p { font-size: 1.1rem; }
             .container { padding: 0 0.5rem; }
-            h2 { font-size: 2rem; }
+            h2 { 
+                font-size: 2rem !important;
+                transition: none !important;
+                animation: none !important;
+                transform: none !important;
+            }
+            h2.scroll-animate, h2.section-title, h2.visible {
+                font-size: 2rem !important;
+                transition: none !important;
+                animation: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
             section { padding: 2rem 0; }
             .grid { grid-template-columns: 1fr; }
             .workshop-grid { grid-template-columns: 1fr; }
@@ -308,6 +386,72 @@
             </div>
         </div>
     </section>
+
+    <!-- NUCLEAR JAVASCRIPT TO KILL ANIMATIONS -->
+    <script>
+        // IMMEDIATE ANIMATION KILLER - RUNS BEFORE ANYTHING ELSE
+        (function() {
+            'use strict';
+            
+            // Function to kill all animations
+            function killAllAnimations() {
+                // Remove animation classes from all elements
+                const animationClasses = [
+                    'scroll-animate', 'section-title', 'visible', 'fade-in', 'slide-in', 
+                    'animate', 'animated', 'fadeIn', 'slideIn', 'bounceIn', 'zoomIn'
+                ];
+                
+                animationClasses.forEach(className => {
+                    const elements = document.querySelectorAll('.' + className);
+                    elements.forEach(el => {
+                        el.classList.remove(className);
+                        el.style.animation = 'none';
+                        el.style.transition = 'none';
+                        el.style.transform = 'none';
+                        el.style.opacity = '1';
+                    });
+                });
+                
+                // Force all h2 elements to be static
+                const h2Elements = document.querySelectorAll('h2');
+                h2Elements.forEach(h2 => {
+                    h2.style.animation = 'none';
+                    h2.style.transition = 'none';
+                    h2.style.transform = 'none';
+                    h2.style.opacity = '1';
+                    h2.style.color = '#ffffff';
+                });
+            }
+            
+            // Kill animations immediately
+            killAllAnimations();
+            
+            // Kill animations when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', killAllAnimations);
+            }
+            
+            // Kill animations after page load
+            window.addEventListener('load', killAllAnimations);
+            
+            // Monitor for new elements and kill their animations
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === 1) { // Element node
+                            killAllAnimations();
+                        }
+                    });
+                });
+            });
+            
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+            
+        })();
+    </script>
 
     <!-- Memory-safe JavaScript -->
     <script>
