@@ -448,46 +448,90 @@ function initializeAnimations() {
     tlMainTimeline = gsap.timeline();
     
     // Initial animations for page load
-    setupPageLoadAnimations();
+    fnPageLoadAnimation();
     setupFloatingElementsAnimation();
     setupInteractionAnimations();
 }
 
-function setupPageLoadAnimations() {
-    // Animate elements in sequence
-    const tl = gsap.timeline();
-    
-    tl.from('.sBrandBadge', {
-        duration: 0.8,
-        y: -30,
+/**
+ * Main page load animation sequence
+ * Orchestrates the entrance animations for all elements
+ */
+function fnPageLoadAnimation() {
+    const sMainLogo = document.getElementById('logoImage');
+    const sMainTitle = document.getElementById('titleMain');
+    const sSubTitle = document.getElementById('titleSub');
+    const sValueProp = document.getElementById('propositionValue');
+    const sFormContainer = document.getElementById('containerForm');
+    const sVideoContainer = document.getElementById('containerVideo');
+    const asTrustElements = document.querySelectorAll('.element-trust');
+    const asProofElements = document.querySelectorAll('.badge-proof');
+
+    // Set initial states for animation
+    gsap.set([sMainLogo, sMainTitle, sSubTitle, sValueProp, sFormContainer, sVideoContainer], {
         opacity: 0,
-        ease: 'back.out(1.7)'
-    })
-    .from('.sMainHeadline', {
-        duration: 0.8,
-        y: 50,
+        y: 30
+    });
+
+    gsap.set([asTrustElements, asProofElements], {
         opacity: 0,
-        ease: 'power2.out'
-    }, '-=0.4')
-    .from('.sSubHeadline', {
-        duration: 0.6,
-        y: 30,
-        opacity: 0,
-        ease: 'power2.out'
-    }, '-=0.4')
-    .from('.sFormContainer', {
-        duration: 0.8,
-        scale: 0.9,
-        opacity: 0,
-        ease: 'back.out(1.3)'
-    }, '-=0.2')
-    .from('.sTrustItem', {
-        duration: 0.6,
-        y: 20,
-        opacity: 0,
-        stagger: 0.1,
-        ease: 'power2.out'
-    }, '-=0.4');
+        scale: 0.8
+    });
+
+    // Main animation timeline
+    const oTimeline = gsap.timeline({ delay: 0.2 });
+
+    oTimeline
+        .to(sMainLogo, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power2.out'
+        })
+        .to(sValueProp, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power2.out'
+        }, '-=0.4')
+        .to(sMainTitle, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power2.out'
+        }, '-=0.3')
+        .to(sSubTitle, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power2.out'
+        }, '-=0.2')
+        .to(sVideoContainer, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power2.out'
+        }, '-=0.2')
+        .to(sFormContainer, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'back.out(1.7)'
+        }, '-=0.3')
+        .to(asTrustElements, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.4,
+            stagger: 0.1,
+            ease: 'back.out(1.7)'
+        }, '-=0.2')
+        .to(asProofElements, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.4,
+            stagger: 0.1,
+            ease: 'back.out(1.7)'
+        }, '-=0.1');
 }
 
 function setupFloatingElementsAnimation() {

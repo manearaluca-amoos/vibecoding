@@ -101,6 +101,41 @@ html {
 }
 
 /* ========================================================================
+   TOP NAVIGATION STYLES
+   Logo navigation at the top of the page
+   ======================================================================== */
+.top-nav {
+    padding: var(--spcPaddingMd) 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 10;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spcPaddingLg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-image {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: all var(--durAnimationNormal) var(--easeDefault);
+}
+
+.logo-image:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 8px rgba(255, 215, 0, 0.3));
+}
+
+/* ========================================================================
    HERO SECTION STYLES
    Main landing area with lead capture form
    ======================================================================== */
@@ -199,17 +234,26 @@ html {
 
 /* ========================================================================
    TYPOGRAPHY STYLES
-   Headlines and text hierarchy
+   Headlines and text hierarchy - SWAPPED SIZES
    ======================================================================== */
 .sMainHeadline {
-    font-size: var(--fntSizeHero);
+    font-size: var(--fntSizeHero);      /* Now larger - for value proposition */
     font-weight: 700;
     line-height: 1.2;
     color: var(--clrText);
     margin-bottom: var(--spcXl);
-    max-width: 800px;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.sSubHeadline {
+    font-size: var(--fntSizeXl);       /* Now smaller - for previous main headline */
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--clrTextMuted);
+    max-width: 700px;
+    margin: 0 auto var(--spcXxl) auto;
 }
 
 .sHighlightText {
@@ -229,22 +273,63 @@ html {
 }
 
 .sValueProposition {
-    margin-bottom: var(--spcXxl);
-}
-
-.sSubHeadline {
-    font-size: var(--fntSizeXl);
-    font-weight: 500;
-    line-height: 1.4;
-    color: var(--clrTextMuted);
-    max-width: 700px;
-    margin: 0 auto;
+    margin-bottom: var(--spcLg);
 }
 
 .sGuideTitleHighlight {
     color: var(--clrAccent);
     font-weight: 700;
     font-style: italic;
+}
+
+/* ========================================================================
+   VIDEO SECTION STYLES
+   YouTube video embed with elegant styling
+   ======================================================================== */
+.sVideoSection {
+    margin: var(--spcXxl) 0;
+}
+
+.sVideoContainer {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.sVideoWrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--brdrRadiusLg);
+    box-shadow: var(--shdwHeavy);
+    border: 3px solid var(--clrAccent);
+    background: var(--clrPrimary);
+}
+
+.sVideoFrame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--brdrRadius);
+}
+
+.sVideoCaption {
+    text-align: center;
+    margin-top: var(--spcLg);
+    padding: var(--spcMd);
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: var(--brdrRadius);
+    color: var(--clrText);
+    font-size: var(--fntSizeMd);
+    font-weight: 600;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.sVideoCaption i {
+    color: var(--clrAccent);
+    font-size: var(--fntSizeLg);
 }
 
 /* ========================================================================
@@ -570,8 +655,13 @@ html {
         --fntSizeHero: 2.25rem;         /* 36px */
         --fntSizeDisplay: 2rem;         /* 32px */
         --fntSizeXxl: 1.25rem;          /* 20px */
+        --fntSizeXl: 1.125rem;          /* 18px */
         --spcXxl: 2rem;                 /* 32px */
         --spcHuge: 3rem;                /* 48px */
+    }
+    
+    .logo-image {
+        height: 50px;
     }
     
     .sMainHeadline {
@@ -590,6 +680,10 @@ html {
     .sCTAButton {
         font-size: var(--fntSizeMd);
         padding: var(--spcMd) var(--spcLg);
+    }
+    
+    .sVideoContainer {
+        margin: 0 var(--spcMd);
     }
     
     .sTrustItem {
@@ -616,8 +710,13 @@ html {
     :root {
         --fntSizeHero: 1.75rem;         /* 28px */
         --fntSizeDisplay: 1.5rem;       /* 24px */
+        --fntSizeXl: 1rem;              /* 16px */
         --spcXl: 1.5rem;                /* 24px */
         --spcXxl: 1.5rem;               /* 24px */
+    }
+    
+    .logo-image {
+        height: 40px;
     }
     
     .sMainHeadline {
@@ -636,6 +735,10 @@ html {
     
     .sFormContainer {
         padding: var(--spcMd);
+        margin: 0 var(--spcSm);
+    }
+    
+    .sVideoContainer {
         margin: 0 var(--spcSm);
     }
     
@@ -704,7 +807,8 @@ html {
 @media print {
     .sFloatingElements,
     .sBackgroundShapes,
-    .sCTAButton {
+    .sCTAButton,
+    .sVideoSection {
         display: none !important;
     }
     
