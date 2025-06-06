@@ -9,10 +9,8 @@
    ======================================================================== */
 let bIsFormSubmitted = false;           // Boolean: form submission state
 let bIsEmailValid = false;              // Boolean: email validation state
-let bIsNameValid = false;               // Boolean: name validation state
 let nAnimationDelay = 100;              // Number: animation timing delay
 let sCurrentUserEmail = '';             // String: current user email
-let sCurrentUserName = '';              // String: current user name
 let oFormElement = null;                // Object: main form DOM element
 let oSuccessElement = null;             // Object: success message DOM element
 let aRequiredFields = [];               // Array: required form fields
@@ -46,9 +44,8 @@ function initializeElements() {
     oFormElement = document.getElementById('sLeadCaptureForm');
     oSuccessElement = document.getElementById('sSuccessMessage');
     
-    // Get all required form fields
+    // Get all required form fields - only email now
     aRequiredFields = [
-        document.getElementById('sFirstNameInput'),
         document.getElementById('sEmailInput')
     ];
     
@@ -107,8 +104,7 @@ function handleFormSubmission(oEvent) {
     let bFormIsValid = validateAllFields();
     
     if (bFormIsValid) {
-        // Get form data
-        sCurrentUserName = document.getElementById('sFirstNameInput').value.trim();
+        // Get form data - only email now
         sCurrentUserEmail = document.getElementById('sEmailInput').value.trim();
         
         // Show loading state
@@ -135,23 +131,6 @@ function validateField(oField, bShowError = false) {
     const sFieldValue = oField.value.trim();
     const sFieldType = oField.type;
     const sFieldId = oField.id;
-    
-    // Name field validation
-    if (sFieldId === 'sFirstNameInput') {
-        if (sFieldValue.length === 0) {
-            sErrorMessage = 'Te rugăm să introduci prenumele tău';
-            bIsValid = false;
-        } else if (sFieldValue.length < 2) {
-            sErrorMessage = 'Prenumele trebuie să aibă cel puțin 2 caractere';
-            bIsValid = false;
-        } else if (!/^[a-zA-ZăâîșțĂÂÎȘȚ\s-]+$/.test(sFieldValue)) {
-            sErrorMessage = 'Prenumele poate conține doar litere';
-            bIsValid = false;
-        } else {
-            bIsValid = true;
-        }
-        bIsNameValid = bIsValid;
-    }
     
     // Email field validation
     if (sFieldId === 'sEmailInput') {
@@ -235,7 +214,7 @@ function validateAllFields() {
 
 function updateSubmitButtonState() {
     const oSubmitButton = document.getElementById('sSubmitButton');
-    const bFormValid = bIsNameValid && bIsEmailValid;
+    const bFormValid = bIsEmailValid; // Only check email now
     
     if (oSubmitButton) {
         oSubmitButton.disabled = !bFormValid || bIsFormSubmitted;
@@ -282,7 +261,6 @@ function processFormSubmission() {
     // For now, we'll simulate a successful submission
     
     console.log('Form submitted:', {
-        name: sCurrentUserName,
         email: sCurrentUserEmail,
         timestamp: new Date().toISOString()
     });
@@ -336,9 +314,7 @@ function resetForm() {
     // Reset form variables
     bIsFormSubmitted = false;
     bIsEmailValid = false;
-    bIsNameValid = false;
     sCurrentUserEmail = '';
-    sCurrentUserName = '';
     
     // Reset form fields
     oFormElement.reset();
@@ -678,10 +654,9 @@ function initializeBasicForm() {
         oFormElement.addEventListener('submit', function(oEvent) {
             oEvent.preventDefault();
             
-            const sName = document.getElementById('sFirstNameInput').value.trim();
             const sEmail = document.getElementById('sEmailInput').value.trim();
             
-            if (sName && sEmail && isValidEmailAddress(sEmail)) {
+            if (sEmail && isValidEmailAddress(sEmail)) {
                 alert('Mulțumim! Ghidul va fi trimis la adresa de email introdusă.');
                 this.reset();
             } else {

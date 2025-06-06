@@ -287,7 +287,7 @@ html {
    YouTube video embed with elegant styling
    ======================================================================== */
 .sVideoSection {
-    margin: var(--spcXxl) 0;
+    margin: var(--spcXxl) 0 var(--spcXxl) 0;
 }
 
 .sVideoContainer {
@@ -317,7 +317,7 @@ html {
 
 .sVideoCaption {
     text-align: center;
-    margin-top: var(--spcLg);
+    margin-bottom: var(--spcLg);
     padding: var(--spcMd);
     background: rgba(255, 215, 0, 0.1);
     border-radius: var(--brdrRadius);
@@ -337,7 +337,7 @@ html {
    Lead capture form with elegant design
    ======================================================================== */
 .sLeadForm {
-    margin-bottom: var(--spcXxl);
+    margin-bottom: var(--spcXl);
 }
 
 .sFormContainer {
@@ -427,14 +427,41 @@ html {
     left: 100%;
 }
 
-.sCTAButton:hover {
+.sCTAButton:hover:not(:disabled) {
     background: #E6C200;
     transform: translateY(-3px);
     box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
 }
 
-.sCTAButton:active {
+.sCTAButton:active:not(:disabled) {
     transform: translateY(-1px);
+}
+
+/* Disabled button state */
+.sCTAButton:disabled {
+    background: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.sCTAButton:disabled::before {
+    display: none;
+}
+
+/* Button ready state (when form is valid) */
+.sCTAButton.btn-ready {
+    background: var(--clrAccent);
+    color: var(--clrPrimary);
+    cursor: pointer;
+    box-shadow: var(--shdwGold);
+}
+
+.sCTAButton.btn-ready:hover {
+    background: #E6C200;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
 }
 
 .sCTAText {
@@ -483,7 +510,7 @@ html {
     border-radius: var(--brdrRadiusXl);
     text-align: center;
     max-width: 500px;
-    margin: 0 auto;
+    margin: var(--spcXl) auto;
     box-shadow: var(--shdwHeavy);
 }
 
@@ -686,6 +713,15 @@ html {
         margin: 0 var(--spcMd);
     }
     
+    .sVideoSection {
+        margin: var(--spcLg) 0; /* Reduced spacing on tablets */
+    }
+    
+    .sVideoCaption {
+        margin-bottom: var(--spcMd); /* Reduced spacing between caption and video on tablets */
+        font-size: var(--fntSizeSm);
+    }
+    
     .sTrustItem {
         flex-direction: column;
         text-align: center;
@@ -740,6 +776,16 @@ html {
     
     .sVideoContainer {
         margin: 0 var(--spcSm);
+    }
+    
+    .sVideoSection {
+        margin: var(--spcMd) 0; /* Further reduced spacing on mobile */
+    }
+    
+    .sVideoCaption {
+        margin-bottom: var(--spcSm); /* Smaller spacing on mobile */
+        padding: var(--spcSm);
+        font-size: var(--fntSizeXs);
     }
     
     .sFieldGroup {
