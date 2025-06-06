@@ -127,7 +127,7 @@ html {
 }
 
 .logo-image {
-    height: 60px;
+    height: 90px;
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
@@ -703,9 +703,6 @@ html {
         --spcHuge: 3rem;                /* 48px */
     }
     
-    .logo-image {
-        height: 50px;
-    }
     
     .sMainHeadline {
         font-size: var(--fntSizeDisplay);
@@ -767,9 +764,7 @@ html {
         --spcXxl: 1.5rem;               /* 24px */
     }
     
-    .logo-image {
-        height: 40px;
-    }
+
     
     .sMainHeadline {
         font-size: var(--fntSizeXxl);

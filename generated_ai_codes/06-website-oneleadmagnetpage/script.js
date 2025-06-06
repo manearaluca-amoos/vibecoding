@@ -666,9 +666,29 @@ function initializeModalFunctionality() {
     document.addEventListener('click', function(oEvent) {
         if (oEvent.target.matches('.sModalLink[href="#sLeadCaptureForm"]')) {
             oEvent.preventDefault();
+            
+            // Close all open modals immediately
+            const oCurrentModals = document.querySelectorAll('.modal.show');
+            oCurrentModals.forEach(function(oModal) {
+                const oModalInstance = bootstrap.Modal.getInstance(oModal);
+                if (oModalInstance) {
+                    oModalInstance.hide();
+                }
+            });
+            
+            // Also trigger the data-bs-dismiss behavior manually
+            const oAllModals = document.querySelectorAll('.modal');
+            oAllModals.forEach(function(oModal) {
+                const oModalInstance = bootstrap.Modal.getInstance(oModal);
+                if (oModalInstance) {
+                    oModalInstance.hide();
+                }
+            });
+            
+            // Wait for modal to close, then scroll to form
             setTimeout(function() {
                 scrollToForm();
-            }, 300); // Wait for modal to close
+            }, 500); // Increased delay to ensure modal closes completely
         }
     });
 }
