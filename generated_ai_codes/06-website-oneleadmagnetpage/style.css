@@ -10,7 +10,9 @@
 :root {
     /* Color Variables - Primary Palette */
     --clrPrimary: #000000;              /* Pure black - main brand color */
-    --clrAccent: #FFD700;               /* Gold - accent and CTA color */
+    --clrAccent: #E6C200;               /* Darker gold - better contrast on white */
+    --clrAccentBright: #FFD700;         /* Original bright gold - for backgrounds */
+    --clrAccentDark: #B8960F;           /* Even darker gold for high contrast text */
     --clrSecondary: #FFFFFF;            /* Pure white - background and text */
     --clrText: #000000;                 /* Black text on white backgrounds */
     --clrTextLight: #FFFFFF;            /* White text on dark backgrounds */
@@ -22,6 +24,7 @@
     --bgAccent: #FFD700;                /* Gold background for highlights */
     --bgOverlay: rgba(0, 0, 0, 0.05);   /* Light overlay */
     --bgGradient: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+    --bgGoldHighlight: rgba(255, 215, 0, 0.15); /* Subtle gold background */
     
     /* Border and Shadow Colors */
     --brdrColor: #E5E5E5;               /* Light border color */
@@ -30,6 +33,7 @@
     --shdwMedium: 0 4px 20px rgba(0, 0, 0, 0.12);
     --shdwHeavy: 0 8px 40px rgba(0, 0, 0, 0.16);
     --shdwGold: 0 4px 20px rgba(255, 215, 0, 0.25);
+    --shdwGoldText: 0 1px 3px rgba(184, 150, 15, 0.3); /* Text shadow for gold text */
     
     /* Typography Variables */
     --fntFamilyPrimary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -257,19 +261,25 @@ html {
 }
 
 .sHighlightText {
-    color: var(--clrAccent);
+    color: var(--clrAccentDark);        /* Darker gold for better contrast */
+    font-weight: 700;                   /* Make it bold */
     position: relative;
+    background: var(--bgGoldHighlight); /* Subtle gold background */
+    padding: 2px 6px;                   /* Small padding for background */
+    border-radius: 4px;                 /* Rounded corners */
+    text-shadow: var(--shdwGoldText);   /* Subtle text shadow */
 }
 
 .sHighlightText::after {
     content: '';
     position: absolute;
-    bottom: 2px;
-    left: 0;
-    width: 100%;
-    height: 3px;
+    bottom: 0px;
+    left: 3px;
+    right: 3px;
+    height: 2px;
     background: var(--clrAccent);
-    opacity: 0.3;
+    opacity: 0.6;
+    border-radius: 1px;
 }
 
 .sValueProposition {
@@ -277,9 +287,15 @@ html {
 }
 
 .sGuideTitleHighlight {
-    color: var(--clrAccent);
+    color: var(--clrAccentDark);        /* Darker gold for better contrast */
     font-weight: 700;
     font-style: italic;
+    background: var(--bgGoldHighlight); /* Subtle gold background */
+    padding: 2px 4px;                   /* Small padding */
+    border-radius: 4px;                 /* Rounded corners */
+    text-shadow: var(--shdwGoldText);   /* Subtle text shadow */
+    border-left: 3px solid var(--clrAccent); /* Left accent border */
+    padding-left: 8px;                  /* Extra padding for border */
 }
 
 /* ========================================================================
@@ -397,7 +413,7 @@ html {
    Primary call-to-action button with gold accent
    ======================================================================== */
 .sCTAButton {
-    background: var(--clrAccent);
+    background: var(--clrAccentBright);  /* Use bright gold for CTA button */
     border: none;
     color: var(--clrPrimary);
     font-size: var(--fntSizeLg);
@@ -428,7 +444,7 @@ html {
 }
 
 .sCTAButton:hover:not(:disabled) {
-    background: #E6C200;
+    background: var(--clrAccent);        /* Use darker gold on hover */
     transform: translateY(-3px);
     box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
 }
@@ -452,14 +468,14 @@ html {
 
 /* Button ready state (when form is valid) */
 .sCTAButton.btn-ready {
-    background: var(--clrAccent);
+    background: var(--clrAccentBright);  /* Use bright gold when ready */
     color: var(--clrPrimary);
     cursor: pointer;
     box-shadow: var(--shdwGold);
 }
 
 .sCTAButton.btn-ready:hover {
-    background: #E6C200;
+    background: var(--clrAccent);        /* Use darker gold on hover */
     transform: translateY(-3px);
     box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
 }
@@ -489,14 +505,14 @@ html {
 }
 
 .sPrivacyLink {
-    color: var(--clrAccent);
+    color: var(--clrAccentDark);         /* Use darker gold for better contrast */
     text-decoration: none;
     font-weight: 600;
 }
 
 .sPrivacyLink:hover {
     text-decoration: underline;
-    color: #E6C200;
+    color: var(--clrAccent);             /* Slightly lighter on hover */
 }
 
 /* ========================================================================
@@ -566,7 +582,7 @@ html {
 }
 
 .sTrustIcon {
-    color: var(--clrAccent);
+    color: var(--clrAccent);             /* Keep medium gold for icons */
     font-size: var(--fntSizeLg);
 }
 
@@ -600,7 +616,7 @@ html {
     align-items: center;
     justify-content: center;
     font-size: var(--fntSizeLg);
-    color: var(--clrAccent);
+    color: var(--clrAccent);             /* Use medium gold for floating elements */
     animation: sFloatUpDown 4s ease-in-out infinite;
 }
 
@@ -668,7 +684,7 @@ html {
 }
 
 .sStatBadge i {
-    color: var(--clrAccent);
+    color: var(--clrAccentBright);       /* Use bright gold for stat badge icons */
 }
 
 /* ========================================================================
@@ -866,5 +882,172 @@ html {
     .sFormContainer {
         box-shadow: none !important;
         border: 2px solid black !important;
+    }
+}
+
+/* ========================================================================
+   MODAL STYLES
+   Interactive modals with elegant design matching the main theme
+   ======================================================================== */
+.sModalContent {
+    border: none;
+    border-radius: var(--brdrRadiusXl);
+    box-shadow: var(--shdwHeavy);
+    background: var(--bgPrimary);
+}
+
+.sModalHeader {
+    background: linear-gradient(135deg, var(--clrPrimary) 0%, #333333 100%);
+    color: var(--clrTextLight);
+    border-bottom: 3px solid var(--clrAccent);
+    border-radius: var(--brdrRadiusXl) var(--brdrRadiusXl) 0 0;
+    padding: var(--spcLg) var(--spcXl);
+}
+
+.sModalTitle {
+    font-size: var(--fntSizeXl);
+    font-weight: 700;
+    color: var(--clrTextLight);
+    margin: 0;
+}
+
+.sModalTitle i {
+    color: var(--clrAccent);
+    font-size: var(--fntSizeXl);
+}
+
+.btn-close {
+    filter: invert(1);
+    opacity: 0.8;
+}
+
+.btn-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.sModalBody {
+    padding: var(--spcXl);
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.sModalSection {
+    margin-bottom: var(--spcLg);
+    padding-bottom: var(--spcMd);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sModalSection:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.sModalSubtitle {
+    color: var(--clrAccentDark);
+    font-size: var(--fntSizeLg);
+    font-weight: 700;
+    margin-bottom: var(--spcMd);
+    display: flex;
+    align-items: center;
+    gap: var(--spcSm);
+}
+
+.sModalList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sModalList li {
+    padding: var(--spcSm) 0;
+    border-left: 3px solid var(--clrAccent);
+    padding-left: var(--spcMd);
+    margin-bottom: var(--spcSm);
+    background: rgba(255, 215, 0, 0.05);
+    border-radius: 0 var(--brdrRadius) var(--brdrRadius) 0;
+    transition: all var(--animDuration) var(--animEasing);
+}
+
+.sModalList li:hover {
+    background: rgba(255, 215, 0, 0.1);
+    transform: translateX(5px);
+}
+
+.sModalList li strong {
+    color: var(--clrAccentDark);
+    font-weight: 700;
+}
+
+.sModalCTA {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+    padding: var(--spcLg);
+    border-radius: var(--brdrRadiusLg);
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    text-align: center;
+    margin-top: var(--spcLg);
+}
+
+.sModalCTA p {
+    margin: 0;
+    font-size: var(--fntSizeLg);
+    font-weight: 600;
+    color: var(--clrText);
+}
+
+.sModalLink {
+    color: var(--clrAccentDark);
+    text-decoration: none;
+    font-weight: 700;
+    background: rgba(255, 215, 0, 0.15);
+    padding: 2px 8px;
+    border-radius: var(--brdrRadius);
+    transition: all var(--animDuration) var(--animEasing);
+    border-bottom: 2px solid var(--clrAccent);
+}
+
+.sModalLink:hover {
+    color: var(--clrPrimary);
+    background: var(--clrAccent);
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+/* Modal animations */
+.modal.fade .modal-dialog {
+    transform: translateY(-50px);
+    transition: transform 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0);
+}
+
+/* Responsive modal styling */
+@media (max-width: 768px) {
+    .sModalHeader {
+        padding: var(--spcMd) var(--spcLg);
+    }
+    
+    .sModalTitle {
+        font-size: var(--fntSizeLg);
+    }
+    
+    .sModalBody {
+        padding: var(--spcLg);
+        max-height: 60vh;
+    }
+    
+    .sModalSubtitle {
+        font-size: var(--fntSizeMd);
+    }
+    
+    .sModalCTA {
+        padding: var(--spcMd);
+    }
+    
+    .sModalCTA p {
+        font-size: var(--fntSizeMd);
     }
 } 

@@ -52,7 +52,7 @@
                     <div class="sHeroContent text-center">
                         
                         <!-- Brand Badge -->
-                        <div class="sBrandBadge">
+                        <div class="sBrandBadge" id="sBrandBadgeClickable" style="cursor: pointer;" title="Click pentru a merge la formular">
                             <span class="sBadgeText">AFLA CUM SA INVETI PRIN PRACTICA</span>
                             <span class="sBadgeHighlight">PROGRAMARE</span>
                         </div>
@@ -60,17 +60,17 @@
                         <!-- Value Proposition - Now larger -->
                         <div class="sValueProposition">
                             <h1 class="sMainHeadline">
-                                Obține acces <strong>GRATUIT</strong> la Workshop-ul practic 
-                                <span class="sGuideTitleHighlight">"VibeCoding - Invata de la zero la programare web si AI"</span> 
-                                & bonus primesti ghidul "5 Lucruri de Știut Înainte să Înveți Programare"!
+                                Obține acces <strong>GRATUIT</strong> la workshop-ul practic 
+                                <span class="sGuideTitleHighlight" id="sVibecodingModal" style="cursor: pointer;" title="Click pentru a afla despre VibeCoding">"VibeCoding - Învață de la zero la programare web și AI"</span> 
+                                & bonus primești ghidul "5 lucruri de știut înainte să înveți programare"!
                             </h1>
                         </div>
                         
                         <!-- Main Headline - Now smaller -->
                         <h2 class="sSubHeadline">
-                            Cum să intri in domeniul
-                            <span class="sHighlightText">dezvoltarii web</span> 
-                            chiar dacă te simți copleșit de numeroasele căi de învățare și de piața muncii care pare ca nu mai are nevoie de noi din cauza AI...
+                            Cum să intri în domeniul
+                            <span class="sHighlightText" id="sWebDevModal" style="cursor: pointer;" title="Click pentru a afla despre dezvoltarea web">dezvoltării web</span> 
+                            chiar dacă te simți copleșit de numeroasele căi de învățare și de piața muncii care pare că nu mai are nevoie de noi din cauza <span class="sHighlightText" id="sAIModal" style="cursor: pointer;" title="Click pentru a afla despre Inteligența Artificială">Inteligenței Artificiale</span>...
                         </h2>
                         
                          <!-- Lead Capture Form -->
@@ -112,7 +112,7 @@
                                 <button type="submit" class="btn sCTAButton" id="sSubmitButton">
                                     <span class="sCTAText">
                                         <i class="bi bi-download me-2"></i>
-                                        Accesează Instant Ghidul Gratuit și PRIMEȘTE BILETUL la training-ul gratuit
+                                        Accesează instant ghidul gratuit și primește biletul la training-ul gratuit
                                     </span>
                                     <div class="sCTALoader d-none">
                                         <span class="spinner-border spinner-border-sm me-2" role="status"></span>
@@ -136,7 +136,7 @@
                             <div class="sVideoContainer">
                                 <div class="sVideoCaption">
                                     <i class="bi bi-play-circle me-2"></i>
-                                    Află de ce acest ghid te va ajuta să devi un programator web bun!
+                                    Află de ce acest ghid te va ajuta să devii un programator web bun!
                                 </div>
                                 <div class="sVideoWrapper">
                                     <iframe 
@@ -192,7 +192,7 @@
                                 <div class="col-md-4">
                                     <div class="sTrustItem">
                                         <i class="bi bi-shield-check sTrustIcon"></i>
-                                        <span class="sTrustText">100% Gratuit & Sigur</span>
+                                        <span class="sTrustText">100% gratuit & sigur</span>
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +226,7 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <p class="sSocialProofText mb-3">
-                        <strong>Alătură-te comunității de programatori care au intrat in domeniu cu încredere!</strong>
+                        <strong>Alătură-te comunității de programatori care au intrat în domeniu cu încredere!</strong>
                     </p>
                     <div class="sSocialProofStats">
                         <span class="sStatBadge">
@@ -251,6 +251,157 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JavaScript -->
     <script src="script.js"></script>
+
+    <!-- MODALS SECTION -->
+    <!-- Web Development Modal -->
+    <div class="modal fade" id="webDevModal" tabindex="-1" aria-labelledby="webDevModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content sModalContent">
+                <div class="modal-header sModalHeader">
+                    <h5 class="modal-title sModalTitle" id="webDevModalLabel">
+                        <i class="bi bi-code-slash me-2"></i>
+                        De ce să alegi dezvoltarea web?
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body sModalBody">
+                    <div class="sModalSection">
+                        <h6 class="sModalSubtitle">🌐 Ce este dezvoltarea web?</h6>
+                        <p>Dezvoltarea web înseamnă să creezi site-uri și aplicații care rulează în browser. Este arta de a transforma idei în experiențe digitale interactive pe care milioane de oameni le folosesc zilnic.</p>
+                    </div>
+                    
+                    <div class="sModalSection">
+                        <h6 class="sModalSubtitle">📈 De ce este în creștere domeniul web?</h6>
+                        <ul class="sModalList">
+                            <li><strong>Digitalizarea accelerată:</strong> Toate businessurile au nevoie de prezență online</li>
+                            <li><strong>E-commerce boom:</strong> Comerțul online creștere exponențial</li>
+                            <li><strong>Remote work:</strong> Aplicațiile web sunt esențiale pentru lucrul de acasă</li>
+                            <li><strong>Mobile-first:</strong> Site-urile responsive sunt mai importante ca niciodată</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sModalSection">
+                        <h6 class="sModalSubtitle">💰 De ce să înveți dezvoltare web acum?</h6>
+                        <ul class="sModalList">
+                            <li><strong>Salarii atractive:</strong> Între 3,000-8,000+ RON pentru începători</li>
+                            <li><strong>Flexibilitate:</strong> Poți lucra remote de oriunde</li>
+                            <li><strong>Cerere mare:</strong> Peste 50,000 joburi disponibile în România</li>
+                            <li><strong>Creativitate + logică:</strong> Combini designul cu programarea</li>
+                            <li><strong>Progres rapid:</strong> Poți avea primul job în 6-12 luni</li>
+                        </ul>
+                    </div>
+
+                    <div class="sModalCTA">
+                        <p><strong>Pregătit să începi?</strong> <a href="#sLeadCaptureForm" class="sModalLink" data-bs-dismiss="modal">Descarcă ghidul gratuit</a> și află cum să faci primul pas!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Modal -->
+    <div class="modal fade" id="aiModal" tabindex="-1" aria-labelledby="aiModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content sModalContent">
+                <div class="modal-header sModalHeader">
+                    <h5 class="modal-title sModalTitle" id="aiModalLabel">
+                        <i class="bi bi-robot me-2"></i>
+                        Inteligența Artificială în 2024
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body sModalBody">
+                    <div class="sModalSection">
+                        <h6 class="sModalSubtitle">🤖 Ce este Inteligența Artificială?</h6>
+                        <p>AI este tehnologia care permite computerelor să "gândească" și să ia decizii asemănătoare cu oamenii. Include machine learning, procesarea limbajului natural și automatizări inteligente.</p>
+                    </div>
+                    
+                    <div class="sModalSection">
+                        <h6 class="sModalSubtitle">🚀 De ce să înveți AI acum?</h6>
+                        <ul class="sModalList">
+                            <li><strong>Revoluția digitală:</strong> AI transformă toate industriile</li>
+                            <li><strong>Eficiență maximă:</strong> Automatizezi taskurile repetitive</li>
+                            <li><strong>Salarii premium:</strong> AI developerii câștigă cu 30-50% mai mult</li>
+                            <li><strong>Viitorul muncii:</strong> Companiile caută urgent specialiști AI</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sModalSection">
+                        <h6 class="sModalSubtitle">💡 De ce AI + Web Development?</h6>
+                        <ul class="sModalList">
+                            <li><strong>Combinația perfectă:</strong> Web-ul este platforma ideală pentru AI</li>
+                            <li><strong>Chatbots inteligenți:</strong> Integrezi AI în site-uri</li>
+                            <li><strong>Personalizare:</strong> Creezi experiențe unice pentru fiecare user</li>
+                            <li><strong>Analiza datelor:</strong> Web apps cu AI insights</li>
+                            <li><strong>Automatizări:</strong> Site-uri care "învață" de la utilizatori</li>
+                        </ul>
+                    </div>
+
+                    <div class="sModalCTA">
+                        <p><strong>Vrei să combini Web + AI?</strong> <a href="#sVibecodingModal" class="sModalLink" onclick="openVibecodingModal()">Descoperă VibeCoding</a> și începe călătoria ta!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VibeCoding Modal -->
+    <div class="modal fade" id="vibecodingModal" tabindex="-1" aria-labelledby="vibecodingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content sModalContent">
+                <div class="modal-header sModalHeader">
+                    <h5 class="modal-title sModalTitle" id="vibecodingModalLabel">
+                        <i class="bi bi-lightning-charge me-2"></i>
+                        Ce este VibeCoding?
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body sModalBody">
+                    <div class="sModalSection">
+                        <h6 class="sModalSubtitle">✨ VibeCoding - Filosofia noastră</h6>
+                        <p><strong>VibeCoding</strong> înseamnă să înveți programarea cu <em>pasiune</em>, <em>energie pozitivă</em> și <em>conexiune reală</em> cu tehnologia. Nu este doar despre cod - este despre a crea cu bucurie!</p>
+                    </div>
+                    
+                    <div class="sModalSection">
+                        <h6 class="sModalSubtitle">🎯 Metoda VibeCoding</h6>
+                        <ul class="sModalList">
+                            <li><strong>Învățare prin practică:</strong> 80% hands-on, 20% teorie</li>
+                            <li><strong>Proiecte reale:</strong> Construiești aplicații de la zero</li>
+                            <li><strong>Feedback instant:</strong> Ghidare pas cu pas</li>
+                            <li><strong>Comunitate activă:</strong> Înveți alături de alții</li>
+                            <li><strong>Mentorat personal:</strong> Suport individualizat</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sModalSection">
+                        <h6 class="sModalSubtitle">🚀 Ce vei învăța în VibeCoding</h6>
+                        <ul class="sModalList">
+                            <li><strong>Web Development:</strong> <a href="#sWebDevModal" class="sModalLink" onclick="openWebDevModal()">HTML, CSS, JavaScript, React</a></li>
+                            <li><strong>Inteligență Artificială:</strong> <a href="#sAIModal" class="sModalLink" onclick="openAIModal()">Machine Learning, APIs, Automatizări</a></li>
+                            <li><strong>Full-Stack:</strong> Frontend + Backend + Database</li>
+                            <li><strong>Tools moderne:</strong> Git, VS Code, Deployment</li>
+                            <li><strong>Soft skills:</strong> Problem solving, comunicare, teamwork</li>
+                        </ul>
+                    </div>
+
+                    <div class="sModalSection">
+                        <h6 class="sModalSubtitle">🎁 Ce primești GRATUIT astăzi</h6>
+                        <ul class="sModalList">
+                            <li>✅ Workshop-ul complet VibeCoding (3+ ore de conținut)</li>
+                            <li>✅ Ghidul "5 lucruri de știut înainte să înveți programare"</li>
+                            <li>✅ Roadmap personalizat pentru primul tău job</li>
+                            <li>✅ Acces la comunitatea VibeCoding</li>
+                            <li>✅ Template-uri și resurse pentru începători</li>
+                        </ul>
+                    </div>
+
+                    <div class="sModalCTA">
+                        <p><strong>Gata să începi VibeCoding?</strong> <a href="#sLeadCaptureForm" class="sModalLink" data-bs-dismiss="modal">Accesează workshop-ul gratuit</a> și transformă-ți pasiunea în carieră!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html> 

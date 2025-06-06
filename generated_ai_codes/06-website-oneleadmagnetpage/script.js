@@ -593,11 +593,12 @@ function initializeAccessibility() {
     // Add keyboard navigation for custom elements
     document.addEventListener('keydown', handleKeyboardNavigation);
     
-    // Add skip link functionality
-    addSkipLinkFunctionality();
-    
     // Enhance focus management
     enhanceFocusManagement();
+    
+    // Initialize modal and brand badge functionality
+    initializeModalFunctionality();
+    initializeBrandBadgeScroll();
 }
 
 function handleKeyboardNavigation(oEvent) {
@@ -615,20 +616,6 @@ function handleKeyboardNavigation(oEvent) {
     }
 }
 
-function addSkipLinkFunctionality() {
-    // Create skip link for better accessibility
-    const oSkipLink = document.createElement('a');
-    oSkipLink.href = '#sLeadCaptureForm';
-    oSkipLink.textContent = 'Sari la formularul de înregistrare';
-    oSkipLink.className = 'sr-only sr-only-focusable';
-    oSkipLink.style.position = 'absolute';
-    oSkipLink.style.top = '10px';
-    oSkipLink.style.left = '10px';
-    oSkipLink.style.zIndex = '9999';
-    
-    document.body.insertBefore(oSkipLink, document.body.firstChild);
-}
-
 function enhanceFocusManagement() {
     // Ensure proper focus order and visibility
     const aFocusableElements = document.querySelectorAll(
@@ -641,6 +628,156 @@ function enhanceFocusManagement() {
             this.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
     });
+}
+
+/* ========================================================================
+   MODAL FUNCTIONALITY
+   Handle modal interactions and cross-modal navigation
+   ======================================================================== */
+function initializeModalFunctionality() {
+    // Web Development modal trigger
+    const oWebDevTrigger = document.getElementById('sWebDevModal');
+    if (oWebDevTrigger) {
+        oWebDevTrigger.addEventListener('click', function() {
+            const oModal = new bootstrap.Modal(document.getElementById('webDevModal'));
+            oModal.show();
+        });
+    }
+    
+    // AI modal trigger
+    const oAITrigger = document.getElementById('sAIModal');
+    if (oAITrigger) {
+        oAITrigger.addEventListener('click', function() {
+            const oModal = new bootstrap.Modal(document.getElementById('aiModal'));
+            oModal.show();
+        });
+    }
+    
+    // VibeCoding modal trigger
+    const oVibecodingTrigger = document.getElementById('sVibecodingModal');
+    if (oVibecodingTrigger) {
+        oVibecodingTrigger.addEventListener('click', function() {
+            const oModal = new bootstrap.Modal(document.getElementById('vibecodingModal'));
+            oModal.show();
+        });
+    }
+    
+    // Modal link handlers for smooth scrolling to form
+    document.addEventListener('click', function(oEvent) {
+        if (oEvent.target.matches('.sModalLink[href="#sLeadCaptureForm"]')) {
+            oEvent.preventDefault();
+            setTimeout(function() {
+                scrollToForm();
+            }, 300); // Wait for modal to close
+        }
+    });
+}
+
+/* ========================================================================
+   BRAND BADGE SCROLL FUNCTIONALITY
+   Smooth scroll to form when brand badge is clicked
+   ======================================================================== */
+function initializeBrandBadgeScroll() {
+    const oBrandBadge = document.getElementById('sBrandBadgeClickable');
+    if (oBrandBadge) {
+        oBrandBadge.addEventListener('click', function() {
+            scrollToForm();
+        });
+        
+        // Add hover effect
+        oBrandBadge.addEventListener('mouseenter', function() {
+            if (typeof gsap !== 'undefined') {
+                gsap.to(this, {
+                    duration: 0.3,
+                    scale: 1.05,
+                    ease: 'power2.out'
+                });
+            }
+        });
+        
+        oBrandBadge.addEventListener('mouseleave', function() {
+            if (typeof gsap !== 'undefined') {
+                gsap.to(this, {
+                    duration: 0.3,
+                    scale: 1,
+                    ease: 'power2.out'
+                });
+            }
+        });
+    }
+}
+
+function scrollToForm() {
+    const oFormElement = document.getElementById('sLeadCaptureForm');
+    if (oFormElement) {
+        oFormElement.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+        });
+        
+        // Focus on email input after scroll
+        setTimeout(function() {
+            const oEmailInput = document.getElementById('sEmailInput');
+            if (oEmailInput) {
+                oEmailInput.focus();
+            }
+        }, 800);
+    }
+}
+
+/* ========================================================================
+   CROSS-MODAL NAVIGATION FUNCTIONS
+   Functions to open modals from within other modals
+   ======================================================================== */
+function openWebDevModal() {
+    // Close current modal first
+    const oCurrentModals = document.querySelectorAll('.modal.show');
+    oCurrentModals.forEach(function(oModal) {
+        const oModalInstance = bootstrap.Modal.getInstance(oModal);
+        if (oModalInstance) {
+            oModalInstance.hide();
+        }
+    });
+    
+    // Open Web Dev modal after a brief delay
+    setTimeout(function() {
+        const oModal = new bootstrap.Modal(document.getElementById('webDevModal'));
+        oModal.show();
+    }, 300);
+}
+
+function openAIModal() {
+    // Close current modal first
+    const oCurrentModals = document.querySelectorAll('.modal.show');
+    oCurrentModals.forEach(function(oModal) {
+        const oModalInstance = bootstrap.Modal.getInstance(oModal);
+        if (oModalInstance) {
+            oModalInstance.hide();
+        }
+    });
+    
+    // Open AI modal after a brief delay
+    setTimeout(function() {
+        const oModal = new bootstrap.Modal(document.getElementById('aiModal'));
+        oModal.show();
+    }, 300);
+}
+
+function openVibecodingModal() {
+    // Close current modal first
+    const oCurrentModals = document.querySelectorAll('.modal.show');
+    oCurrentModals.forEach(function(oModal) {
+        const oModalInstance = bootstrap.Modal.getInstance(oModal);
+        if (oModalInstance) {
+            oModalInstance.hide();
+        }
+    });
+    
+    // Open VibeCoding modal after a brief delay
+    setTimeout(function() {
+        const oModal = new bootstrap.Modal(document.getElementById('vibecodingModal'));
+        oModal.show();
+    }, 300);
 }
 
 /* ========================================================================
