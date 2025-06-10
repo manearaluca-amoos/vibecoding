@@ -130,7 +130,7 @@ html, body {
 .quiz-shape3 {
     width: 150px;
     height: 150px;
-    top: 30%;
+    top: 40%;
     right: 20%;
     animation-delay: 14s;
 }
@@ -967,6 +967,7 @@ html, body {
     .quiz-section {
         min-height: 100vh;
         padding: 20px 0;
+        align-items: flex-start;
     }
     
     .quiz-logo {
@@ -1064,6 +1065,27 @@ html, body {
     .results-success-message .success-content p {
         font-size: 1.2rem;
     }
+
+    .quiz-shape1 {
+        width: 200px;
+        height: 200px;
+        top: -15%;
+        left: -10%;
+    }
+
+    .quiz-shape2 {
+        width: 150px;
+        height: 150px;
+        top: 70%;
+        right: -10%;
+    }
+
+    .quiz-shape3 {
+        width: 100px;
+        height: 100px;
+        top: 50%;
+        right: 30%;
+    }
 }
 
 /* Mobile Portrait */
@@ -1075,13 +1097,12 @@ html, body {
     .quiz-section {
         padding: 15px 0;
         min-height: 100vh;
+        align-items: flex-start;
     }
     
     .quiz-header {
         margin-bottom: 25px;
     }
-    
-
     
     .quiz-title {
         font-size: 1.7rem;
@@ -1253,7 +1274,6 @@ html, body {
         margin-bottom: 20px;
     }
 
-
     .quiz-title {
         font-size: 1.8rem;
         line-height: 1.1;
@@ -1298,6 +1318,7 @@ html, body {
     .quiz-section {
         padding: 20px 0;
         min-height: auto;
+        align-items: flex-start;
     }
 
     .quiz-header {
@@ -1308,7 +1329,6 @@ html, body {
         margin-bottom: 15px;
         padding-top: 10px;
     }
-
 
     .quiz-title {
         font-size: 1.8rem;
