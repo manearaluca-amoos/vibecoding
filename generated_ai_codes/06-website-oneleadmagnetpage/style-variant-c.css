@@ -366,11 +366,18 @@
     position: relative;
     transition: all 0.3s ease;
     overflow: hidden;
+    cursor: move; /* Indicate draggable */
 }
 
 .dropped-element:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 215, 0, 0.5);
+}
+
+.dropped-element.dragging-reorder {
+    transform: rotate(2deg);
+    z-index: 1000;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .dropped-element .remove-element {
@@ -396,6 +403,122 @@
 .dropped-element .remove-element:hover {
     opacity: 1;
     background: rgba(220, 53, 69, 1);
+}
+
+/* Reorder Handle */
+.reorder-handle {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: rgba(255, 215, 0, 0.8);
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    width: 25px;
+    height: 25px;
+    font-size: 0.8rem;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.reorder-handle:hover {
+    opacity: 1;
+    background: rgba(255, 215, 0, 1);
+    transform: scale(1.1);
+}
+
+.reorder-handle:active {
+    cursor: grabbing;
+}
+
+.reorder-handle i {
+    font-size: 0.7rem;
+}
+
+/* Drop Indicator for Reordering */
+.reorder-drop-indicator {
+    height: 3px;
+    margin: 0.25rem 0;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: dropIndicatorPulse 1s ease-in-out infinite alternate;
+}
+
+.drop-line {
+    height: 100%;
+    background: linear-gradient(90deg, transparent, #FFD700, transparent);
+    border-radius: 2px;
+    position: relative;
+}
+
+.drop-line::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #FFD700;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+@keyframes dropIndicatorPulse {
+    from { 
+        opacity: 0.6;
+        transform: scaleY(0.8);
+    }
+    to { 
+        opacity: 1;
+        transform: scaleY(1.2);
+    }
+}
+
+/* Enhanced drag feedback */
+.dropped-element[draggable="true"]:hover .reorder-handle {
+    animation: handleWiggle 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes handleWiggle {
+    from { transform: translateX(0px); }
+    to { transform: translateX(2px); }
+}
+
+/* Mobile specific reorder styles */
+@media (max-width: 768px) {
+    .reorder-handle {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .reorder-handle i {
+        font-size: 0.9rem;
+    }
+    
+    .dropped-element .remove-element {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+        right: 8px;
+        top: 8px;
+    }
+    
+    .reorder-drop-indicator {
+        height: 4px;
+        margin: 0.5rem 0;
+    }
+    
+    .drop-line::before {
+        width: 12px;
+        height: 12px;
+    }
 }
 
 /* HTML Code Display Styles */
@@ -835,4 +958,288 @@
     height: 100%;
     pointer-events: none;
     z-index: 9998;
+}
+
+/* ==============================================
+   MOBILE DRAG AND DROP STYLES
+   ============================================== */
+
+/* Mobile Drag Hint */
+.mobile-drag-hint {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(40, 167, 69, 0.95);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 25px;
+    z-index: 10001;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(40, 167, 69, 0.3);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+}
+
+.mobile-drag-hint .hint-content {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.mobile-drag-hint i {
+    font-size: 1.5rem;
+    animation: mobileDragHintPulse 2s ease-in-out infinite;
+}
+
+@keyframes mobileDragHintPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+/* Mobile Drag Success */
+.mobile-drag-success {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(40, 167, 69, 0.95);
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    z-index: 10002;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(40, 167, 69, 0.3);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+}
+
+.mobile-drag-success .success-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    text-align: center;
+}
+
+.mobile-drag-success i {
+    font-size: 3rem;
+    color: #ffffff;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.mobile-drag-success span {
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+}
+
+/* Enhanced Touch Experience */
+.draggable-html-element {
+    touch-action: none; /* Prevent default touch behaviors */
+}
+
+/* Improved touch feedback on mobile */
+@media (max-width: 768px) {
+    .draggable-html-element {
+        padding: 1.2rem;
+        margin-bottom: 1.2rem;
+        border-width: 3px;
+    }
+    
+    .draggable-html-element:active {
+        transform: scale(0.95);
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 193, 7, 0.2));
+    }
+    
+    .element-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 2.2rem;
+    }
+    
+    .element-name {
+        font-size: 1.1rem;
+    }
+    
+    .element-description {
+        font-size: 0.9rem;
+    }
+    
+    /* Larger drop zone on mobile */
+    .webpage-drop-zone {
+        min-height: 350px;
+        border-width: 4px;
+        padding: 1.5rem;
+    }
+    
+    .webpage-drop-zone.drag-over {
+        background: rgba(255, 215, 0, 0.2);
+        border-color: rgba(255, 215, 0, 1);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        transform: scale(1.02);
+        transition: all 0.3s ease;
+    }
+    
+    /* Larger touch targets for buttons */
+    .btn-clear, .btn-check-website {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        min-height: 50px;
+    }
+    
+    .remove-element {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+    
+    /* Better mobile progress display */
+    .builder-progress-container {
+        padding: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .progress-label, .timer-container {
+        font-size: 1rem;
+    }
+    
+    .timer-container {
+        padding: 0.5rem 1rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+    
+    /* Enhanced mobile preview */
+    .website-preview {
+        border-width: 3px;
+    }
+    
+    .placeholder-browser {
+        border-radius: 15px;
+    }
+    
+    .browser-bar {
+        padding: 0.8rem 1rem;
+    }
+    
+    .browser-url {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    /* Mobile drag clone enhancement */
+    .draggable-html-element[style*="position: fixed"] {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 215, 0, 0.8);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 215, 0, 0.1));
+    }
+}
+
+/* Ultra-small mobile devices */
+@media (max-width: 576px) {
+    .mobile-drag-hint {
+        bottom: 80px;
+        left: 1rem;
+        right: 1rem;
+        transform: none;
+        padding: 0.8rem 1.2rem;
+    }
+    
+    .mobile-drag-hint .hint-content {
+        gap: 0.6rem;
+        font-size: 0.9rem;
+    }
+    
+    .mobile-drag-hint i {
+        font-size: 1.3rem;
+    }
+    
+    .mobile-drag-success {
+        left: 1rem;
+        right: 1rem;
+        transform: translateY(-50%);
+        padding: 1.2rem 1.5rem;
+    }
+    
+    .mobile-drag-success i {
+        font-size: 2.5rem;
+    }
+    
+    .mobile-drag-success span {
+        font-size: 1.1rem;
+    }
+    
+    .draggable-html-element {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .element-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+    
+    .webpage-drop-zone {
+        min-height: 300px;
+        padding: 1rem;
+    }
+    
+    .website-preview {
+        height: 300px;
+    }
+}
+
+/* Vibration support for mobile devices */
+@media (hover: none) and (pointer: coarse) {
+    /* These styles apply only to touch devices */
+    .draggable-html-element:active {
+        transition: none; /* Immediate feedback on touch */
+    }
+    
+    .drag-over {
+        animation: mobileDragOverPulse 0.5s ease-in-out infinite alternate;
+    }
+}
+
+@keyframes mobileDragOverPulse {
+    from { 
+        background: rgba(255, 215, 0, 0.15);
+        border-color: rgba(255, 215, 0, 0.7);
+    }
+    to { 
+        background: rgba(255, 215, 0, 0.25);
+        border-color: rgba(255, 215, 0, 1);
+    }
+}
+
+/* Accessibility improvements for touch */
+@media (pointer: coarse) {
+    .draggable-html-element {
+        position: relative;
+    }
+    
+    .draggable-html-element::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        z-index: -1;
+        background: transparent;
+        border-radius: 20px;
+    }
+    
+    .draggable-html-element:active::before {
+        background: rgba(255, 215, 0, 0.1);
+        animation: touchFeedback 0.2s ease-out;
+    }
+}
+
+@keyframes touchFeedback {
+    0% { transform: scale(0.9); opacity: 0; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.5; }
 } 

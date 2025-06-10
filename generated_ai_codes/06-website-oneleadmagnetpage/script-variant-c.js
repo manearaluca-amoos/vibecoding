@@ -22,6 +22,7 @@ const builderState = {
 // ==============================================
 
 document.addEventListener('DOMContentLoaded', function() {
+    optimizeForMobile();
     initializeBuilder();
     initializeDragAndDrop();
     initializeFormHandling();
@@ -138,20 +139,26 @@ function showTimeUpModal() {
 }
 
 // ==============================================
-// DRAG AND DROP FUNCTIONALITY
+// DRAG AND DROP FUNCTIONALITY (Desktop + Mobile)
 // ==============================================
 
 function initializeDragAndDrop() {
     const draggableElements = document.querySelectorAll('.draggable-html-element');
     const dropZone = document.getElementById('webpageDropZone');
     
-    // Initialize draggable elements
+    // Initialize draggable elements for both desktop and mobile
     draggableElements.forEach(element => {
+        // Desktop drag events
         element.addEventListener('dragstart', handleDragStart);
         element.addEventListener('dragend', handleDragEnd);
+        
+        // Mobile touch events
+        element.addEventListener('touchstart', handleTouchStart, { passive: false });
+        element.addEventListener('touchmove', handleTouchMove, { passive: false });
+        element.addEventListener('touchend', handleTouchEnd, { passive: false });
     });
     
-    // Initialize drop zone
+    // Initialize drop zone for desktop
     dropZone.addEventListener('dragover', handleDragOver);
     dropZone.addEventListener('dragenter', handleDragEnter);
     dropZone.addEventListener('dragleave', handleDragLeave);
@@ -159,6 +166,16 @@ function initializeDragAndDrop() {
 }
 
 let draggedElement = null;
+let touchStartX = 0;
+let touchStartY = 0;
+let touchCurrentX = 0;
+let touchCurrentY = 0;
+let isTouchDragging = false;
+let touchClone = null;
+
+// ==============================================
+// DESKTOP DRAG HANDLERS (Existing)
+// ==============================================
 
 function handleDragStart(e) {
     draggedElement = e.target.closest('.draggable-html-element');
@@ -249,147 +266,295 @@ function handleDrop(e) {
     }
 }
 
-function addElementToDropZone(elementType, elementHTML) {
-    const dropZone = document.getElementById('webpageDropZone');
+// ==============================================
+// MOBILE TOUCH HANDLERS (New)
+// ==============================================
+
+function handleTouchStart(e) {
+    if (e.target.closest('.draggable-html-element').classList.contains('used')) {
+        return;
+    }
     
-    // Create dropped element container
-    const droppedElement = document.createElement('div');
-    droppedElement.className = 'dropped-element';
-    droppedElement.dataset.elementType = elementType;
+    draggedElement = e.target.closest('.draggable-html-element');
+    const touch = e.touches[0];
     
-    // Create remove button
-    const removeBtn = document.createElement('button');
-    removeBtn.className = 'remove-element';
-    removeBtn.innerHTML = '×';
-    removeBtn.onclick = () => removeElement(droppedElement, elementType);
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    touchCurrentX = touch.clientX;
+    touchCurrentY = touch.clientY;
     
-    // Create HTML code display instead of card preview
-    const htmlCodeDisplay = document.createElement('div');
-    htmlCodeDisplay.className = 'html-code-display';
+    // Prevent scrolling while dragging
+    e.preventDefault();
     
-    // Format the HTML for display with proper indentation and line breaks
-    const formattedHTML = formatHTMLForDisplay(elementHTML);
+    // Trigger haptic feedback
+    triggerHapticFeedback('light');
     
-    htmlCodeDisplay.innerHTML = `
-        <div class="code-header">
-            <span class="element-type-badge">${getElementDisplayName(elementType)}</span>
-        </div>
-        <pre class="html-code"><code>${formattedHTML}</code></pre>
-    `;
-    
-    droppedElement.appendChild(removeBtn);
-    droppedElement.appendChild(htmlCodeDisplay);
-    
-    // Add to drop zone
-    dropZone.appendChild(droppedElement);
-    
-    // Store in state
-    builderState.droppedElements.push({
-        type: elementType,
-        html: elementHTML,
-        element: droppedElement
+    // Add touch feedback
+    gsap.to(draggedElement, {
+        duration: 0.1,
+        scale: 0.95,
+        ease: 'power2.out'
     });
     
-    // Animate addition
-    gsap.from(droppedElement, {
-        duration: 0.5,
+    // Show mobile drag hint
+    showMobileDragHint();
+}
+
+function handleTouchMove(e) {
+    if (!draggedElement || draggedElement.classList.contains('used')) {
+        return;
+    }
+    
+    const touch = e.touches[0];
+    touchCurrentX = touch.clientX;
+    touchCurrentY = touch.clientY;
+    
+    const deltaX = touchCurrentX - touchStartX;
+    const deltaY = touchCurrentY - touchStartY;
+    
+    // Start dragging if moved more than 10px
+    if (!isTouchDragging && (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10)) {
+        startTouchDrag(e);
+    }
+    
+    if (isTouchDragging) {
+        e.preventDefault();
+        
+        // Update clone position
+        if (touchClone) {
+            touchClone.style.left = touchCurrentX - 50 + 'px';
+            touchClone.style.top = touchCurrentY - 30 + 'px';
+        }
+        
+        // Check if over drop zone
+        const elementBelow = document.elementFromPoint(touchCurrentX, touchCurrentY);
+        const dropZone = document.getElementById('webpageDropZone');
+        
+        if (dropZone.contains(elementBelow)) {
+            dropZone.classList.add('drag-over');
+        } else {
+            dropZone.classList.remove('drag-over');
+        }
+    }
+}
+
+function handleTouchEnd(e) {
+    if (!draggedElement) {
+        return;
+    }
+    
+    hideMobileDragHint();
+    
+    if (isTouchDragging) {
+        // Check if dropped on drop zone
+        const elementBelow = document.elementFromPoint(touchCurrentX, touchCurrentY);
+        const dropZone = document.getElementById('webpageDropZone');
+        
+        if (dropZone.contains(elementBelow) && !draggedElement.classList.contains('used')) {
+            // Successfully dropped
+            const elementType = draggedElement.dataset.element;
+            const elementHTML = draggedElement.dataset.html;
+            
+            // Add element to drop zone
+            addElementToDropZone(elementType, elementHTML);
+            
+            // Mark draggable element as used
+            draggedElement.classList.add('used');
+            draggedElement.draggable = false;
+            
+            // Update progress
+            builderState.elementsUsed++;
+            updateProgress();
+            
+            // Update live preview
+            updateLivePreview();
+            
+            // Hide placeholder if this is the first element
+            if (builderState.elementsUsed === 1) {
+                hideDropZonePlaceholder();
+            }
+            
+            // Enable check button if minimum elements reached
+            if (builderState.elementsUsed >= builderState.minElementsRequired) {
+                document.getElementById('checkWebsiteBtn').disabled = false;
+                
+                // Animate check button
+                gsap.to('#checkWebsiteBtn', {
+                    duration: 0.5,
+                    scale: 1.1,
+                    ease: 'bounce.out'
+                });
+            }
+            
+            // Success animation
+            gsap.to(draggedElement, {
+                duration: 0.3,
+                backgroundColor: 'rgba(40, 167, 69, 0.3)',
+                borderColor: 'rgba(40, 167, 69, 0.6)',
+                yoyo: true,
+                repeat: 1
+            });
+            
+            // Show success feedback
+            showMobileDragSuccess();
+        }
+        
+        endTouchDrag();
+    } else {
+        // Reset scale if just tapped
+        gsap.to(draggedElement, {
+            duration: 0.2,
+            scale: 1,
+            ease: 'power2.out'
+        });
+    }
+    
+    // Clean up
+    dropZone.classList.remove('drag-over');
+    draggedElement = null;
+    isTouchDragging = false;
+}
+
+function startTouchDrag(e) {
+    isTouchDragging = true;
+    
+    // Trigger medium haptic feedback when drag starts
+    triggerHapticFeedback('medium');
+    
+    // Create visual clone for dragging
+    touchClone = draggedElement.cloneNode(true);
+    touchClone.style.position = 'fixed';
+    touchClone.style.zIndex = '10000';
+    touchClone.style.width = isMobileDevice() ? '180px' : '200px';
+    touchClone.style.height = 'auto';
+    touchClone.style.transform = 'rotate(5deg)';
+    touchClone.style.opacity = '0.9';
+    touchClone.style.pointerEvents = 'none';
+    touchClone.style.left = touchCurrentX - 50 + 'px';
+    touchClone.style.top = touchCurrentY - 30 + 'px';
+    
+    document.body.appendChild(touchClone);
+    
+    // Fade original element
+    gsap.to(draggedElement, {
+        duration: 0.2,
+        opacity: 0.3,
+        scale: 0.9
+    });
+    
+    // Animate clone appearance
+    gsap.from(touchClone, {
+        duration: 0.3,
         scale: 0.8,
-        opacity: 0,
         ease: 'bounce.out'
     });
 }
 
-// New function to format HTML for display
-function formatHTMLForDisplay(htmlString) {
-    // Escape HTML for display
-    const escapedHTML = htmlString
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
+function endTouchDrag() {
+    // Remove clone
+    if (touchClone) {
+        gsap.to(touchClone, {
+            duration: 0.3,
+            scale: 0.8,
+            opacity: 0,
+            onComplete: () => {
+                if (touchClone && touchClone.parentNode) {
+                    touchClone.parentNode.removeChild(touchClone);
+                }
+                touchClone = null;
+            }
+        });
+    }
     
-    // Add syntax highlighting classes
-    return escapedHTML
-        .replace(/(&lt;\/?)([a-zA-Z][a-zA-Z0-9]*)/g, '$1<span class="html-tag">$2</span>')
-        .replace(/(\s)([a-zA-Z-]+)(=)/g, '$1<span class="html-attr">$2</span>$3')
-        .replace(/(=)(&quot;[^&]*&quot;)/g, '$1<span class="html-value">$2</span>')
-        .replace(/(=)(&#39;[^&]*&#39;)/g, '$1<span class="html-value">$2</span>');
+    // Reset original element
+    gsap.to(draggedElement, {
+        duration: 0.3,
+        opacity: 1,
+        scale: 1,
+        ease: 'power2.out'
+    });
 }
 
-function removeElement(droppedElement, elementType) {
-    // Remove from DOM
-    droppedElement.remove();
-    
-    // Remove from state
-    builderState.droppedElements = builderState.droppedElements.filter(
-        el => el.element !== droppedElement
-    );
-    
-    // Re-enable draggable element
-    const draggableElement = document.querySelector(`[data-element="${elementType}"]`);
-    if (draggableElement) {
-        draggableElement.classList.remove('used');
-        draggableElement.draggable = true;
-    }
-    
-    // Update progress
-    builderState.elementsUsed--;
-    updateProgress();
-    
-    // Update live preview
-    updateLivePreview();
-    
-    // Show placeholder if no elements left
-    if (builderState.elementsUsed === 0) {
-        showDropZonePlaceholder();
-    }
-    
-    // Disable check button if below minimum
-    if (builderState.elementsUsed < builderState.minElementsRequired) {
-        document.getElementById('checkWebsiteBtn').disabled = true;
+// ==============================================
+// MOBILE UI HELPERS
+// ==============================================
+
+function showMobileDragHint() {
+    // Show hint only on first drag attempt
+    if (!localStorage.getItem('vibecoding_mobile_hint_shown')) {
+        const hint = document.createElement('div');
+        hint.id = 'mobileDragHint';
+        hint.className = 'mobile-drag-hint';
+        hint.innerHTML = `
+            <div class="hint-content">
+                <i class="bi bi-hand-index-thumb"></i>
+                <span>Ține apăsat și trage în zona de construcție</span>
+            </div>
+        `;
         
-        gsap.to('#checkWebsiteBtn', {
+        document.body.appendChild(hint);
+        
+        gsap.from(hint, {
+            duration: 0.5,
+            y: 50,
+            opacity: 0,
+            ease: 'bounce.out'
+        });
+        
+        // Auto-hide after 3 seconds
+        setTimeout(() => {
+            hideMobileDragHint();
+            localStorage.setItem('vibecoding_mobile_hint_shown', 'true');
+        }, 3000);
+    }
+}
+
+function hideMobileDragHint() {
+    const hint = document.getElementById('mobileDragHint');
+    if (hint) {
+        gsap.to(hint, {
             duration: 0.3,
-            scale: 1
+            y: 50,
+            opacity: 0,
+            onComplete: () => {
+                hint.remove();
+            }
         });
     }
 }
 
-function clearAllElements() {
-    // Remove all dropped elements
-    const droppedElements = document.querySelectorAll('.dropped-element');
-    droppedElements.forEach(element => element.remove());
+function showMobileDragSuccess() {
+    // Trigger success haptic feedback
+    triggerHapticFeedback('success');
     
-    // Reset state
-    builderState.droppedElements = [];
-    builderState.elementsUsed = 0;
+    const success = document.createElement('div');
+    success.className = 'mobile-drag-success';
+    success.innerHTML = `
+        <div class="success-content">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>Element adăugat!</span>
+        </div>
+    `;
     
-    // Re-enable all draggable elements
-    const draggableElements = document.querySelectorAll('.draggable-html-element');
-    draggableElements.forEach(element => {
-        element.classList.remove('used');
-        element.draggable = true;
-    });
+    document.body.appendChild(success);
     
-    // Update progress
-    updateProgress();
-    
-    // Update live preview
-    updateLivePreview();
-    
-    // Show placeholder
-    showDropZonePlaceholder();
-    
-    // Disable check button
-    document.getElementById('checkWebsiteBtn').disabled = true;
-    
-    // Animate clear action
-    gsap.from('#clearAllBtn', {
-        duration: 0.3,
-        scale: 1.2,
+    gsap.from(success, {
+        duration: 0.4,
+        scale: 0,
         ease: 'bounce.out'
     });
+    
+    // Auto-remove
+    setTimeout(() => {
+        gsap.to(success, {
+            duration: 0.3,
+            scale: 0,
+            opacity: 0,
+            onComplete: () => {
+                success.remove();
+            }
+        });
+    }, 1500);
 }
 
 // ==============================================
@@ -1012,4 +1177,373 @@ window.revealBuilderLandingPage = revealBuilderLandingPage;
 window.closeIncompleteModal = closeIncompleteModal;
 window.resetBuilderWinnerForm = resetBuilderWinnerForm;
 
-console.log('🚀 VibeCoding Website Builder - Variant C loaded successfully!'); 
+console.log('🚀 VibeCoding Website Builder - Variant C loaded successfully!');
+
+// ==============================================
+// ELEMENT MANAGEMENT FUNCTIONS
+// ==============================================
+
+function addElementToDropZone(elementType, elementHTML) {
+    const dropZone = document.getElementById('webpageDropZone');
+    
+    // Create dropped element container
+    const droppedElement = document.createElement('div');
+    droppedElement.className = 'dropped-element';
+    droppedElement.dataset.elementType = elementType;
+    droppedElement.draggable = true; // Make dropped elements draggable for reordering
+    
+    // Create remove button
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-element';
+    removeBtn.innerHTML = '×';
+    removeBtn.onclick = () => removeElement(droppedElement, elementType);
+    
+    // Create reorder handle
+    const reorderHandle = document.createElement('div');
+    reorderHandle.className = 'reorder-handle';
+    reorderHandle.innerHTML = '<i class="bi bi-grip-vertical"></i>';
+    reorderHandle.title = 'Trage pentru a reordona';
+    
+    // Create HTML code display instead of card preview
+    const htmlCodeDisplay = document.createElement('div');
+    htmlCodeDisplay.className = 'html-code-display';
+    
+    // Format the HTML for display with proper indentation and line breaks
+    const formattedHTML = formatHTMLForDisplay(elementHTML);
+    
+    htmlCodeDisplay.innerHTML = `
+        <div class="code-header">
+            <span class="element-type-badge">${getElementDisplayName(elementType)}</span>
+        </div>
+        <pre class="html-code"><code>${formattedHTML}</code></pre>
+    `;
+    
+    droppedElement.appendChild(removeBtn);
+    droppedElement.appendChild(reorderHandle);
+    droppedElement.appendChild(htmlCodeDisplay);
+    
+    // Add drag event listeners for reordering
+    droppedElement.addEventListener('dragstart', handleReorderDragStart);
+    droppedElement.addEventListener('dragend', handleReorderDragEnd);
+    droppedElement.addEventListener('dragover', handleReorderDragOver);
+    droppedElement.addEventListener('drop', handleReorderDrop);
+    
+    // Add to drop zone
+    dropZone.appendChild(droppedElement);
+    
+    // Store in state
+    builderState.droppedElements.push({
+        type: elementType,
+        html: elementHTML,
+        element: droppedElement
+    });
+    
+    // Animate addition
+    gsap.from(droppedElement, {
+        duration: 0.5,
+        scale: 0.8,
+        opacity: 0,
+        ease: 'bounce.out'
+    });
+}
+
+// ==============================================
+// REORDERING FUNCTIONALITY
+// ==============================================
+
+let reorderDraggedElement = null;
+let reorderDropIndicator = null;
+
+function handleReorderDragStart(e) {
+    reorderDraggedElement = e.target.closest('.dropped-element');
+    e.dataTransfer.effectAllowed = 'move';
+    
+    // Add visual feedback
+    reorderDraggedElement.style.opacity = '0.5';
+    reorderDraggedElement.classList.add('dragging-reorder');
+    
+    // Create and add drop indicator
+    createDropIndicator();
+    
+    // Trigger haptic feedback
+    triggerHapticFeedback('light');
+    
+    console.log('🔄 Started reordering element:', reorderDraggedElement.dataset.elementType);
+}
+
+function handleReorderDragEnd(e) {
+    // Reset visual feedback
+    e.target.style.opacity = '1';
+    e.target.classList.remove('dragging-reorder');
+    
+    // Remove drop indicator
+    removeDropIndicator();
+    
+    reorderDraggedElement = null;
+    
+    console.log('🔄 Ended reordering');
+}
+
+function handleReorderDragOver(e) {
+    if (!reorderDraggedElement) return;
+    
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    
+    const targetElement = e.target.closest('.dropped-element');
+    if (targetElement && targetElement !== reorderDraggedElement) {
+        showDropIndicator(targetElement, e.clientY);
+    }
+}
+
+function handleReorderDrop(e) {
+    if (!reorderDraggedElement) return;
+    
+    e.preventDefault();
+    const targetElement = e.target.closest('.dropped-element');
+    
+    if (targetElement && targetElement !== reorderDraggedElement) {
+        const dropZone = document.getElementById('webpageDropZone');
+        const rect = targetElement.getBoundingClientRect();
+        const midPoint = rect.top + rect.height / 2;
+        
+        // Determine if we should insert before or after
+        if (e.clientY < midPoint) {
+            // Insert before target
+            dropZone.insertBefore(reorderDraggedElement, targetElement);
+        } else {
+            // Insert after target
+            dropZone.insertBefore(reorderDraggedElement, targetElement.nextSibling);
+        }
+        
+        // Update the state array to match new order
+        updateElementsOrder();
+        
+        // Update live preview
+        updateLivePreview();
+        
+        // Trigger success haptic feedback
+        triggerHapticFeedback('medium');
+        
+        // Animate the reordered element
+        gsap.from(reorderDraggedElement, {
+            duration: 0.3,
+            scale: 0.95,
+            ease: 'bounce.out'
+        });
+        
+        console.log('✅ Reordered elements successfully');
+    }
+    
+    removeDropIndicator();
+}
+
+function createDropIndicator() {
+    if (!reorderDropIndicator) {
+        reorderDropIndicator = document.createElement('div');
+        reorderDropIndicator.className = 'reorder-drop-indicator';
+        reorderDropIndicator.innerHTML = '<div class="drop-line"></div>';
+    }
+}
+
+function showDropIndicator(targetElement, mouseY) {
+    if (!reorderDropIndicator) return;
+    
+    const rect = targetElement.getBoundingClientRect();
+    const midPoint = rect.top + rect.height / 2;
+    const dropZone = document.getElementById('webpageDropZone');
+    
+    // Remove indicator if already present
+    if (reorderDropIndicator.parentNode) {
+        reorderDropIndicator.parentNode.removeChild(reorderDropIndicator);
+    }
+    
+    if (mouseY < midPoint) {
+        // Show indicator before target
+        dropZone.insertBefore(reorderDropIndicator, targetElement);
+    } else {
+        // Show indicator after target
+        dropZone.insertBefore(reorderDropIndicator, targetElement.nextSibling);
+    }
+}
+
+function removeDropIndicator() {
+    if (reorderDropIndicator && reorderDropIndicator.parentNode) {
+        reorderDropIndicator.parentNode.removeChild(reorderDropIndicator);
+    }
+}
+
+function updateElementsOrder() {
+    const dropZone = document.getElementById('webpageDropZone');
+    const droppedElements = Array.from(dropZone.querySelectorAll('.dropped-element'));
+    
+    // Rebuild the elements array based on current DOM order
+    const newElementsArray = [];
+    
+    droppedElements.forEach(element => {
+        const existingElement = builderState.droppedElements.find(
+            el => el.element === element
+        );
+        if (existingElement) {
+            newElementsArray.push(existingElement);
+        }
+    });
+    
+    // Update the state
+    builderState.droppedElements = newElementsArray;
+    
+    console.log('🔄 Updated elements order:', builderState.droppedElements.map(el => el.type));
+}
+
+// ==============================================
+// MOBILE OPTIMIZATION HELPERS
+// ==============================================
+
+function triggerHapticFeedback(type = 'light') {
+    // Trigger haptic feedback on supported devices
+    if (navigator.vibrate && /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+        switch (type) {
+            case 'light':
+                navigator.vibrate(10);
+                break;
+            case 'medium':
+                navigator.vibrate(25);
+                break;
+            case 'heavy':
+                navigator.vibrate([50, 30, 50]);
+                break;
+            case 'success':
+                navigator.vibrate([100, 50, 100, 50, 200]);
+                break;
+            default:
+                navigator.vibrate(10);
+        }
+    }
+}
+
+function isMobileDevice() {
+    return /Android|iPhone|iPad|iPod|Mobile|Opera Mini/i.test(navigator.userAgent) || 
+           ('ontouchstart' in window) || 
+           (navigator.maxTouchPoints > 0);
+}
+
+function optimizeForMobile() {
+    if (isMobileDevice()) {
+        // Add mobile class to body
+        document.body.classList.add('mobile-device');
+        
+        // Disable context menu on long press
+        document.addEventListener('contextmenu', (e) => {
+            if (e.target.closest('.draggable-html-element')) {
+                e.preventDefault();
+            }
+        });
+        
+        // Prevent zoom on double tap
+        document.addEventListener('touchend', (e) => {
+            if (e.target.closest('.builder-container')) {
+                e.preventDefault();
+            }
+        });
+        
+        // Optimize scroll behavior
+        document.addEventListener('touchmove', (e) => {
+            if (e.target.closest('.webpage-drop-zone') && isTouchDragging) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    }
+}
+
+// New function to format HTML for display
+function formatHTMLForDisplay(htmlString) {
+    // Escape HTML for display
+    const escapedHTML = htmlString
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    
+    // Add syntax highlighting classes
+    return escapedHTML
+        .replace(/(&lt;\/?)([a-zA-Z][a-zA-Z0-9]*)/g, '$1<span class="html-tag">$2</span>')
+        .replace(/(\s)([a-zA-Z-]+)(=)/g, '$1<span class="html-attr">$2</span>$3')
+        .replace(/(=)(&quot;[^&]*&quot;)/g, '$1<span class="html-value">$2</span>')
+        .replace(/(=)(&#39;[^&]*&#39;)/g, '$1<span class="html-value">$2</span>');
+}
+
+function removeElement(droppedElement, elementType) {
+    // Remove from DOM
+    droppedElement.remove();
+    
+    // Remove from state
+    builderState.droppedElements = builderState.droppedElements.filter(
+        el => el.element !== droppedElement
+    );
+    
+    // Re-enable draggable element
+    const draggableElement = document.querySelector(`[data-element="${elementType}"]`);
+    if (draggableElement) {
+        draggableElement.classList.remove('used');
+        draggableElement.draggable = true;
+    }
+    
+    // Update progress
+    builderState.elementsUsed--;
+    updateProgress();
+    
+    // Update live preview
+    updateLivePreview();
+    
+    // Show placeholder if no elements left
+    if (builderState.elementsUsed === 0) {
+        showDropZonePlaceholder();
+    }
+    
+    // Disable check button if below minimum
+    if (builderState.elementsUsed < builderState.minElementsRequired) {
+        document.getElementById('checkWebsiteBtn').disabled = true;
+        
+        gsap.to('#checkWebsiteBtn', {
+            duration: 0.3,
+            scale: 1
+        });
+    }
+}
+
+function clearAllElements() {
+    // Remove all dropped elements
+    const droppedElements = document.querySelectorAll('.dropped-element');
+    droppedElements.forEach(element => element.remove());
+    
+    // Reset state
+    builderState.droppedElements = [];
+    builderState.elementsUsed = 0;
+    
+    // Re-enable all draggable elements
+    const draggableElements = document.querySelectorAll('.draggable-html-element');
+    draggableElements.forEach(element => {
+        element.classList.remove('used');
+        element.draggable = true;
+    });
+    
+    // Update progress
+    updateProgress();
+    
+    // Update live preview
+    updateLivePreview();
+    
+    // Show placeholder
+    showDropZonePlaceholder();
+    
+    // Disable check button
+    document.getElementById('checkWebsiteBtn').disabled = true;
+    
+    // Animate clear action
+    gsap.from('#clearAllBtn', {
+        duration: 0.3,
+        scale: 1.2,
+        ease: 'bounce.out'
+    });
+} 
