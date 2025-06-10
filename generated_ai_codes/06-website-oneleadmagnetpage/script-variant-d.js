@@ -27,8 +27,8 @@ const SCORING = {
 const PERSONALIZED_MESSAGES = {
     // Pentru cei care cred că trebuie programare (q1: yes)
     programming_believer: {
-        icon: '💡',
-        title: 'Surpriză! Te înșeli.',
+        icon: '��',
+        title: 'Haide să afli realitatea prin practică live!',
         message: 'Realizarea unui website modern înseamnă claritate, nu cod. Hai să-ți arăt cum se face cu adevărat.'
     },
     // Pentru cei confuzi de termenii tehnici (q2: yes)
@@ -40,7 +40,7 @@ const PERSONALIZED_MESSAGES = {
     // Pentru cei sceptici față de AI (q3: yes)
     ai_skeptic: {
         icon: '🚀',
-        title: 'Fals! Tocmai aici încep lucrurile interesante.',
+        title: 'Să-ți arăt o perspectivă diferită!',
         message: 'AI-ul și "vibe coding" nu sunt jucării. Sunt viitorul, și tu poți fi parte din el.'
     },
     // Pentru cei cu scor mic (sunt în căutare)
@@ -426,7 +426,6 @@ function showResults() {
 }
 
 function updateResultsContent(messageData) {
-    document.getElementById('resultsIcon').textContent = messageData.icon;
     document.getElementById('resultsTitle').textContent = messageData.title;
     document.getElementById('resultsMessage').textContent = messageData.message;
 }

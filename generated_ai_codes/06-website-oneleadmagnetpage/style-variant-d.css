@@ -32,17 +32,37 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: var(--fntFamilyPrimary);
     line-height: 1.6;
     color: var(--text-primary);
     background: var(--background-light);
     overflow-x: hidden;
+    /* Mobile optimizations */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    touch-action: manipulation;
 }
 
 .container {
     max-width: 900px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
+}
+
+/* Prevent horizontal scroll on mobile */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+/* Better touch targets for mobile */
+.answer-option, .quiz-btn, .results-submit-btn {
+    min-height: 44px; /* iOS recommended touch target size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .d-none {
@@ -308,7 +328,7 @@ body {
 }
 
 .answer-option {
-    display: block;
+    display: flex;
     background: rgba(255, 255, 255, 0.7);
     border: 3px solid transparent;
     border-radius: 15px;
@@ -319,6 +339,11 @@ body {
     position: relative;
     overflow: hidden;
     user-select: none;
+    min-height: 44px;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .answer-option::before {
@@ -360,6 +385,8 @@ body {
     color: var(--text-primary);
     display: block;
     line-height: 1.4;
+    flex: 1;
+    text-align: left;
 }
 
 .answer-checkmark {
@@ -436,17 +463,6 @@ body {
 .results-content {
     text-align: center;
     padding: 60px 40px;
-}
-
-.results-icon {
-    font-size: 5rem;
-    margin-bottom: 30px;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
 }
 
 .score-display {
@@ -532,8 +548,10 @@ body {
 }
 
 .badge-icon {
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    margin-right: 8px;
+    display: inline;
+    vertical-align: middle;
     animation: starTwinkle 2s ease-in-out infinite;
 }
 
@@ -547,6 +565,9 @@ body {
     font-weight: 600;
     margin: 0;
     line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
 
 /* CTA Button */
@@ -928,42 +949,57 @@ body {
 }
 
 /* ==============================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - ENHANCED FOR MOBILE
    ============================================== */
 
+/* Mobile Landscape and Tablets */
 @media (max-width: 768px) {
+    .quiz-section {
+        min-height: 100vh;
+        padding: 20px 0;
+    }
+    
     .quiz-title {
         font-size: 2.2rem;
+        line-height: 1.1;
+        margin-bottom: 15px;
     }
     
     .quiz-subtitle {
         font-size: 1.1rem;
+        margin-bottom: 25px;
+    }
+    
+    .progress-container {
+        padding: 20px;
+        margin-bottom: 25px;
     }
     
     .question-content {
-        padding: 30px 25px;
+        padding: 25px 20px;
         border-radius: 20px;
+        margin: 0 10px;
     }
     
     .question-title {
         font-size: 1.8rem;
+        line-height: 1.2;
+        margin-bottom: 25px;
     }
     
     .answer-option {
-        padding: 15px 20px;
+        padding: 15px 18px;
+        margin-bottom: 12px;
     }
     
     .answer-text {
         font-size: 1.1rem;
+        line-height: 1.3;
     }
     
     .quiz-btn, .quiz-cta-btn {
         padding: 15px 30px;
         font-size: 1.1rem;
-    }
-    
-    .results-icon {
-        font-size: 4rem;
     }
     
     .score-value {
@@ -972,100 +1008,318 @@ body {
     
     .results-title {
         font-size: 2rem;
+        margin-bottom: 15px;
     }
     
     .results-message {
         font-size: 1.2rem;
+        margin-bottom: 25px;
     }
     
-    .workshop-title {
-        font-size: 2.2rem;
+    .achievement-badge {
+        margin: 25px 10px;
+        padding: 20px;
     }
     
-    .workshop-subtitle {
-        font-size: 1.1rem;
+    .results-email-section {
+        margin: 30px 10px;
+        padding: 25px 20px;
     }
     
-    .signup-form {
+    .email-section-title {
+        font-size: 1.6rem;
+    }
+    
+    .results-submit-btn {
+        min-width: 250px;
+        padding: 16px 30px;
+        font-size: 1.2rem;
+    }
+    
+    .results-success-message {
+        margin: 30px 10px;
         padding: 25px;
+    }
+    
+    .results-success-message .success-content h3 {
+        font-size: 2rem;
+    }
+    
+    .results-success-message .success-content p {
+        font-size: 1.2rem;
     }
 }
 
+/* Mobile Portrait */
 @media (max-width: 576px) {
     .container {
-        padding: 0 15px;
+        padding: 0 10px;
+    }
+    
+    .quiz-section {
+        padding: 15px 0;
+        min-height: 100vh;
+    }
+    
+    .quiz-header {
+        margin-bottom: 25px;
+    }
+    
+    .logo-img {
+        height: 45px;
     }
     
     .quiz-title {
-        font-size: 1.8rem;
+        font-size: 1.7rem;
+        line-height: 1.1;
+        margin-bottom: 12px;
     }
     
     .quiz-subtitle {
-        font-size: 1rem;
+        font-size: 0.95rem;
+        margin-bottom: 20px;
     }
     
     .progress-container {
-        padding: 20px;
+        padding: 15px;
         border-radius: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .progress-text {
+        font-size: 1rem;
     }
     
     .question-content {
-        padding: 25px 20px;
+        padding: 20px 15px;
         border-radius: 15px;
+        margin: 0 5px;
     }
     
     .question-icon {
-        font-size: 3rem;
+        font-size: 2.5rem;
+        margin-bottom: 15px;
     }
     
     .question-title {
-        font-size: 1.5rem;
-        margin-bottom: 30px;
+        font-size: 1.4rem;
+        line-height: 1.2;
+        margin-bottom: 20px;
     }
     
     .answer-option {
         padding: 12px 15px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
+        border-radius: 12px;
     }
     
     .answer-text {
-        font-size: 1rem;
+        font-size: 0.95rem;
+        line-height: 1.3;
+    }
+    
+    .answer-checkmark {
+        font-size: 1.2rem;
+        right: 15px;
     }
     
     .quiz-btn {
         padding: 12px 25px;
         font-size: 1rem;
+        border-radius: 40px;
     }
     
     .quiz-cta-btn {
-        padding: 15px 30px;
-        font-size: 1.1rem;
+        padding: 14px 25px;
+        font-size: 1.05rem;
+        min-width: 280px;
+    }
+    
+    .results-content {
+        padding: 30px 15px;
     }
     
     .score-value {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
     
     .results-title {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+    }
+    
+    .results-message {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
     }
     
     .achievement-badge {
-        padding: 20px;
-        margin: 30px auto;
+        padding: 18px 15px;
+        margin: 20px 5px;
+        border-radius: 15px;
     }
     
-    .workshop-title {
-        font-size: 1.8rem;
-    }
-    
-    .signup-form {
-        padding: 20px;
-    }
-    
-    .form-control {
-        padding: 12px 15px;
+    .achievement-text {
         font-size: 1rem;
+        line-height: 1.4;
+    }
+    
+    .badge-icon {
+        font-size: 1.3rem;
+        margin-right: 6px;
+    }
+    
+    .results-email-section {
+        margin: 25px 5px 20px;
+        padding: 20px 15px;
+        border-radius: 15px;
+    }
+    
+    .email-section-title {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+    
+    .email-section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+    
+    .form-row .form-control {
+        padding: 14px 18px;
+        font-size: 1rem;
+        border-radius: 12px;
+    }
+    
+    .results-submit-btn {
+        min-width: 240px;
+        padding: 14px 25px;
+        font-size: 1.1rem;
+        border-radius: 40px;
+    }
+    
+    .results-success-message {
+        margin: 25px 5px;
+        padding: 20px 15px;
+        border-radius: 20px;
+    }
+    
+    .results-success-message .success-content h3 {
+        font-size: 1.7rem;
+        margin: 15px 0;
+    }
+    
+    .results-success-message .success-content p {
+        font-size: 1.05rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+    
+    .results-success-message .success-content i {
+        font-size: 3.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .celebration-emojis {
+        font-size: 2rem;
+        letter-spacing: 0.5rem;
+    }
+    
+    .restart-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        margin-top: 20px;
+    }
+}
+
+/* Extra Small Mobile Devices */
+@media (max-width: 375px) {
+    .quiz-title {
+        font-size: 1.5rem;
+    }
+    
+    .quiz-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .question-title {
+        font-size: 1.3rem;
+    }
+    
+    .answer-text {
+        font-size: 0.9rem;
+    }
+    
+    .quiz-btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .results-submit-btn {
+        min-width: 220px;
+        font-size: 1rem;
+    }
+    
+    .achievement-text {
+        font-size: 0.95rem;
+    }
+    
+    .email-section-title {
+        font-size: 1.3rem;
+    }
+}
+
+/* Landscape Orientation Fixes */
+@media (max-height: 600px) and (orientation: landscape) {
+    .quiz-section {
+        padding: 10px 0;
+    }
+    
+    .quiz-header {
+        margin-bottom: 15px;
+    }
+    
+    .logo-img {
+        height: 35px;
+    }
+    
+    .quiz-title {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+    }
+    
+    .quiz-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    
+    .progress-container {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+    
+    .question-content {
+        padding: 15px;
+    }
+    
+    .question-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+    
+    .question-title {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .answer-option {
+        padding: 8px 12px;
+        margin-bottom: 6px;
+    }
+    
+    .quiz-btn {
+        padding: 8px 20px;
+        font-size: 0.9rem;
     }
 }
 

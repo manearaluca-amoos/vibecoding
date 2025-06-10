@@ -2,7 +2,7 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>VibeCoding Workshop - Quiz Interactiv</title>
     <link rel="stylesheet" href="style-variant-d.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
             <!-- Quiz Header -->
             <div class="quiz-header text-center">
                 <div class="quiz-logo">
-                    <img src="assets/logo-vibecoding.png" alt="VibeCoding" class="logo-img">
+                    <img src="assets/images/amoos-gold-COMPLET-bg-transparent.png" alt="Amoos.ro - Partenerul tau digital de incredere" class="logo-img">
                 </div>
                 <h1 class="quiz-title">
                     Ești gata pentru <span class="vibecoding-highlight">VibeCoding</span> Workshop?
@@ -134,24 +134,13 @@
                 <!-- Results Screen -->
                 <div class="quiz-question" id="results">
                     <div class="question-content results-content">
-                        <div class="results-icon" id="resultsIcon">🎉</div>
                         <div class="score-display">
                             <span class="score-label">Scorul tău:</span>
                             <span class="score-value" id="scoreValue">0%</span>
                         </div>
                         <h2 class="results-title" id="resultsTitle">Felicitări!</h2>
-                        <p class="results-message" id="resultsMessage">Mesajul va apărea aici...</p>
                         
-                        <!-- Achievement Badge -->
-                        <div class="achievement-badge">
-                            <div class="badge-icon">⭐</div>
-                            <p class="achievement-text">
-                                Ai răspuns cu sinceritate și <strong>asta e exact ce căutam</strong>.<br>
-                                Meriți un loc la workshop!
-                            </p>
-                        </div>
-
-                        <!-- Email Form on Results Page -->
+                        <!-- Email Form on Results Page - Moved up here -->
                         <div class="results-email-section" id="resultsEmailSection">
                             <h3 class="email-section-title">🚀 Rezervă-ți locul la workshop!</h3>
                             <p class="email-section-subtitle">Introduce adresa ta de email pentru a primi toate detaliile</p>
@@ -172,6 +161,16 @@
                                 </div>
                             </form>
                         </div>
+                        
+                        <p class="results-message" id="resultsMessage">Mesajul va apărea aici...</p>
+                        
+                        <!-- Achievement Badge -->
+                        <div class="achievement-badge">
+                            <p class="achievement-text">
+                                <span class="badge-icon">⭐</span> Ai răspuns cu sinceritate și <strong>asta e exact ce căutam</strong>.<br>
+                                Meriți un loc la workshop!
+                            </p>
+                        </div>
 
                         <!-- Success Message (hidden initially) -->
                         <div id="resultsSuccessMessage" class="results-success-message d-none">
@@ -180,6 +179,7 @@
                                 <h3>Perfect! Ești înscris la workshop! 🎉</h3>
                                 <p>
                                     Vei primi în scurt timp un email cu toate detaliile workshop-ului.<br>
+                                    <strong>⚠️ Verifică și folderul de spam pentru a confirma înscrierea!</strong><br>
                                     <strong>Ne vedem curând la VibeCoding Workshop!</strong> 🚀
                                 </p>
                                 <div class="success-celebration">
