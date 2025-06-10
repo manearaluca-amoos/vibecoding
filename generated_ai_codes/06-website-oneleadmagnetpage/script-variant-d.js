@@ -615,30 +615,75 @@ function showQuestion(questionNumber) {
 // ==============================================
 
 function initializeResultsEmailForm() {
+    console.log('🔧 initializeResultsEmailForm called');
+    
     const form = document.getElementById('resultsEmailForm');
     const emailInput = document.getElementById('resultsEmail');
     
+    if (!form || !emailInput) {
+        console.error('❌ Form elements not found:', { form, emailInput });
+        return;
+    }
+    
+    console.log('✅ Form elements found, setting up listeners');
+    
     // Real-time validation
-    emailInput.addEventListener('input', () => validateResultsEmail(emailInput));
+    emailInput.addEventListener('input', () => {
+        console.log('📧 Email input changed');
+        validateResultsEmail(emailInput);
+    });
     
     // Form submission
-    form.addEventListener('submit', handleResultsEmailSubmit);
+    form.addEventListener('submit', (e) => {
+        console.log('📧 Form submit event triggered');
+        handleResultsEmailSubmit(e);
+    });
+    
+    // Also add click listener to button as backup
+    const submitButton = document.getElementById('resultsSubmitBtn');
+    if (submitButton) {
+        submitButton.addEventListener('click', (e) => {
+            console.log('🔘 Submit button clicked directly');
+            if (submitButton.type !== 'submit') {
+                e.preventDefault();
+                handleResultsEmailSubmit(e);
+            }
+        });
+    }
+    
+    console.log('✅ Email form initialized successfully');
 }
 
 function validateResultsEmail(input) {
+    console.log('📧 validateResultsEmail called with:', input?.value);
+    
+    if (!input) {
+        console.error('❌ Input element is null');
+        return false;
+    }
+    
     const feedback = input.parentNode.querySelector('.input-feedback');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isValid = emailRegex.test(input.value);
+    const emailValue = input.value.trim();
+    
+    console.log('📧 Email to validate:', emailValue);
+    
+    const isValid = emailValue.length > 0 && emailRegex.test(emailValue);
     const message = isValid ? 'Email valid ✓' : 'Te rugăm să introduci o adresă de email validă';
+    
+    console.log('📧 Validation result:', isValid, 'Message:', message);
     
     // Update input styling
     input.classList.remove('valid', 'invalid');
     input.classList.add(isValid ? 'valid' : 'invalid');
     
-    // Update feedback
+    // Update feedback if element exists
     if (feedback) {
         feedback.textContent = message;
         feedback.className = `input-feedback ${isValid ? 'success' : 'error'}`;
+        console.log('📧 Feedback updated');
+    } else {
+        console.warn('⚠️ Feedback element not found');
     }
     
     return isValid;
@@ -647,25 +692,48 @@ function validateResultsEmail(input) {
 function handleResultsEmailSubmit(e) {
     e.preventDefault();
     
+    console.log('📧 Form submission started...');
+    
     const emailInput = document.getElementById('resultsEmail');
     const submitButton = document.getElementById('resultsSubmitBtn');
     
+    if (!emailInput || !submitButton) {
+        console.error('❌ Required elements not found:', { emailInput, submitButton });
+        return;
+    }
+    
+    console.log('📧 Email value:', emailInput.value);
+    
     // Validate email
-    if (!validateResultsEmail(emailInput)) {
+    const isValid = validateResultsEmail(emailInput);
+    console.log('📧 Email validation result:', isValid);
+    
+    if (!isValid) {
+        console.log('❌ Email validation failed');
         showFormError('Te rugăm să introduci o adresă de email validă');
         return;
     }
+    
+    console.log('✅ Email is valid, proceeding...');
     
     // Show loading state
     const submitText = submitButton.querySelector('.submit-text');
     const submitLoader = submitButton.querySelector('.submit-loader');
     
+    if (!submitText || !submitLoader) {
+        console.error('❌ Button elements not found:', { submitText, submitLoader });
+        return;
+    }
+    
+    console.log('🔄 Setting loading state...');
     submitText.classList.add('d-none');
     submitLoader.classList.remove('d-none');
     submitButton.disabled = true;
     
     // Simulate form submission
+    console.log('⏳ Starting 2-second delay...');
     setTimeout(() => {
+        console.log('✅ Timeout completed, showing success...');
         showResultsSuccess();
         
         // Track successful signup
@@ -679,33 +747,87 @@ function handleResultsEmailSubmit(e) {
 }
 
 function showResultsSuccess() {
+    console.log('🎉 showResultsSuccess called');
+    
     const emailSection = document.getElementById('resultsEmailSection');
     const successMessage = document.getElementById('resultsSuccessMessage');
     
-    // Hide email form and show success
-    gsap.to(emailSection, {
-        duration: 0.5,
-        opacity: 0,
-        y: -20,
-        onComplete: () => {
-            emailSection.classList.add('d-none');
-            successMessage.classList.remove('d-none');
-            
-            // Animate success message
-            gsap.from(successMessage, {
-                duration: 0.8,
-                opacity: 0,
-                y: 20,
-                scale: 0.95,
-                ease: 'bounce.out'
-            });
-            
-            // Trigger final celebration
-            setTimeout(() => {
-                showFinalCelebration();
-            }, 500);
+    if (!emailSection || !successMessage) {
+        console.error('❌ Success elements not found:', { emailSection, successMessage });
+        return;
+    }
+    
+    console.log('✅ Success elements found, proceeding with animation...');
+    
+    // Immediately hide email section with CSS
+    emailSection.style.display = 'none';
+    emailSection.style.visibility = 'hidden';
+    emailSection.style.opacity = '0';
+    emailSection.classList.add('d-none');
+    
+    console.log('📧 Email section forcibly hidden');
+    
+    // Force visibility of success message immediately
+    successMessage.style.display = 'block';
+    successMessage.style.visibility = 'visible';
+    successMessage.style.opacity = '1';
+    successMessage.classList.remove('d-none');
+    
+    console.log('🎉 Success message forced visible');
+    
+    // Simple direct transition without complex GSAP
+    successMessage.style.cssText = `
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
+        z-index: 1000 !important;
+        transform: translateY(0) scale(1) !important;
+    `;
+    
+    // Animate success message with simple GSAP
+    gsap.fromTo(successMessage, 
+        { 
+            opacity: 0, 
+            y: 30, 
+            scale: 0.9 
+        },
+        {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: 'bounce.out',
+            onComplete: () => {
+                console.log('🎊 Success message fully visible!');
+                
+                // Final visibility check
+                const isVisible = window.getComputedStyle(successMessage).display !== 'none';
+                const isEmailHidden = window.getComputedStyle(emailSection).display === 'none';
+                
+                console.log('👁️ Success message visibility check:', isVisible);
+                console.log('👁️ Email section hidden check:', isEmailHidden);
+                
+                // Extra safety - force email section hidden again
+                if (!isEmailHidden) {
+                    console.warn('⚠️ Email section still visible, forcing hide!');
+                    emailSection.style.cssText = `
+                        display: none !important;
+                        visibility: hidden !important;
+                        opacity: 0 !important;
+                        height: 0 !important;
+                        overflow: hidden !important;
+                    `;
+                }
+            }
         }
-    });
+    );
+    
+    // Trigger final celebration
+    setTimeout(() => {
+        console.log('🎉 Starting final celebration...');
+        showFinalCelebration();
+    }, 500);
 }
 
 // ==============================================
