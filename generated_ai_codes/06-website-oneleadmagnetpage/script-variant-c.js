@@ -263,19 +263,22 @@ function addElementToDropZone(elementType, elementHTML) {
     removeBtn.innerHTML = '×';
     removeBtn.onclick = () => removeElement(droppedElement, elementType);
     
-    // Create element preview
-    const elementPreview = document.createElement('div');
-    elementPreview.innerHTML = `
-        <div style="color: #FFD700; font-weight: 600; margin-bottom: 0.25rem;">
-            ${getElementDisplayName(elementType)}
+    // Create HTML code display instead of card preview
+    const htmlCodeDisplay = document.createElement('div');
+    htmlCodeDisplay.className = 'html-code-display';
+    
+    // Format the HTML for display with proper indentation and line breaks
+    const formattedHTML = formatHTMLForDisplay(elementHTML);
+    
+    htmlCodeDisplay.innerHTML = `
+        <div class="code-header">
+            <span class="element-type-badge">${getElementDisplayName(elementType)}</span>
         </div>
-        <div style="color: #E6C200; font-size: 0.8rem; opacity: 0.8;">
-            ${getElementDescription(elementType)}
-        </div>
+        <pre class="html-code"><code>${formattedHTML}</code></pre>
     `;
     
     droppedElement.appendChild(removeBtn);
-    droppedElement.appendChild(elementPreview);
+    droppedElement.appendChild(htmlCodeDisplay);
     
     // Add to drop zone
     dropZone.appendChild(droppedElement);
@@ -294,6 +297,24 @@ function addElementToDropZone(elementType, elementHTML) {
         opacity: 0,
         ease: 'bounce.out'
     });
+}
+
+// New function to format HTML for display
+function formatHTMLForDisplay(htmlString) {
+    // Escape HTML for display
+    const escapedHTML = htmlString
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    
+    // Add syntax highlighting classes
+    return escapedHTML
+        .replace(/(&lt;\/?)([a-zA-Z][a-zA-Z0-9]*)/g, '$1<span class="html-tag">$2</span>')
+        .replace(/(\s)([a-zA-Z-]+)(=)/g, '$1<span class="html-attr">$2</span>$3')
+        .replace(/(=)(&quot;[^&]*&quot;)/g, '$1<span class="html-value">$2</span>')
+        .replace(/(=)(&#39;[^&]*&#39;)/g, '$1<span class="html-value">$2</span>');
 }
 
 function removeElement(droppedElement, elementType) {
