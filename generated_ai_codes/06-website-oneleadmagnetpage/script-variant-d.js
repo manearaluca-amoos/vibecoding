@@ -16,32 +16,50 @@ const quizState = {
     started: false
 };
 
-// Score calculation: each positive answer adds 35%, partial adds 20%
+// Score calculation: pentru noul quiz provocator
 const SCORING = {
-    'yes': 35,
-    'partial': 20,
-    'no': 0
+    'yes': 0,      // Răspunsuri "greșite" - 0 puncte  
+    'partial': 50, // Răspunsuri parțiale - 50 puncte
+    'no': 100      // Răspunsuri "corecte" - 100 puncte
 };
 
-// Score-based messages
-const SCORE_MESSAGES = {
-    low: {
-        threshold: 50,
-        icon: '🌱',
-        title: 'Perfect pentru început!',
-        message: 'E clar că ești la început. Hai să te ajutăm la workshop să pui bazele unui site web de succes!'
+// Mesaje personalizate bazate pe răspunsuri și scor
+const PERSONALIZED_MESSAGES = {
+    // Pentru cei care cred că trebuie programare (q1: yes)
+    programming_believer: {
+        icon: '💡',
+        title: 'Surpriză! Te înșeli.',
+        message: 'Realizarea unui website modern înseamnă claritate, nu cod. Hai să-ți arăt cum se face cu adevărat.'
     },
-    medium: {
-        threshold: 80,
+    // Pentru cei confuzi de termenii tehnici (q2: yes)
+    tech_confused: {
+        icon: '🎯',
+        title: 'Perfect! Asta e tocmai ce căutam.',
+        message: 'Faptul că "te pierzi" înseamnă că e momentul să înțelegi totul simplu, pe limba ta.'
+    },
+    // Pentru cei sceptici față de AI (q3: yes)
+    ai_skeptic: {
         icon: '🚀',
-        title: 'Ești pe drumul cel bun!',
-        message: 'Ești aproape gata! Vino la workshop și punem totul cap la cap pentru un site web profesional.'
+        title: 'Fals! Tocmai aici încep lucrurile interesante.',
+        message: 'AI-ul și "vibe coding" nu sunt jucării. Sunt viitorul, și tu poți fi parte din el.'
     },
-    high: {
-        threshold: 100,
+    // Pentru cei cu scor mic (sunt în căutare)
+    seeker: {
+        icon: '🌱',
+        title: 'E clar că n-ai avut încă contextul potrivit.',
+        message: 'Tocmai de aceea există workshopul ăsta. Să-ți oferim contextul și claritatea de care ai nevoie.'
+    },
+    // Pentru cei cu scor mediu (au potențial)
+    potential: {
+        icon: '⚡',
+        title: 'Ai deja începutul în tine.',
+        message: 'Îți lipsește doar direcția practică. Hai să transformăm intuiția în rezultate concrete.'
+    },
+    // Pentru cei cu scor mare (sunt pregătiți)
+    ready: {
         icon: '🏆',
-        title: 'Excelent progres!',
-        message: 'Bravo! Ai făcut deja primii pași importanți. Hai să ducem site-ul la nivelul următor!'
+        title: 'Ai mindsetul potrivit.',
+        message: 'Hai să-l transformăm în acțiune concretă. Ești mai aproape de succes decât crezi.'
     }
 };
 
@@ -284,24 +302,46 @@ function finishQuiz() {
 function calculateScore() {
     let totalScore = 0;
     
-    // Calculate score based on answers
+    // Calculează scorul total
     Object.values(quizState.answers).forEach(answer => {
         totalScore += SCORING[answer] || 0;
     });
     
-    // Ensure score doesn't exceed 100%
-    quizState.score = Math.min(totalScore, 100);
+    // Scorul este din 300 puncte posibile (3 întrebări x 100 puncte max)
+    // Convertim la procente
+    quizState.score = Math.round((totalScore / 300) * 100);
     
-    console.log(`🎯 Score calculated: ${quizState.score}% (answers: ${JSON.stringify(quizState.answers)})`);
+    console.log(`🎯 Score calculated: ${quizState.score}% (total points: ${totalScore}/300, answers: ${JSON.stringify(quizState.answers)})`);
 }
 
-function getScoreMessage(score) {
-    if (score < SCORE_MESSAGES.low.threshold) {
-        return SCORE_MESSAGES.low;
-    } else if (score < SCORE_MESSAGES.medium.threshold) {
-        return SCORE_MESSAGES.medium;
+function getPersonalizedMessage(score, answers) {
+    console.log('🎯 Getting personalized message for score:', score, 'answers:', answers);
+    
+    // Logică personalizată bazată pe răspunsuri specifice
+    const q1 = answers.q1; // Întrebarea despre programare
+    const q2 = answers.q2; // Întrebarea despre termeni tehnici  
+    const q3 = answers.q3; // Întrebarea despre AI
+    
+    // Mesaje speciale pentru răspunsuri specifice (indiferent de scor)
+    if (q1 === 'yes') {
+        return PERSONALIZED_MESSAGES.programming_believer;
+    }
+    
+    if (q2 === 'yes') {
+        return PERSONALIZED_MESSAGES.tech_confused;
+    }
+    
+    if (q3 === 'yes') {
+        return PERSONALIZED_MESSAGES.ai_skeptic;
+    }
+    
+    // Altfel, folosește scorul pentru mesaj
+    if (score <= 40) {
+        return PERSONALIZED_MESSAGES.seeker;
+    } else if (score <= 80) {
+        return PERSONALIZED_MESSAGES.potential;
     } else {
-        return SCORE_MESSAGES.high;
+        return PERSONALIZED_MESSAGES.ready;
     }
 }
 
@@ -315,11 +355,11 @@ function showResults() {
     
     console.log('🎯 Showing results...');
     
-    // Get score message
-    const scoreData = getScoreMessage(quizState.score);
+    // Obține mesajul personalizat
+    const messageData = getPersonalizedMessage(quizState.score, quizState.answers);
     
     // Update results content
-    updateResultsContent(scoreData);
+    updateResultsContent(messageData);
     
     // Immediate, stable transition - no complex animations
     if (currentQuestionElement) {
@@ -329,15 +369,25 @@ function showResults() {
     // Show results immediately
     resultsElement.classList.add('active');
     
-    // Ensure email section is visible from start
+    // Ensure email section is visible and success message is hidden from start
     const emailSection = document.getElementById('resultsEmailSection');
     const successMessage = document.getElementById('resultsSuccessMessage');
     
     if (emailSection) {
         emailSection.classList.remove('d-none');
+        emailSection.style.display = 'block';
+        emailSection.style.visibility = 'visible';
+        emailSection.style.opacity = '1';
     }
+    
     if (successMessage) {
         successMessage.classList.add('d-none');
+        successMessage.style.display = 'none';
+        successMessage.style.visibility = 'hidden';
+        successMessage.style.opacity = '0';
+        successMessage.style.height = '0';
+        successMessage.style.overflow = 'hidden';
+        console.log('✅ Success message properly hidden initially');
     }
     
     // Reset any problematic styles that might cause disappearing
@@ -375,10 +425,10 @@ function showResults() {
     console.log('📊 Results displayed successfully');
 }
 
-function updateResultsContent(scoreData) {
-    document.getElementById('resultsIcon').textContent = scoreData.icon;
-    document.getElementById('resultsTitle').textContent = scoreData.title;
-    document.getElementById('resultsMessage').textContent = scoreData.message;
+function updateResultsContent(messageData) {
+    document.getElementById('resultsIcon').textContent = messageData.icon;
+    document.getElementById('resultsTitle').textContent = messageData.title;
+    document.getElementById('resultsMessage').textContent = messageData.message;
 }
 
 function animateScoreCounter() {
@@ -487,11 +537,30 @@ function restartQuiz() {
     const successMessage = document.getElementById('resultsSuccessMessage');
     const emailSection = document.getElementById('resultsEmailSection');
     
+    // Ensure success message is completely hidden
     if (successMessage) {
         successMessage.classList.add('d-none');
+        successMessage.style.cssText = `
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            overflow: hidden !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        `;
+        console.log('✅ Success message reset to hidden state');
     }
+    
+    // Ensure email section is visible
     if (emailSection) {
         emailSection.classList.remove('d-none');
+        emailSection.style.cssText = `
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        `;
+        console.log('✅ Email section reset to visible state');
     }
     
     // Show first question

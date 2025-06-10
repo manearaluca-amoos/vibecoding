@@ -39,6 +39,8 @@ body {
 
 .d-none {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
 
 .text-center {
@@ -1113,4 +1115,15 @@ body {
 
 .results-submit-btn:active:not(:disabled) {
     transform: translateY(-2px);
+}
+
+/* Ensure success message is completely hidden initially */
+.results-success-message.d-none {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
 } 
