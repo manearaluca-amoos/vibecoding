@@ -1,3 +1,15 @@
+<?php
+// Check if variant parameter is set and equals 'a'
+$variant = isset($_GET['variant']) ? $_GET['variant'] : '';
+
+if ($variant === 'a') {
+    // Include variant-a content
+    include 'index-variant-a.php';
+    exit;
+}
+
+// Default: Show variant-d content (quiz)
+?>
 <!DOCTYPE html>
 <html lang="ro">
 <head>
